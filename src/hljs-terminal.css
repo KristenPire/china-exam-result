@@ -1,85 +1,116 @@
 /*
- * highlight.js theme — matches terminal palette from index.css.
+ * highlight.js theme — Noctis Bordo palette.
+ * Source: https://github.com/liviuschera/noctis (bordo variant)
  */
 
 .hljs {
-  color: #d4d4d4;
+  color: #cbbec2;
 }
 
+/* keywords, control flow, storage modifiers, operators */
 .hljs-keyword,
 .hljs-selector-tag,
 .hljs-literal,
 .hljs-section,
 .hljs-link {
-  color: #cc78e0;
+  color: #df769b;
+  font-weight: bold;
 }
 
 .hljs-function .hljs-keyword {
-  color: #cc78e0;
+  color: #df769b;
 }
 
+/* strings */
 .hljs-string,
 .hljs-meta .hljs-string {
-  color: #00ff41;
+  color: #49e9a6;
 }
 
+/* numbers, constants */
 .hljs-number,
 .hljs-symbol,
 .hljs-bullet {
-  color: #ffd700;
+  color: #7060eb;
 }
 
+/* function names */
 .hljs-title,
-.hljs-title.function_,
+.hljs-title.function_ {
+  color: #16a3b6;
+}
+
+/* class names */
 .hljs-title.class_ {
-  color: #00d4ff;
+  color: #49ace9;
 }
 
+/* types, built-ins */
 .hljs-type,
-.hljs-built_in,
-.hljs-params {
-  color: #4ec9b0;
-}
-
-.hljs-comment,
-.hljs-quote {
-  color: #666680;
+.hljs-built_in {
+  color: #d67e5c;
   font-style: italic;
 }
 
-.hljs-doctag,
-.hljs-formula {
-  color: #00d4ff;
+/* parameters */
+.hljs-params {
+  color: #e4b781;
+  font-weight: bold;
 }
 
+/* comments */
+.hljs-comment,
+.hljs-quote {
+  color: #8b747c;
+  font-style: italic;
+}
+
+/* doc tags */
+.hljs-doctag,
+.hljs-formula {
+  color: #49d6e9;
+}
+
+/* preprocessor, meta */
 .hljs-meta,
 .hljs-meta .hljs-keyword,
 .hljs-tag {
-  color: #ff8844;
+  color: #df769b;
 }
 
+/* variables */
 .hljs-variable,
 .hljs-template-variable {
-  color: #e06c75;
+  color: #e4b781;
 }
 
+/* language variables (this, self) */
+.hljs-variable.language_ {
+  color: #e66533;
+  font-style: italic;
+}
+
+/* attributes */
 .hljs-attr,
 .hljs-attribute {
-  color: #ffd700;
+  color: #d5971a;
 }
 
+/* selectors */
 .hljs-selector-id,
 .hljs-selector-class {
-  color: #00d4ff;
+  color: #49ace9;
 }
 
+/* regexp, deletion */
 .hljs-regexp,
 .hljs-deletion {
-  color: #ff3333;
+  color: #e3541c;
 }
 
+/* addition */
 .hljs-addition {
-  color: #00ff41;
+  color: #49e9a6;
 }
 
 .hljs-emphasis {

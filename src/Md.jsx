@@ -18,8 +18,8 @@ hljs.registerLanguage("bash", bash);
 // ── Styles matching the terminal theme ──
 
 const codeBlockStyle = {
-  background: "#0d0d24",
-  border: "1px solid #2a2a4a",
+  background: "#322a2d",
+  border: "1px solid #4a3a40",
   borderRadius: 4,
   padding: "12px 14px",
   margin: "8px 0",
@@ -30,12 +30,12 @@ const codeBlockStyle = {
 };
 
 const inlineCodeStyle = {
-  background: "#1a1a3a",
-  border: "1px solid #2a2a4a",
+  background: "#3a2f33",
+  border: "1px solid #4a3a40",
   borderRadius: 3,
   padding: "1px 5px",
   fontSize: "0.92em",
-  color: "#00d4ff",
+  color: "#49d6e9",
   fontFamily: "'Courier New', Consolas, monospace",
 };
 
