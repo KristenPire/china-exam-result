@@ -1,9 +1,12 @@
 /**
  * Lightweight Markdown renderer for exam content.
  *
- * Handles:  fenced code blocks (```lang ... ```) and inline code (`...`).
- * Everything else is rendered as plain text.
- * Code blocks get syntax highlighting via highlight.js.
+ * Supports:
+ *   - Fenced code blocks (```lang ... ```)  → syntax-highlighted <pre>
+ *   - Inline code (`...`)                   → styled <code>
+ *   - **bold**                              → <strong>
+ *   - Line breaks (\n)                      → <br>
+ *   - Bullet lists (lines starting with -)  → <ul><li>
  */
 
 import { useMemo } from "react";
@@ -15,7 +18,7 @@ hljs.registerLanguage("cpp", cpp);
 hljs.registerLanguage("c", cpp);
 hljs.registerLanguage("bash", bash);
 
-// ── Styles matching the terminal theme ──
+// ── Styles ──
 
 const codeBlockStyle = {
   background: "#322a2d",
@@ -30,19 +33,18 @@ const codeBlockStyle = {
 };
 
 const inlineCodeStyle = {
-  background: "#3a2f33",
-  border: "1px solid #4a3a40",
+  background: "#1a1a3a",
+  border: "1px solid #2a2a4a",
   borderRadius: 3,
   padding: "1px 5px",
   fontSize: "0.92em",
-  color: "#49d6e9",
+  color: "#00d4ff",
   fontFamily: "'Courier New', Consolas, monospace",
 };
 
-// ── Parser ──
+// ── Helpers ──
 
 const BLOCK_RE = /```(\w*)\n([\s\S]*?)```/g;
-const INLINE_RE = /`([^`]+)`/g;
 
 function highlight(code, lang) {
   if (lang && hljs.getLanguage(lang)) {
@@ -51,24 +53,85 @@ function highlight(code, lang) {
   return hljs.highlightAuto(code).value;
 }
 
-function renderInline(text, key) {
-  // Split on inline code
+/** Render inline markdown: `code` and **bold** */
+function renderInlineTokens(text, keyPrefix) {
+  // Match inline code or bold
+  const TOKEN_RE = /`([^`]+)`|\*\*([^*]+)\*\*/g;
   const parts = [];
   let last = 0;
   let m;
-  const re = new RegExp(INLINE_RE.source, "g");
-  while ((m = re.exec(text)) !== null) {
+  while ((m = TOKEN_RE.exec(text)) !== null) {
     if (m.index > last) parts.push(text.slice(last, m.index));
-    parts.push(
-      <code key={`${key}-${m.index}`} style={inlineCodeStyle}>
-        {m[1]}
-      </code>,
-    );
-    last = re.lastIndex;
+    if (m[1] !== undefined) {
+      parts.push(
+        <code key={`${keyPrefix}-c${m.index}`} style={inlineCodeStyle}>
+          {m[1]}
+        </code>,
+      );
+    } else {
+      parts.push(
+        <strong key={`${keyPrefix}-b${m.index}`} style={{ color: "#f0f0f0" }}>
+          {m[2]}
+        </strong>,
+      );
+    }
+    last = TOKEN_RE.lastIndex;
   }
   if (last < text.length) parts.push(text.slice(last));
   return parts;
 }
+
+/** Render a plain-text chunk (no code blocks) into lines, bullets, and inline tokens */
+function renderTextBlock(text, keyPrefix) {
+  const lines = text.split("\n");
+  const result = [];
+  let bulletBuffer = [];
+
+  function flushBullets() {
+    if (bulletBuffer.length === 0) return;
+    result.push(
+      <ul
+        key={`${keyPrefix}-ul${result.length}`}
+        style={{ margin: "4px 0 4px 6px", paddingLeft: 14, listStyleType: "'› '" }}
+      >
+        {bulletBuffer.map((item, i) => (
+          <li key={i} style={{ marginBottom: 2 }}>
+            {renderInlineTokens(item, `${keyPrefix}-li${i}`)}
+          </li>
+        ))}
+      </ul>,
+    );
+    bulletBuffer = [];
+  }
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    const bulletMatch = line.match(/^[-•]\s+(.*)/);
+
+    if (bulletMatch) {
+      bulletBuffer.push(bulletMatch[1]);
+    } else {
+      flushBullets();
+      if (line.trim() === "") {
+        // blank line → small spacer
+        result.push(<div key={`${keyPrefix}-sp${i}`} style={{ height: 6 }} />);
+      } else {
+        result.push(
+          <span key={`${keyPrefix}-ln${i}`}>
+            {i > 0 && lines[i - 1].trim() !== "" && !lines[i - 1].match(/^[-•]\s+/) && (
+              <br />
+            )}
+            {renderInlineTokens(line, `${keyPrefix}-${i}`)}
+          </span>,
+        );
+      }
+    }
+  }
+  flushBullets();
+  return result;
+}
+
+// ── Main component ──
 
 export function Md({ children }) {
   const elements = useMemo(() => {
@@ -80,12 +143,13 @@ export function Md({ children }) {
     const re = new RegExp(BLOCK_RE.source, "g");
 
     while ((m = re.exec(src)) !== null) {
-      // Text before this code block
       if (m.index > last) {
-        const text = src.slice(last, m.index);
-        result.push(<span key={`t-${last}`}>{renderInline(text, last)}</span>);
+        result.push(
+          <span key={`t-${last}`}>
+            {renderTextBlock(src.slice(last, m.index), `t${last}`)}
+          </span>,
+        );
       }
-      // Code block
       const lang = m[1] || "";
       const code = m[2].replace(/\n$/, "");
       result.push(
@@ -96,10 +160,11 @@ export function Md({ children }) {
       last = re.lastIndex;
     }
 
-    // Remaining text
     if (last < src.length) {
       result.push(
-        <span key={`t-${last}`}>{renderInline(src.slice(last), last)}</span>,
+        <span key={`t-${last}`}>
+          {renderTextBlock(src.slice(last), `t${last}`)}
+        </span>,
       );
     }
     return result;

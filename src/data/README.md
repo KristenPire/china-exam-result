@@ -103,11 +103,28 @@ Use the class id (`os`, `net`, `fp`) and the next number (`01`, `02`...).
 | `questions[].options` | Object with letter keys: `{ "A": "...", "B": "..." }`|
 | `questions[].correct` | Array of correct letter(s): `["B"]` or `["A", "D"]`  |
 | `questions[].mode`    | `"any"` = pick one correct, `"all"` = pick all correct|
-| `questions[].explanation` | Why the answer is correct (shown to students)     |
+| `questions[].explanation` | Why the answer is correct (shown to students) — see **Explanation style guide** below |
 
 **Scoring rules:**
 - `mode: "any"` → student picks **one** answer. If it's in `correct`, full points.
 - `mode: "all"` → student must pick a **subset** of correct answers. Partial credit = (correct picks / total correct). **Any wrong pick = 0 points.**
+
+**Explanation style guide:**
+
+Explanations are rendered with Markdown (inline `code`, **bold**, `\n` line breaks, `- ` bullet lists, and ` ```cpp ` code blocks). Write them like a short course snippet — clear, breathable, educational.
+
+Rules:
+- **Simple English.** Students are non-native speakers. Use short sentences. Avoid idioms and complex grammar. Technical keywords (`dangling pointer`, `undefined behavior`, `pass by value`…) stay exact — don't simplify those.
+- **Breathe.** Never write a wall of text. Use line breaks between ideas. Use bullet lists for steps or key points.
+- **Structure.** For "what is the output?" → trace step by step with bullets. For concepts → state the rule, then show why it matters.
+- **Code examples.** Add a short `cpp` code block when it helps: to show the fix, the safe pattern, or the contrast. Keep it to 2–4 lines.
+- **Bold** the key concept or takeaway once (e.g., `**pass by value**`, `**dangling pointer**`).
+
+Example:
+
+```
+"explanation": "This is **pass by value** — the function gets a copy, not the original.\n\nStep by step:\n- `n = 4` in `main()`\n- `triple(n)` sends a copy of `4`\n- Inside the function, only the copy changes\n- `n` stays `4`\n\nTo change the original, use a reference:\n```cpp\nvoid triple(int& x) { x = x * 3; }\n```"
+```
 
 ### 4. Create `students.json`
 
