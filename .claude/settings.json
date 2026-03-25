@@ -6,7 +6,22 @@
       "Bash(npm install:*)",
       "Bash(npm run:*)",
       "Bash(git init:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(curl -s \"https://raw.githubusercontent.com/liviuschera/noctis/master/package.json\")",
+      "Bash(curl -s \"https://api.github.com/repos/liviuschera/noctis/contents/\")",
+      "Bash(curl -s \"https://api.github.com/repos/liviuschera/noctis/contents/themes\")",
+      "Bash(curl -s \"https://raw.githubusercontent.com/liviuschera/noctis/master/themes/bordo.json\" -o /tmp/bordo.json)",
+      "Read(//tmp/**)",
+      "Bash(pip3 install:*)",
+      "Bash(git push:*)",
+      "Bash(ls /Users/kristen/china/exam-results/*.xlsx)",
+      "Bash(ls /Users/kristen/china/exam-results/**/*.xlsx)",
+      "Bash(gh run:*)",
+"Bash(gh auth:*)"
+    ],
+    "additionalDirectories": [
+      "/Users/kristen/china/exam-results/src/data/os"
     ]
   }
 }

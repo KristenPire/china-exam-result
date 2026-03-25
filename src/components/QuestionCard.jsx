@@ -11,14 +11,21 @@ export function QuestionCard({ question, wrongAnswer, index }) {
   // wrongAnswer = what the student picked (e.g. "A" or "ABC"), undefined if correct, "x" if no answer
   const isWrongQuestion = wrongAnswer !== undefined;
   const isNoAnswer = isWrongQuestion && wrongAnswer === "x";
-  const picked = isWrongQuestion ? (isNoAnswer ? [] : wrongAnswer.split("")) : question.correct;
-  const accent = isWrongQuestion ? (isNoAnswer ? C.yellowDim : C.redDim) : C.greenDim;
+  const picked = isWrongQuestion
+    ? isNoAnswer
+      ? []
+      : wrongAnswer.split("")
+    : question.correct;
+  const accent = isWrongQuestion
+    ? isNoAnswer
+      ? C.yellowDim
+      : C.redDim
+    : C.greenDim;
   const isEitherOr = question.mode === "any" && question.correct.length > 1;
 
   return (
     <motion.div variants={staggerItem}>
       <AsciiBox accent={accent} className="p-3 sm:p-5 mb-4">
-
         <QuestionHeader
           index={index}
           isNoAnswer={isNoAnswer}
@@ -29,16 +36,29 @@ export function QuestionCard({ question, wrongAnswer, index }) {
 
         <QuestionText question={question} />
 
-        <OptionList question={question} picked={picked} isWrongQuestion={isWrongQuestion} />
+        <OptionList
+          question={question}
+          picked={picked}
+          isWrongQuestion={isWrongQuestion}
+        />
 
-        <Explanation showWhy={showWhy} onToggle={() => setShowWhy(!showWhy)} question={question} />
-
+        <Explanation
+          showWhy={showWhy}
+          onToggle={() => setShowWhy(!showWhy)}
+          question={question}
+        />
       </AsciiBox>
     </motion.div>
   );
 }
 
-function QuestionHeader({ index, isNoAnswer, isWrongQuestion, question, isEitherOr }) {
+function QuestionHeader({
+  index,
+  isNoAnswer,
+  isWrongQuestion,
+  question,
+  isEitherOr,
+}) {
   return (
     <div className="flex justify-between items-center mb-3 flex-wrap gap-2">
       <div className="flex items-center gap-2">
@@ -49,7 +69,7 @@ function QuestionHeader({ index, isNoAnswer, isWrongQuestion, question, isEither
           {isNoAnswer ? "NO ANSWER" : isWrongQuestion ? "WRONG" : "OK"}
         </Tag>
         {question.mode === "all" && <Tag type="info">SELECT ALL</Tag>}
-        {isEitherOr && <Tag type="info">{question.correct.join("/")}</Tag>}
+        {isEitherOr && <Tag type="info">{question.correct.join(" or ")}</Tag>}
       </div>
     </div>
   );
@@ -115,7 +135,9 @@ function OptionRow({ letter, text, isCorrect, isPicked, isWrong }) {
       }}
     >
       <span>
-        {prefix}{letter}. <Md>{text}</Md>{suffix}
+        {prefix}
+        {letter}. <Md>{text}</Md>
+        {suffix}
       </span>
       {isPicked && (
         <span

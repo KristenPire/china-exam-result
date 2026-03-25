@@ -66,6 +66,7 @@ export function getStudentName(studentId) {
   return null;
 }
 
+
 export function studentExists(studentId) {
   return EXAMS.some((e) => STUDENTS[e.id]?.[studentId]);
 }
