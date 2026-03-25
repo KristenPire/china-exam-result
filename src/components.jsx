@@ -216,15 +216,13 @@ function OptionRow({ letter, text, isCorrect, isPicked, isWrong }) {
     bg = "rgba(0,255,65,0.08)";
     color = C.green;
     prefix = "» ";
-    suffix = " [YOU ✓]";
   } else if (isPicked && isWrong) {
     bg = "rgba(255,51,51,0.08)";
     color = C.red;
     prefix = "» ";
-    suffix = " [YOU ✗]";
   } else if (isCorrect && !isPicked) {
-    color = C.yellow;
-    suffix = " [← CORRECT]";
+    color = C.greenDim;
+    suffix = " [✓]";
   }
 
   return (
@@ -241,6 +239,7 @@ function OptionRow({ letter, text, isCorrect, isPicked, isWrong }) {
       {prefix}
       {letter}. <Md>{text}</Md>
       {suffix}
+      {isPicked && <Tag type="info">YOUR ANSWER</Tag>}
     </div>
   );
 }
