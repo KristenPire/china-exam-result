@@ -381,7 +381,7 @@
         "A"
       ],
       "mode": "any",
-      "explanation": "Two key scheduling metrics from OSTEP Chapter 7:\n\n```\nTurnaround = T_completion − T_arrival  (total time: arrival → done)\nResponse   = T_firstrun  − T_arrival  (time until first CPU access)\n```\n\n**B** is the *response time* formula, not turnaround.\n**C** is backwards — would give a negative number.\n**D** is execution duration — not a standard metric."
+      "explanation": "Two key scheduling metrics:\n\n```\nTurnaround = T_completion − T_arrival  (total time: arrival → done)\nResponse   = T_firstrun  − T_arrival  (time until first CPU access)\n```\n\n**B** is the *response time* formula, not turnaround.\n**C** is backwards — would give a negative number.\n**D** is execution duration — not a standard metric."
     },
     {
       "id": 26,

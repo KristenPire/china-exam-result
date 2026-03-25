@@ -36,7 +36,7 @@ export function DashboardScreen({ studentId, onSelectExam, onLogout }) {
   return (
     <motion.div
       {...fadeSlide}
-      className="min-h-screen p-6 max-w-[720px] mx-auto"
+      className="min-h-screen p-4 sm:p-6 max-w-[720px] mx-auto"
     >
       <motion.button
         whileHover={{ x: -2 }}
@@ -53,9 +53,9 @@ export function DashboardScreen({ studentId, onSelectExam, onLogout }) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
       >
-        <AsciiBox accent="#00d4ff" className="p-4 mb-5">
+        <AsciiBox accent="#00d4ff" className="p-3 sm:p-4 mb-5">
           <div className="flex justify-between items-center flex-wrap gap-2">
-            <div className="text-tm-white text-[18px] font-bold">{name}</div>
+            <div className="text-tm-white text-[16px] sm:text-[18px] font-bold">{name}</div>
             <div className="text-tm-dim text-[12px]">ID: {studentId}</div>
           </div>
         </AsciiBox>
@@ -85,7 +85,7 @@ export function DashboardScreen({ studentId, onSelectExam, onLogout }) {
           className="mb-5"
         >
           {exams.length > 0 ? (
-            <AsciiBox accent={gradeColor(avg)} className="p-5">
+            <AsciiBox accent={gradeColor(avg)} className="p-3 sm:p-5">
               <div className="text-tm-dim text-[10px] tracking-wider mb-2">
                 {classInfo.fullName.toUpperCase()} ── FINAL GRADE
               </div>
@@ -99,7 +99,7 @@ export function DashboardScreen({ studentId, onSelectExam, onLogout }) {
                   </span>
                   <span className="text-tm-dim text-[14px]"> / 100</span>
                 </div>
-                <ProgressBar percent={avg} width={25} />
+                <span className="overflow-hidden"><ProgressBar percent={avg} width={20} /></span>
               </div>
               <div className="text-tm-text text-[10px] opacity-40 mt-1">
                 {exams.map(({ exam }) => `${exam.title} × ${exam.coeff}%`).join("  +  ")}

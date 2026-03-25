@@ -18,19 +18,19 @@ export function ExamDetailScreen({ examId, studentId, onBack }) {
   const correctCount = exam.questions.length - wrongCount;
 
   return (
-    <motion.div {...fadeSlide} className="min-h-screen p-6 max-w-[720px] mx-auto">
+    <motion.div {...fadeSlide} className="min-h-screen p-4 sm:p-6 max-w-[720px] mx-auto">
 
       <motion.button whileHover={{ x: -2 }} whileTap={{ scale: 0.95 }} onClick={onBack}
         className="bg-transparent border border-tm-border text-tm-cyan font-mono text-[13px] cursor-pointer px-3.5 py-1.5 mb-5 tracking-wider">
-        [&lt; BACK TO DASHBOARD]
+        [&lt; BACK]
       </motion.button>
 
       {/* ── Score header ── */}
       <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
-        <AsciiBox accent={C.cyan} className="p-6 mb-6">
+        <AsciiBox accent={C.cyan} className="p-4 sm:p-6 mb-5 sm:mb-6">
           <div className="text-tm-dim text-[11px] mb-1">── EXAM RESULTS ──</div>
-          <div className="text-tm-white text-[18px] font-bold mb-0.5">{exam.title}</div>
-          <div className="text-tm-dim text-[12px] mb-4">
+          <div className="text-tm-white text-[16px] sm:text-[18px] font-bold mb-0.5">{exam.title}</div>
+          <div className="text-tm-dim text-[11px] sm:text-[12px] mb-4">
             {exam.date} │ {exam.coeff}% │ ID: {studentId}
           </div>
 
@@ -44,11 +44,13 @@ export function ExamDetailScreen({ examId, studentId, onBack }) {
           </div>
 
           <div className="mb-3">
-            <span className="text-tm-white text-[28px] font-bold">{student.grade}</span>
-            <span className="text-tm-dim text-[18px]"> / {exam.totalPoints}</span>
+            <span className="text-tm-white text-[24px] sm:text-[28px] font-bold">{student.grade}</span>
+            <span className="text-tm-dim text-[16px] sm:text-[18px]"> / {exam.totalPoints}</span>
           </div>
 
-          <ProgressBar percent={pct} width={35} />
+          <div className="overflow-hidden">
+            <ProgressBar percent={pct} width={25} />
+          </div>
 
           <div className="flex gap-4 mt-4 flex-wrap text-[12px]">
             <span className="text-tm-green">● {correctCount} correct</span>
@@ -58,8 +60,12 @@ export function ExamDetailScreen({ examId, studentId, onBack }) {
       </motion.div>
 
       {/* ── Questions ── */}
-      <div className="text-tm-dim text-[11px] mb-4 text-center">
-        ├{"─".repeat(20)} QUESTION DETAILS {"─".repeat(20)}┤
+      <div className="flex items-center gap-3 mb-4">
+        <div className="flex-1 h-px bg-tm-border" />
+        <span className="text-tm-text text-[12px] tracking-widest font-bold">
+          QUESTION DETAILS
+        </span>
+        <div className="flex-1 h-px bg-tm-border" />
       </div>
 
       <motion.div variants={stagger} initial="initial" animate="animate">

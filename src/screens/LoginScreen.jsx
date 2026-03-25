@@ -49,24 +49,24 @@ export function LoginScreen({ onLogin }) {
         </div>
 
         {/* ── Body ── */}
-        <div className="pt-8 pb-6 px-6">
+        <div className="pt-6 pb-5 px-4 sm:pt-8 sm:pb-6 sm:px-6">
 
           {/* Header */}
           <motion.div {...delayedFade(0.2)} className="text-center mb-2">
-            <div className="text-[28px] font-bold text-tm-cyan tracking-[3px]">EPITA</div>
+            <div className="text-[24px] sm:text-[28px] font-bold text-tm-cyan tracking-[3px]">EPITA</div>
             <div className="text-[13px] text-tm-dim tracking-[4px] my-1">×</div>
-            <div className="text-[20px] font-bold text-tm-cyan tracking-[2px]">CHANG'AN UNIVERSITY</div>
+            <div className="text-[15px] sm:text-[20px] font-bold text-tm-cyan tracking-[1px] sm:tracking-[2px]">CHANG'AN UNIVERSITY</div>
           </motion.div>
 
-          <motion.div {...delayedScale(0.4)} className="text-center text-tm-border text-[12px] my-4 origin-center">
+          <motion.div {...delayedScale(0.4)} className="text-center text-tm-border text-[12px] my-4 origin-center overflow-hidden">
             {"─".repeat(40)}
           </motion.div>
 
-          <motion.div {...delayedFade(0.5)} className="text-center text-[13px] text-tm-green tracking-[6px] mb-6">
+          <motion.div {...delayedFade(0.5)} className="text-center text-[11px] sm:text-[13px] text-tm-green tracking-[3px] sm:tracking-[6px] mb-6">
             EXAM RESULTS VIEWER
           </motion.div>
 
-          <motion.div {...delayedScale(0.6)} className="text-center text-tm-border text-[12px] mb-6 origin-center">
+          <motion.div {...delayedScale(0.6)} className="text-center text-tm-border text-[12px] mb-6 origin-center overflow-hidden">
             {"─".repeat(40)}
           </motion.div>
 
@@ -77,11 +77,11 @@ export function LoginScreen({ onLogin }) {
             <motion.div
               key={shakeKey}
               animate={error ? shake : {}}
-              className="flex items-center cursor-text"
+              className="flex items-center cursor-text overflow-hidden"
               onClick={focus}
             >
-              <span className="text-tm-green whitespace-nowrap">student@exam-server</span>
-              <span className="text-tm-dim">:~$ </span>
+              <span className="text-tm-green whitespace-nowrap text-[12px] sm:text-[14px]">student@exam</span>
+              <span className="text-tm-dim text-[12px] sm:text-[14px]">:~$ </span>
               <span className="text-tm-white">{studentId}</span>
               <BlinkingCursor />
               <input

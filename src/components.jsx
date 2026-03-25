@@ -175,11 +175,11 @@ export function ExamCard({ exam, student, onClick, isLatest }) {
         transition={{ duration: 0.15 }}
       >
         <AsciiBox
-          className={`mb-3 ${hasDetail ? "cursor-pointer" : "p-5"}`}
+          className={`mb-3 ${hasDetail ? "cursor-pointer" : "p-3 sm:p-5"}`}
           accent={hasDetail && hovered ? C.cyan : undefined}
         >
           <div onClick={hasDetail ? onClick : undefined}>
-            <div className="p-5 pb-0">
+            <div className="p-3 sm:p-5 pb-0">
               <div className="flex justify-between items-baseline mb-1 flex-wrap gap-2">
                 <span className="text-tm-white text-[15px] font-bold">
                   {exam.title}
@@ -204,7 +204,7 @@ export function ExamCard({ exam, student, onClick, isLatest }) {
                     / {exam.totalPoints}
                   </span>
                 </div>
-                <ProgressBar percent={pct} width={20} />
+                <span className="overflow-hidden"><ProgressBar percent={pct} width={15} /></span>
               </div>
 
               <div className="flex gap-3 text-[11px] flex-wrap mb-4">
@@ -218,7 +218,7 @@ export function ExamCard({ exam, student, onClick, isLatest }) {
 
             {hasDetail && (
               <div
-                className="px-5 py-3 flex items-center justify-between border-t transition-colors duration-200"
+                className="px-3 sm:px-5 py-3 flex items-center justify-between border-t transition-colors duration-200"
                 style={{
                   borderColor: hovered ? C.cyanDim : C.border,
                   background: hovered
@@ -279,7 +279,7 @@ function OptionRow({ letter, text, isCorrect, isPicked, isWrong }) {
 
   return (
     <div
-      className="py-1.5 px-2.5 text-[13px] flex items-baseline justify-between gap-4"
+      className="py-1.5 px-1.5 sm:px-2.5 text-[12px] sm:text-[13px] flex items-baseline justify-between gap-2 sm:gap-4"
       style={{
         background: bg,
         color,
@@ -316,7 +316,7 @@ export function QuestionCard({ question, wrongAnswer, index }) {
 
   return (
     <motion.div variants={staggerItem}>
-      <AsciiBox accent={accent} className="p-5 mb-4">
+      <AsciiBox accent={accent} className="p-3 sm:p-5 mb-4">
         {/* Header */}
         <div className="flex justify-between items-center mb-3 flex-wrap gap-2">
           <div className="flex items-center gap-2">
