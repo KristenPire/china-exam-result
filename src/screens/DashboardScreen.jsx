@@ -47,55 +47,16 @@ export function DashboardScreen({ studentId, onSelectExam, onLogout }) {
         [&lt; LOGOUT]
       </motion.button>
 
-      {/* ── Student card ── */}
+      {/* ── Identity ── */}
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
       >
-        <AsciiBox accent="#00d4ff" className="p-6 mb-5">
-          <div className="text-tm-dim text-[11px] mb-1">
-            ── STUDENT DASHBOARD ──
-          </div>
-
-          <div className="flex justify-between items-baseline flex-wrap gap-2 mb-1">
-            <div className="text-tm-white text-[20px] font-bold">{name}</div>
+        <AsciiBox accent="#00d4ff" className="p-4 mb-5">
+          <div className="flex justify-between items-center flex-wrap gap-2">
+            <div className="text-tm-white text-[18px] font-bold">{name}</div>
             <div className="text-tm-dim text-[12px]">ID: {studentId}</div>
-          </div>
-
-          <div className="border-t border-tm-border mt-3 pt-3">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={classId}
-                initial={{ opacity: 0, x: 10 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -10 }}
-                transition={{ duration: 0.2 }}
-              >
-                <div className="text-tm-dim text-[11px] mb-1.5">
-                  {classInfo.fullName.toUpperCase()}
-                </div>
-
-                {exams.length > 0 ? (
-                  <>
-                    <div className="flex items-baseline gap-2 mb-2">
-                      <span
-                        className="text-[28px] font-bold"
-                        style={{ color: gradeColor(avg) }}
-                      >
-                        {avg.toFixed(2)}
-                      </span>
-                      <span className="text-tm-dim text-[16px]"> / 100</span>
-                    </div>
-                    <ProgressBar percent={avg} width={35} />
-                  </>
-                ) : (
-                  <div className="text-tm-dim text-[13px]">
-                    No exams published yet.
-                  </div>
-                )}
-              </motion.div>
-            </AnimatePresence>
           </div>
         </AsciiBox>
       </motion.div>
@@ -113,10 +74,61 @@ export function DashboardScreen({ studentId, onSelectExam, onLogout }) {
         />
       </motion.div>
 
-      {/* ── Exam list ── */}
-      <div className="text-tm-dim text-[11px] mb-4 text-center">
-        ├{"─".repeat(18)} {exams.length} EXAM(S) {"─".repeat(18)}┤
-      </div>
+      {/* ── Class grade summary ── */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={classId}
+          initial={{ opacity: 0, x: 10 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -10 }}
+          transition={{ duration: 0.2 }}
+          className="mb-5"
+        >
+          {exams.length > 0 ? (
+            <AsciiBox accent={gradeColor(avg)} className="p-5">
+              <div className="text-tm-dim text-[10px] tracking-wider mb-2">
+                {classInfo.fullName.toUpperCase()} ── FINAL GRADE
+              </div>
+              <div className="flex items-center justify-between flex-wrap gap-3 mb-1">
+                <div className="flex items-baseline gap-2">
+                  <span
+                    className="text-[24px] font-bold"
+                    style={{ color: gradeColor(avg) }}
+                  >
+                    {avg.toFixed(2)}
+                  </span>
+                  <span className="text-tm-dim text-[14px]"> / 100</span>
+                </div>
+                <ProgressBar percent={avg} width={25} />
+              </div>
+              <div className="text-tm-text text-[10px] opacity-40 mt-1">
+                {exams.map(({ exam }) => `${exam.title} × ${exam.coeff}%`).join("  +  ")}
+              </div>
+              {totalCoeff < 100 && (
+                <div className="text-tm-dim text-[10px] mt-2 tracking-wider">
+                  {100 - totalCoeff}% remaining ── more exams to come
+                </div>
+              )}
+            </AsciiBox>
+          ) : (
+            <AsciiBox className="p-5">
+              <div className="text-tm-dim text-[13px]">
+                No exams published yet.
+              </div>
+            </AsciiBox>
+          )}
+        </motion.div>
+      </AnimatePresence>
+
+      {exams.length > 0 && (
+        <div className="flex items-center gap-3 mb-4">
+          <div className="flex-1 h-px bg-tm-border" />
+          <span className="text-tm-text text-[12px] tracking-widest font-bold">
+            EXAMS
+          </span>
+          <div className="flex-1 h-px bg-tm-border" />
+        </div>
+      )}
 
       <AnimatePresence mode="wait">
         <motion.div
@@ -126,11 +138,12 @@ export function DashboardScreen({ studentId, onSelectExam, onLogout }) {
           animate="animate"
           exit={{ opacity: 0 }}
         >
-          {exams.map(({ exam, student }) => (
+          {exams.map(({ exam, student }, i) => (
             <ExamCard
               key={exam.id}
               exam={exam}
               student={student}
+              isLatest={i === 0}
               onClick={() => onSelectExam(exam.id)}
             />
           ))}
@@ -138,7 +151,7 @@ export function DashboardScreen({ studentId, onSelectExam, onLogout }) {
       </AnimatePresence>
 
       <div className="text-center text-tm-dim text-[11px] py-4">
-        ── click an exam for full details ── <BlinkingCursor />
+        ── <BlinkingCursor />
       </div>
     </motion.div>
   );

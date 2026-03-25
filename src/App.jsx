@@ -9,7 +9,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { LoginScreen } from "./screens/LoginScreen";
 import { DashboardScreen } from "./screens/DashboardScreen";
 import { ExamDetailScreen } from "./screens/ExamDetailScreen";
-
 export default function App() {
   const [screen, setScreen] = useState("login");
   const [studentId, setStudentId] = useState(null);
