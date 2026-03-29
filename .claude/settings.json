@@ -18,7 +18,8 @@
       "Bash(ls /Users/kristen/china/exam-results/*.xlsx)",
       "Bash(ls /Users/kristen/china/exam-results/**/*.xlsx)",
       "Bash(gh run:*)",
-"Bash(gh auth:*)"
+      "Bash(gh auth:*)",
+      "Bash(git tag:*)"
     ],
     "additionalDirectories": [
       "/Users/kristen/china/exam-results/src/data/os"
