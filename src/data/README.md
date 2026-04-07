@@ -12,20 +12,26 @@ The app auto-discovers everything. Add a folder → it shows up.
 data/
   classes.json              ← list of courses (rarely changes)
   <class_id>/
-    <exam_number>/
-      info.json             ← exam metadata
-      body.json             ← questions & answers
-      students.json         ← student results
+    <number>/
+      info.json             ← metadata (type field determines exam vs project)
+      body.json             ← questions & answers       [exam only]
+      students.json         ← per-student grades        [exam only]
+      groups.json           ← group list with members   [project only]
 ```
 
 Example:
 ```
 data/
-  os/00/   ← first OS exam
-  os/01/   ← second OS exam
-  net/00/  ← first Networking exam
-  fp/00/   ← first FP exam
+  os/00/   ← OS exam    (info + body + students)
+  os/01/   ← OS exam    (info + body + students)
+  os/02/   ← OS project (info + groups)
+  cpp/00/  ← C++ exam
+  cpp/03/  ← C++ project
 ```
+
+The `type` field in `info.json` controls which files are expected:
+- No `type` (or omitted) → exam: needs `body.json` + `students.json`
+- `"type": "project"` → project: needs `groups.json`
 
 ---
 
@@ -169,6 +175,93 @@ Only list **wrong** answers. Questions not listed = student got it right.
 ```
 
 Students without `wrong` can't click into exam details — they see their grade only.
+
+---
+
+---
+
+## Adding a project
+
+### 1. Create the folder
+
+Use the next available number in the class directory:
+
+```bash
+mkdir -p src/data/os/02
+```
+
+### 2. Create `info.json`
+
+```json
+{
+  "type": "project",
+  "title": "System Call Implementation",
+  "startDate": "2026-03-15",
+  "deadline": "2026-05-01",
+  "totalPoints": 100,
+  "coeff": 30
+}
+```
+
+| Field         | Description                                                  |
+|---------------|--------------------------------------------------------------|
+| `type`        | Must be `"project"` — tells the loader which files to expect |
+| `title`       | Display name shown to all students                           |
+| `startDate`   | Project start date (YYYY-MM-DD)                              |
+| `deadline`    | Submission deadline (YYYY-MM-DD)                             |
+| `totalPoints` | Max score (default 100)                                      |
+| `coeff`       | Weight as a percentage in the final grade                    |
+
+### 3. Create `groups.json`
+
+Each entry is one group. Grade and comments start as `null` and are filled in after evaluation.
+
+```json
+[
+  {
+    "groupName": "team-alpha",
+    "repositoryLink": "https://github.com/student/team-alpha",
+    "grade": null,
+    "comments": null,
+    "members": {
+      "2023905317": "李定诺",
+      "2023903690": "喻思翔"
+    }
+  },
+  {
+    "groupName": "team-beta",
+    "repositoryLink": null,
+    "grade": null,
+    "comments": null,
+    "members": {
+      "2023901234": "张三",
+      "2023901235": "李四"
+    }
+  }
+]
+```
+
+| Field            | Description                                          |
+|------------------|------------------------------------------------------|
+| `groupName`      | Team name (shown as a badge) — use the repo name    |
+| `repositoryLink` | URL to the repo, or `null` if not provided           |
+| `grade`          | `null` until graded, then a number (e.g. `87.5`)    |
+| `comments`       | `null` until reviewed, then a feedback string        |
+| `members`        | Object mapping student IDs → names                  |
+
+### 4. Grading later
+
+When a group's project is graded, edit their entry in `groups.json`:
+
+```json
+{
+  "grade": 87.5,
+  "comments": "Good work overall. Memory management needs improvement.",
+  ...
+}
+```
+
+Each group can be graded independently. The project card updates automatically.
 
 ---
 

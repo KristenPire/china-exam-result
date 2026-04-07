@@ -13,9 +13,11 @@ import {
   ProgressBar,
   ClassTabs,
   ExamCard,
+  ProjectCard,
 } from "../components";
 import {
   getStudentExams,
+  getStudentProjects,
   getStudentName,
   getDefaultClassId,
   computeWeightedAverage,
@@ -29,8 +31,23 @@ export function DashboardScreen({ studentId, onSelectExam, onLogout }) {
     () => getStudentExams(studentId, classId),
     [studentId, classId],
   );
-  const avg = computeWeightedAverage(exams);
-  const totalCoeff = exams.reduce((s, e) => s + e.exam.coeff, 0);
+  const projects = useMemo(
+    () => getStudentProjects(studentId, classId),
+    [studentId, classId],
+  );
+
+  // Merge exams and projects into one list, sorted by date descending
+  const items = useMemo(() => {
+    const all = [
+      ...exams.map((e) => ({ kind: "exam", date: e.exam.publishedDate, ...e })),
+      ...projects.map((p) => ({ kind: "project", date: p.project.deadline, ...p })),
+    ];
+    return all.sort((a, b) => (a.date < b.date ? 1 : -1));
+  }, [exams, projects]);
+
+  const avg = computeWeightedAverage(exams, projects);
+  const totalCoeff = exams.reduce((s, e) => s + e.exam.coeff, 0)
+                   + projects.reduce((s, p) => s + p.project.coeff, 0);
   const classInfo = CLASSES.find((c) => c.id === classId);
 
   return (
@@ -55,11 +72,11 @@ export function DashboardScreen({ studentId, onSelectExam, onLogout }) {
           transition={{ duration: 0.2 }}
           className="mb-5"
         >
-          <GradeSummary exams={exams} avg={avg} totalCoeff={totalCoeff} classInfo={classInfo} />
+          <GradeSummary exams={exams} projects={projects} avg={avg} totalCoeff={totalCoeff} classInfo={classInfo} />
         </motion.div>
       </AnimatePresence>
 
-      {exams.length > 0 && <SectionDivider label="EXAMS" />}
+      {items.length > 0 && <SectionDivider label="EXAMS" />}
 
       <AnimatePresence mode="wait">
         <motion.div
@@ -69,15 +86,24 @@ export function DashboardScreen({ studentId, onSelectExam, onLogout }) {
           animate="animate"
           exit={{ opacity: 0 }}
         >
-          {exams.map(({ exam, student }, i) => (
-            <ExamCard
-              key={exam.id}
-              exam={exam}
-              student={student}
-              isLatest={i === 0}
-              onClick={() => onSelectExam(exam.id)}
-            />
-          ))}
+          {items.map((item, i) =>
+            item.kind === "exam" ? (
+              <ExamCard
+                key={item.exam.id}
+                exam={item.exam}
+                student={item.student}
+                isLatest={i === 0}
+                onClick={() => onSelectExam(item.exam.id)}
+              />
+            ) : (
+              <ProjectCard
+                key={item.project.id + item.group.groupName}
+                project={item.project}
+                group={item.group}
+                studentId={studentId}
+              />
+            )
+          )}
         </motion.div>
       </AnimatePresence>
 
@@ -115,14 +141,27 @@ function IdentityCard({ name, studentId }) {
   );
 }
 
-function GradeSummary({ exams, avg, totalCoeff, classInfo }) {
-  if (exams.length === 0) {
+function GradeSummary({ exams, projects, avg, totalCoeff, classInfo }) {
+  const gradedProjects = projects.filter(({ group }) => group.grade != null);
+  const hasGradedItems = exams.length > 0 || gradedProjects.length > 0;
+
+  if (!hasGradedItems) {
+    const hasPendingProjects = projects.length > 0;
     return (
       <AsciiBox className="p-5">
-        <div className="text-tm-dim text-[13px]">No exams published yet.</div>
+        <div className="text-tm-dim text-[13px]">
+          {hasPendingProjects
+            ? "Project registered — grade pending."
+            : "No exams published yet."}
+        </div>
       </AsciiBox>
     );
   }
+
+  const formulaParts = [
+    ...exams.map(({ exam }) => `${exam.title} × ${exam.coeff}%`),
+    ...gradedProjects.map(({ project }) => `${project.title} × ${project.coeff}%`),
+  ];
 
   return (
     <AsciiBox accent={gradeColor(avg)} className="p-3 sm:p-5">
@@ -141,11 +180,11 @@ function GradeSummary({ exams, avg, totalCoeff, classInfo }) {
         </span>
       </div>
       <div className="text-tm-text text-[10px] opacity-40 mt-1">
-        {exams.map(({ exam }) => `${exam.title} × ${exam.coeff}%`).join("  +  ")}
+        {formulaParts.join("  +  ")}
       </div>
       {totalCoeff < 100 && (
         <div className="text-tm-dim text-[10px] mt-2 tracking-wider">
-          {100 - totalCoeff}% remaining ── more exams to come
+          {100 - totalCoeff}% remaining ── more to come
         </div>
       )}
     </AsciiBox>
