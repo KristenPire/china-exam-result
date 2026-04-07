@@ -1,0 +1,605 @@
+{
+  "bodyType": "mcq",
+  "questions": [
+    {
+      "id": 1,
+      "text": "What is a \"First class citizen\" in programming languages?",
+      "options": {
+        "A": "A built-in data type that is optimized for performance and memory",
+        "B": "A function that is defined at the top level of a module and cannot be nested",
+        "C": "An entity (like a function) that can be a variable, passed as an argument, and returned from another function",
+        "D": "A higher-order function that takes other functions as arguments and returns a new function as a result"
+      },
+      "correct": [
+        "C"
+      ],
+      "mode": "any",
+      "explanation": "A **first-class citizen** is any entity that can be: (1) assigned to a variable, (2) passed as an argument, (3) returned from a function. In Python, functions are first-class citizens."
+    },
+    {
+      "id": 2,
+      "text": "Which of these is a side effect?",
+      "options": {
+        "A": "Writing to a file",
+        "B": "Computing `x + y` and storing the result in a local variable",
+        "C": "Returning a value",
+        "D": "Calling another pure function inside the function body"
+      },
+      "correct": [
+        "A"
+      ],
+      "mode": "any",
+      "explanation": "A **side effect** is any observable change outside the function's return value. Writing to a file modifies external state."
+    },
+    {
+      "id": 3,
+      "text": "What does this print?\n```python\na = [1, 2, 3]\nb = a\nb.append(5)\nprint(len(a))\n```",
+      "options": {
+        "A": "5",
+        "B": "3",
+        "C": "4",
+        "D": "None"
+      },
+      "correct": [
+        "C"
+      ],
+      "mode": "any",
+      "explanation": "`b = a` doesn't copy — both point to the same list. `b.append(5)` mutates the shared list, so `len(a)` is now 4. This illustrates why immutability matters in FP."
+    },
+    {
+      "id": 4,
+      "text": "What does \"pure function\" mean?",
+      "options": {
+        "A": "Same input → same output AND no side effects",
+        "B": "It has no parameters and always returns the same value",
+        "C": "It uses only built-in types and avoids any custom classes",
+        "D": "It uses no imports and only relies on the standard library"
+      },
+      "correct": [
+        "A"
+      ],
+      "mode": "any",
+      "explanation": "A pure function is **deterministic** (same inputs → same output) and has **no side effects** (doesn't modify external state)."
+    },
+    {
+      "id": 5,
+      "text": "What is the purpose of normalizing data from different sources?",
+      "options": {
+        "A": "To sort data alphabetically before passing it to the next function",
+        "B": "To rename fields to common names so one function can process all rows",
+        "C": "To remove duplicate rows and ensure all values are properly typed",
+        "D": "To make all data lowercase for consistency and easier string matching"
+      },
+      "correct": [
+        "B"
+      ],
+      "mode": "any",
+      "explanation": "**Normalization** transforms data from different sources into a common schema so downstream functions can process all rows uniformly."
+    },
+    {
+      "id": 6,
+      "text": "What does this expression do?\n```python\n{**d, \"key\": \"new\"}\n```",
+      "options": {
+        "A": "Creates an empty dict and only adds `\"key\": \"new\"`",
+        "B": "Deletes \"key\" from `d` and returns the rest",
+        "C": "Creates a new dict with all of `d`'s items plus `\"key\": \"new\"`",
+        "D": "Modifies `d` in place by adding the new key-value pair directly"
+      },
+      "correct": [
+        "C"
+      ],
+      "mode": "any",
+      "explanation": "The `**` unpacking creates a **new dict** with all of `d`'s items, then adds/overwrites `\"key\": \"new\"`. The original `d` is not modified."
+    },
+    {
+      "id": 7,
+      "text": "What does this code produce?\n```python\nlist(map(lambda x: x ** 2 + 1, [1, 3, 5]))\n```",
+      "options": {
+        "A": "`[1, 9, 25]`",
+        "B": "`[3, 7, 11]`",
+        "C": "`[2, 4, 6]`",
+        "D": "`[2, 10, 26]`"
+      },
+      "correct": [
+        "D"
+      ],
+      "mode": "any",
+      "explanation": "For each element: `1² + 1 = 2`, `3² + 1 = 10`, `5² + 1 = 26`."
+    },
+    {
+      "id": 8,
+      "text": "In functional programming, where should side effects be placed?",
+      "options": {
+        "A": "At the edges of the program, not in the core logic",
+        "B": "Only in class constructors to keep them organized",
+        "C": "Nowhere — pure programs should never have any side effects",
+        "D": "Inside every function for convenience and easier debugging"
+      },
+      "correct": [
+        "A"
+      ],
+      "mode": "any",
+      "explanation": "FP pushes side effects to the **edges** of the program (I/O, DB, network). The core logic stays pure and testable — the \"functional core, imperative shell\" pattern."
+    },
+    {
+      "id": 9,
+      "text": "What does this code produce?\n```python\nlist(filter(lambda x: x > 3, [1, 5, 2, 4]))\n```",
+      "options": {
+        "A": "`[1, 2]`",
+        "B": "`[5, 4]`",
+        "C": "True",
+        "D": "`[1, 5, 2, 4]`"
+      },
+      "correct": [
+        "B"
+      ],
+      "mode": "any",
+      "explanation": "`filter()` keeps elements where the predicate is `True`. Elements > 3 are `5` and `4`."
+    },
+    {
+      "id": 10,
+      "text": "Which of the following is a valid pytest test file name?",
+      "options": {
+        "A": "`test_parsing.py`",
+        "B": "`test.py`",
+        "C": "`parsing_tests.py`",
+        "D": "`check_parsing.py`"
+      },
+      "correct": [
+        "A"
+      ],
+      "mode": "any",
+      "explanation": "pytest auto-discovers files matching `test_*.py` or `*_test.py`. `test_parsing.py` follows the `test_` prefix convention."
+    },
+    {
+      "id": 11,
+      "text": "What does this produce?\n```python\nfrom functools import reduce\nfns = [\n    lambda x: x + 1,\n    lambda x: x * 2,\n    lambda x: x - 3,\n]\nresult = reduce(lambda acc, f: f(acc), fns, 5)\n```",
+      "options": {
+        "A": "7",
+        "B": "3",
+        "C": "9",
+        "D": "11"
+      },
+      "correct": [
+        "C"
+      ],
+      "mode": "any",
+      "explanation": "Starting with 5: `5 + 1 = 6`, then `6 * 2 = 12`, then `12 - 3 = 9`. `reduce` applies each function in sequence."
+    },
+    {
+      "id": 12,
+      "text": "What is the expression equivalent of this code?\n```python\nif x > 0:\n    result = \"positive\"\nelse:\n    result = \"negative\"\n```",
+      "options": {
+        "A": "`result = x > 0 ? \"positive\" : \"negative\"`",
+        "B": "`result = \"positive\" or \"negative\"`",
+        "C": "`result = (\"positive\", \"negative\")[x > 0]`",
+        "D": "`result = \"positive\" if x > 0 else \"negative\"`"
+      },
+      "correct": [
+        "D"
+      ],
+      "mode": "any",
+      "explanation": "Python's ternary expression: `value_if_true if condition else value_if_false`."
+    },
+    {
+      "id": 13,
+      "text": "What does \"referential transparency\" mean?",
+      "options": {
+        "A": "All variables must be visible in the current scope to avoid hidden dependencies",
+        "B": "You can replace `f(x)` with its return value anywhere without changing the program",
+        "C": "Functions must declare their return type explicitly in the function signature",
+        "D": "Functions must have documentation strings that explain their full behavior"
+      },
+      "correct": [
+        "B"
+      ],
+      "mode": "any",
+      "explanation": "**Referential transparency** means any expression can be replaced by its value without changing behavior. Only possible with pure functions."
+    },
+    {
+      "id": 14,
+      "text": "What does this dict comprehension produce?\n```python\n{k: v * 2 for k, v in {\"a\": 1, \"b\": 2}.items()}\n```",
+      "options": {
+        "A": "`{\"a\": 2, \"b\": 4}`",
+        "B": "`[(\"a\", 2), (\"b\", 4)]`",
+        "C": "`{\"a\": 1, \"b\": 2}`",
+        "D": "`[2, 4]`"
+      },
+      "correct": [
+        "A"
+      ],
+      "mode": "any",
+      "explanation": "This dict comprehension iterates over items, keeping keys and doubling values: `\"a\"` → `1*2=2`, `\"b\"` → `2*2=4`."
+    },
+    {
+      "id": 15,
+      "text": "Which Python type is immutable?",
+      "options": {
+        "A": "`dict`",
+        "B": "`list`",
+        "C": "`set`",
+        "D": "`tuple`"
+      },
+      "correct": [
+        "D"
+      ],
+      "mode": "any",
+      "explanation": "**Tuples** are immutable — once created, their elements cannot be changed. Lists, sets, and dicts are mutable."
+    },
+    {
+      "id": 16,
+      "text": "What is a \"predicate\" in functional programming?",
+      "options": {
+        "A": "A loop variable used for iteration over a sequence",
+        "B": "A function that returns True or False based on a condition",
+        "C": "A function that transforms each element into a new value",
+        "D": "A function that combines two values into a single result"
+      },
+      "correct": [
+        "B"
+      ],
+      "mode": "any",
+      "explanation": "A **predicate** is a boolean-returning function. Used by `filter()` to decide which elements to keep."
+    },
+    {
+      "id": 17,
+      "text": "What is `pipe(x, f, g, h)` equivalent to?",
+      "options": {
+        "A": "`h(g(f(x)))`",
+        "B": "`f(g(h(x)))`",
+        "C": "`f(x) + g(x) + h(x)`",
+        "D": "`h(f(g(x)))`"
+      },
+      "correct": [
+        "A"
+      ],
+      "mode": "any",
+      "explanation": "`pipe` applies functions left to right: `f(x)`, then `g` on result, then `h`. So `pipe(x, f, g, h)` = `h(g(f(x)))`."
+    },
+    {
+      "id": 18,
+      "text": "What does `pipeline(f, g, h)` return?",
+      "options": {
+        "A": "A list containing the three functions `[f, g, h]`",
+        "B": "A new function that can be called later with data as input",
+        "C": "`None` because `pipeline` only has a side effect internally",
+        "D": "The result of applying `f` → `g` → `h` to default data"
+      },
+      "correct": [
+        "B"
+      ],
+      "mode": "any",
+      "explanation": "`pipeline(f, g, h)` returns a **new function** — a composed transformation to be called later with data."
+    },
+    {
+      "id": 19,
+      "text": "Why is Hugging Face `datasets` memory-efficient for large files?",
+      "options": {
+        "A": "It compresses all data with gzip before loading it into memory",
+        "B": "It converts all strings to integer IDs to reduce memory usage",
+        "C": "It removes duplicate rows automatically when loading the dataset",
+        "D": "It stores data on disk and loads it in batches, not all at once in RAM"
+      },
+      "correct": [
+        "D"
+      ],
+      "mode": "any",
+      "explanation": "Hugging Face `datasets` uses memory-mapped files — data stays on disk and is loaded only when accessed, enabling work with datasets larger than RAM."
+    },
+    {
+      "id": 20,
+      "text": "Why are pure functions particularly easy to test?",
+      "options": {
+        "A": "They run faster than impure functions, making tests quicker and more efficient",
+        "B": "They use less memory during testing because the runtime can optimize them better",
+        "C": "They depend only on their inputs and produce no side effects, so no setup is needed",
+        "D": "Python has special built-in testing tools that are designed for pure functions"
+      },
+      "correct": [
+        "C"
+      ],
+      "mode": "any",
+      "explanation": "Pure functions need no mocking, no setup, no teardown. Just pass inputs and check outputs — they're deterministic and independent."
+    },
+    {
+      "id": 21,
+      "text": "What does \"deterministic\" mean for a function?",
+      "options": {
+        "A": "The function always returns the same output for the same input",
+        "B": "The function modifies global state",
+        "C": "The function has no return statement and always does the same thing",
+        "D": "A generator function that must be explicitly called to run"
+      },
+      "correct": [
+        "A"
+      ],
+      "mode": "any",
+      "explanation": "A **deterministic** function always produces the same output given the same input. No randomness, no dependence on external state."
+    },
+    {
+      "id": 22,
+      "text": "Which of the following functions is pure?\n```python\n# Function W\nresults = []\ndef save(x):\n    results.append(x)\n    return x\n\n# Function X\ndef square(x):\n    return x ** 2\n\n# Function Y\nfrom datetime import datetime\ndef greet():\n    return f\"Hello at {datetime.now()}\"\n\n# Function Z\ndef increment(x):\n    print(x + 1)\n    return x + 1\n```",
+      "options": {
+        "A": "Function W",
+        "B": "Function X",
+        "C": "Function Y",
+        "D": "Function Z"
+      },
+      "correct": [
+        "B"
+      ],
+      "mode": "any",
+      "explanation": "**Function X** (`square`) is pure: deterministic and no side effects. W mutates `results`, Y depends on current time (non-deterministic), Z calls `print` (side effect)."
+    },
+    {
+      "id": 23,
+      "text": "Which of these Python keywords starts a statement (NOT an expression)?",
+      "options": {
+        "A": "`not`",
+        "B": "`for ... in ...:` (loop)",
+        "C": "`lambda`",
+        "D": "`True`"
+      },
+      "correct": [
+        "B"
+      ],
+      "mode": "any",
+      "explanation": "A `for` loop is a **statement**. `lambda`, `not`, and `True` are all expressions."
+    },
+    {
+      "id": 24,
+      "text": "What does this return?\n```python\nt = (10, 20, 30)\nnew_t = t + (40,)\nprint(new_t)\n```",
+      "options": {
+        "A": "Error — tuples are immutable",
+        "B": "`[10, 20, 30, 40]`",
+        "C": "`(40, 10, 20, 30)`",
+        "D": "`(10, 20, 30, 40)`"
+      },
+      "correct": [
+        "D"
+      ],
+      "mode": "any",
+      "explanation": "Tuple concatenation with `+` creates a **new tuple**. The original `t` is unchanged. `(40,)` is a single-element tuple."
+    },
+    {
+      "id": 25,
+      "text": "What does this list comprehension produce?\n```python\n[x ** 2 for x in range(5)]\n```",
+      "options": {
+        "A": "`[1, 4, 9, 16, 25]`",
+        "B": "`[0, 2, 4, 6, 8]`",
+        "C": "`[0, 1, 4, 9, 16]`",
+        "D": "`[1, 8, 27, 64, 125]`"
+      },
+      "correct": [
+        "C"
+      ],
+      "mode": "any",
+      "explanation": "`range(5)` = `0, 1, 2, 3, 4`. Squaring: `0, 1, 4, 9, 16`."
+    },
+    {
+      "id": 26,
+      "text": "What is a \"higher-order function\"?",
+      "options": {
+        "A": "A function that runs faster than other functions due to optimization",
+        "B": "A function with more than three parameters in its signature",
+        "C": "A function that is defined inside a class and accesses its attributes",
+        "D": "A function that takes another function as argument or returns a function"
+      },
+      "correct": [
+        "D"
+      ],
+      "mode": "any",
+      "explanation": "A **higher-order function** takes functions as arguments or returns functions. Examples: `map`, `filter`, `reduce`, decorators."
+    },
+    {
+      "id": 27,
+      "text": "Why does the industry prefer left-to-right pipelines over deeply nested calls?",
+      "options": {
+        "A": "Left-to-right matches the execution order, making code easier to read",
+        "B": "Nested calls are not valid Python syntax and will cause errors",
+        "C": "Python does not support nested function calls beyond three levels",
+        "D": "Nested calls are slower at runtime due to additional stack overhead"
+      },
+      "correct": [
+        "A"
+      ],
+      "mode": "any",
+      "explanation": "Left-to-right pipelines match the execution order, making code more readable than inside-out nested calls."
+    },
+    {
+      "id": 28,
+      "text": "What is the key difference between `pipe` and `pipeline`?",
+      "options": {
+        "A": "`pipe` composes functions right to left; `pipeline` composes left to right",
+        "B": "`pipe` is a built-in Python function; `pipeline` must be imported from a library",
+        "C": "`pipe` works on lists only; `pipeline` works on any type of data `[f, g]`",
+        "D": "`pipe` takes data and returns a result; `pipeline` returns a reusable function"
+      },
+      "correct": [
+        "D"
+      ],
+      "mode": "any",
+      "explanation": "`pipe(data, f, g, h)` applies immediately. `pipeline(f, g, h)` returns a reusable function for later use."
+    },
+    {
+      "id": 29,
+      "text": "What does `-v` do in `python -m pytest -v`?",
+      "options": {
+        "A": "Validates test file names before actually running the tests (correct test names)",
+        "B": "Shows verbose output with each test name and its result (more details)",
+        "C": "Runs only tests that failed during the last test session",
+        "D": "Verifies that all tests have docstrings before running them"
+      },
+      "correct": [
+        "B"
+      ],
+      "mode": "any",
+      "explanation": "The `-v` flag shows verbose output: each test's full name and pass/fail status."
+    },
+    {
+      "id": 30,
+      "text": "What does \"routing\" mean in a data pipeline?",
+      "options": {
+        "A": "Removing rows that contain errors and sending them to a dedicated error log",
+        "B": "Splitting data into training and testing sets for machine learning models",
+        "C": "Sending each row to the correct processing path based on its properties",
+        "D": "Sorting all rows alphabetically before processing them in the pipeline"
+      },
+      "correct": [
+        "C"
+      ],
+      "mode": "any",
+      "explanation": "**Routing** directs each row to the appropriate processing path based on its attributes."
+    },
+    {
+      "id": 31,
+      "text": "In declarative routing, what does the dispatch dict contain?",
+      "options": {
+        "A": "A mapping from column names to validation rules",
+        "B": "A mapping from segment names to lists of pipeline functions",
+        "C": "A list of all rows and their assigned segments",
+        "D": "A mapping from file paths to data loaders"
+      },
+      "correct": [
+        "B"
+      ],
+      "mode": "any",
+      "explanation": "The dispatch dict maps segment names to lists of functions for processing rows in that segment."
+    },
+    {
+      "id": 32,
+      "text": "What does `\"hello\".isdigit()` return?",
+      "options": {
+        "A": "`False`",
+        "B": "`\"hello\"`",
+        "C": "`0`",
+        "D": "`True`"
+      },
+      "correct": [
+        "A"
+      ],
+      "mode": "any",
+      "explanation": "`str.isdigit()` returns `False` because `\"hello\"` contains no digit characters."
+    },
+    {
+      "id": 33,
+      "text": "What is the main advantage of storing business rules in a config file (YAML/JSON) rather than hardcoding them in Python?",
+      "options": {
+        "A": "Python cannot read its own `.py` files at runtime, so settings must be in a separate file",
+        "B": "Configuration files run faster than Python code because they are parsed more efficiently",
+        "C": "A non-developer (e.g. product manager) can change rules or settings without touching the code",
+        "D": "Python requires all settings to be in a separate file to prevent security vulnerabilities"
+      },
+      "correct": [
+        "C"
+      ],
+      "mode": "any",
+      "explanation": "Separating config from code lets **non-developers** modify rules without touching Python code."
+    },
+    {
+      "id": 34,
+      "text": "What is the \"trash bin\" pattern used for in routing?",
+      "options": {
+        "A": "Tagging unmatched rows with \"drop\" so they are explicitly filtered out",
+        "B": "Permanently deleting rows that contain null values or errors",
+        "C": "Raising an error when a row matches no rule in the system",
+        "D": "Storing all rows in a backup file with a \"drop\" status"
+      },
+      "correct": [
+        "A"
+      ],
+      "mode": "any",
+      "explanation": "The trash bin pattern tags unmatched rows with `\"drop\"` — explicit, safe, and debuggable."
+    },
+    {
+      "id": 35,
+      "text": "Look at this function. What is the problem?\n```python\ndef update_user(user):\n    user[\"active\"] = True\n    return user\n```",
+      "options": {
+        "A": "It should do everything in one line within the return statement",
+        "B": "It should use `print` instead of `return` to output the result",
+        "C": "It returns the wrong type because the value should be an integer",
+        "D": "It mutates the input `user` instead of creating a new dict"
+      },
+      "correct": [
+        "D"
+      ],
+      "mode": "any",
+      "explanation": "This function **mutates** the input dict. The FP way: `return {**user, \"active\": True}`."
+    },
+    {
+      "id": 36,
+      "text": "What does this pipeline return?\n```python\nfrom functools import reduce\n\ndef pipe(data, *fns):\n    return reduce(lambda acc, f: f(acc), fns, data)\n\nresult = pipe(\n    \" Hello World \",\n    str.strip,\n    str.lower,\n    str.split\n)[0][3:]\n```",
+      "options": {
+        "A": "`\"hello\"`",
+        "B": "`\"lo\"`",
+        "C": "`\"hel\"`",
+        "D": "`[\"hello\", \"world\"]`"
+      },
+      "correct": [
+        "B"
+      ],
+      "mode": "any",
+      "explanation": "Steps: `\" Hello World \"` → strip → `\"Hello World\"` → lower → `\"hello world\"` → split → `[\"hello\", \"world\"]`. Then `[0]` = `\"hello\"`, `[3:]` = `\"lo\"`."
+    },
+    {
+      "id": 37,
+      "text": "Given these rules, what segment is assigned to the row?\n```python\nRULES = [\n    {\"conditions\": {\"lang\": \"en\", \"urgency\": \"high\"}, \"segment\": \"en_urgent\"},\n    {\"conditions\": {\"lang\": \"fr\", \"urgency\": \"high\"}, \"segment\": \"fr_urgent\"},\n    {\"conditions\": {\"lang\": \"en\", \"urgency\": \"medium\"}, \"segment\": \"en_urgent\"},\n    {\"conditions\": {\"lang\": \"fr\"},                      \"segment\": \"fr_general\"},\n    {\"conditions\": {\"lang\": \"en\"},                      \"segment\": \"en_general\"},\n]\nrow = {\"lang\": \"en\", \"urgency\": \"low\", \"text\": \"hello\"}\n```",
+      "options": {
+        "A": "`\"en_urgent\"`",
+        "B": "`\"drop\"`",
+        "C": "`\"en_general\"`",
+        "D": "KeyError"
+      },
+      "correct": [
+        "C"
+      ],
+      "mode": "any",
+      "explanation": "Rules 1 and 3 don't match (wrong urgency). Rule 5 matches `lang=en` → `\"en_general\"`."
+    },
+    {
+      "id": 38,
+      "text": "What does this code print?\n```python\nm = map(lambda x: x + 10, [1, 2, 3])\nprint(list(m))\nprint(list(m))\n```",
+      "options": {
+        "A": "`[11, 12, 13]` then `[11, 12, 13]`",
+        "B": "`[1, 2, 3]` then `[1, 2, 3]`",
+        "C": "Error on the second `print`",
+        "D": "`[11, 12, 13]` then `[]`"
+      },
+      "correct": [
+        "D"
+      ],
+      "mode": "any",
+      "explanation": "`map()` returns a lazy iterator. First `list(m)` consumes it. Second `list(m)` returns `[]` — iterators are single-use."
+    },
+    {
+      "id": 39,
+      "text": "What is the main pattern used by companies like Alibaba and ByteDance in their data pipelines?",
+      "options": {
+        "A": "Small pure functions chained together into pipelines, reliable at any scale",
+        "B": "Use global variables to share state between all processing functions",
+        "C": "Avoid functions entirely and use only classes with inheritance hierarchies",
+        "D": "Write everything in one big function to keep it simple and centralized"
+      },
+      "correct": [
+        "A"
+      ],
+      "mode": "any",
+      "explanation": "Industry leaders use functional pipelines: small, pure, composable functions that scale reliably."
+    },
+    {
+      "id": 40,
+      "text": "Which statement best describes why functional programming is well-suited for data processing?",
+      "options": {
+        "A": "FP avoids using functions entirely, which makes data processing faster and more reliable",
+        "B": "Pure functions, immutability, and composition make pipelines predictable, testable, and safe to run in parallel",
+        "C": "FP is the only paradigm that supports reading, writing, and processing files at scale",
+        "D": "FP forces everything to be in separate files, which simplifies deployment and scaling"
+      },
+      "correct": [
+        "B"
+      ],
+      "mode": "any",
+      "explanation": "FP's core principles — pure functions, immutability, and composition — make pipelines predictable, testable, and parallelizable."
+    }
+  ]
+}

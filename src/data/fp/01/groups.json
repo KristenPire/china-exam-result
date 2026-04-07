@@ -1,0 +1,830 @@
+[
+  {
+    "groupName": "Sage",
+    "repositoryLink": null,
+    "grade": 0.0,
+    "comments": null,
+    "members": {
+      "2023905493": "Sage"
+    }
+  },
+  {
+    "groupName": "Jerry",
+    "repositoryLink": null,
+    "grade": 0.0,
+    "comments": null,
+    "members": {
+      "2023905321": "Jerry"
+    }
+  },
+  {
+    "groupName": "Lilibet",
+    "repositoryLink": null,
+    "grade": 0.0,
+    "comments": null,
+    "members": {
+      "2023902041": "Lilibet"
+    }
+  },
+  {
+    "groupName": "Steven",
+    "repositoryLink": null,
+    "grade": 94.0,
+    "comments": null,
+    "members": {
+      "2023900908": "Steven"
+    }
+  },
+  {
+    "groupName": "Star",
+    "repositoryLink": null,
+    "grade": 0.0,
+    "comments": null,
+    "members": {
+      "2023902044": "Star"
+    }
+  },
+  {
+    "groupName": "Theodore",
+    "repositoryLink": null,
+    "grade": 85.0,
+    "comments": null,
+    "members": {
+      "2023903113": "Theodore"
+    }
+  },
+  {
+    "groupName": "Michael",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023905325": "Michael"
+    }
+  },
+  {
+    "groupName": "James William",
+    "repositoryLink": null,
+    "grade": 75.0,
+    "comments": null,
+    "members": {
+      "2023903693": "James William"
+    }
+  },
+  {
+    "groupName": "Vernon",
+    "repositoryLink": null,
+    "grade": 20.0,
+    "comments": null,
+    "members": {
+      "2023905494": "Vernon"
+    }
+  },
+  {
+    "groupName": "Beluga",
+    "repositoryLink": null,
+    "grade": 64.0,
+    "comments": null,
+    "members": {
+      "2023905419": "Beluga"
+    }
+  },
+  {
+    "groupName": "Alex",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023903990": "Alex"
+    }
+  },
+  {
+    "groupName": "Kevin Chou",
+    "repositoryLink": null,
+    "grade": 92.0,
+    "comments": null,
+    "members": {
+      "2023900903": "Kevin Chou"
+    }
+  },
+  {
+    "groupName": "Charles",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023900902": "Charles"
+    }
+  },
+  {
+    "groupName": "Ikun Hututu",
+    "repositoryLink": null,
+    "grade": 82.0,
+    "comments": null,
+    "members": {
+      "2023900900": "Ikun Hututu"
+    }
+  },
+  {
+    "groupName": "Kane",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023901702": "Kane"
+    }
+  },
+  {
+    "groupName": "Guo Jingsheng",
+    "repositoryLink": null,
+    "grade": 98.0,
+    "comments": null,
+    "members": {
+      "2023905329": "Guo Jingsheng"
+    }
+  },
+  {
+    "groupName": "Jobs",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023903117": "Jobs"
+    }
+  },
+  {
+    "groupName": "Zima",
+    "repositoryLink": null,
+    "grade": 34.0,
+    "comments": null,
+    "members": {
+      "2023902042": "Zima"
+    }
+  },
+  {
+    "groupName": "Doris",
+    "repositoryLink": null,
+    "grade": 92.0,
+    "comments": null,
+    "members": {
+      "2023905492": "Doris"
+    }
+  },
+  {
+    "groupName": "Leo",
+    "repositoryLink": null,
+    "grade": 83.0,
+    "comments": null,
+    "members": {
+      "2023905327": "Leo"
+    }
+  },
+  {
+    "groupName": "David",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023905931": "David"
+    }
+  },
+  {
+    "groupName": "Summer",
+    "repositoryLink": null,
+    "grade": 75.0,
+    "comments": null,
+    "members": {
+      "2023903692": "Summer"
+    }
+  },
+  {
+    "groupName": "Divid",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023901566": "Divid"
+    }
+  },
+  {
+    "groupName": "Enzo",
+    "repositoryLink": null,
+    "grade": 65.0,
+    "comments": null,
+    "members": {
+      "2023905940": "Enzo"
+    }
+  },
+  {
+    "groupName": "Katie",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023905318": "Katie"
+    }
+  },
+  {
+    "groupName": "Viclant",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023905420": "Viclant"
+    }
+  },
+  {
+    "groupName": "Leah",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023905937": "Leah"
+    }
+  },
+  {
+    "groupName": "Edison",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023902047": "Edison"
+    }
+  },
+  {
+    "groupName": "Zora",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023901703": "Zora"
+    }
+  },
+  {
+    "groupName": "Ben",
+    "repositoryLink": null,
+    "grade": 99.0,
+    "comments": null,
+    "members": {
+      "2023901701": "Ben"
+    }
+  },
+  {
+    "groupName": "Tracy",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023905331": "Tracy"
+    }
+  },
+  {
+    "groupName": "yogafire",
+    "repositoryLink": null,
+    "grade": 56.0,
+    "comments": null,
+    "members": {
+      "2023901565": "yogafire"
+    }
+  },
+  {
+    "groupName": "Danny",
+    "repositoryLink": null,
+    "grade": 80.0,
+    "comments": null,
+    "members": {
+      "2023905333": "Danny"
+    }
+  },
+  {
+    "groupName": "Gaston",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023901700": "Gaston"
+    }
+  },
+  {
+    "groupName": "Youheng Xu",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023901564": "Youheng Xu"
+    }
+  },
+  {
+    "groupName": "Daniel",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023902045": "Daniel"
+    }
+  },
+  {
+    "groupName": "Neil",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023905316": "Neil"
+    }
+  },
+  {
+    "groupName": "Harrison",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023901708": "Harrison"
+    }
+  },
+  {
+    "groupName": "Zander",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023905320": "Zander"
+    }
+  },
+  {
+    "groupName": "Eve",
+    "repositoryLink": null,
+    "grade": 75.0,
+    "comments": null,
+    "members": {
+      "2023902043": "Eve"
+    }
+  },
+  {
+    "groupName": "Verena",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023905495": "Verena"
+    }
+  },
+  {
+    "groupName": "Luke",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023905941": "Luke"
+    }
+  },
+  {
+    "groupName": "Ray",
+    "repositoryLink": null,
+    "grade": 81.0,
+    "comments": null,
+    "members": {
+      "2023900901": "Ray"
+    }
+  },
+  {
+    "groupName": "Joseph Wuyang",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023905935": "Joseph Wuyang"
+    }
+  },
+  {
+    "groupName": "jacccccob",
+    "repositoryLink": null,
+    "grade": 50.0,
+    "comments": null,
+    "members": {
+      "2023905317": "jacccccob"
+    }
+  },
+  {
+    "groupName": "Michelle",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023905942": "Michelle"
+    }
+  },
+  {
+    "groupName": "Rick",
+    "repositoryLink": null,
+    "grade": 95.0,
+    "comments": null,
+    "members": {
+      "2023901697": "Rick"
+    }
+  },
+  {
+    "groupName": "Kale",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023905335": "Kale"
+    }
+  },
+  {
+    "groupName": "Camellia",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023902790": "Camellia"
+    }
+  },
+  {
+    "groupName": "Wade",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023903989": "Wade"
+    }
+  },
+  {
+    "groupName": "Fannie",
+    "repositoryLink": null,
+    "grade": 65.0,
+    "comments": null,
+    "members": {
+      "2023905939": "Fannie"
+    }
+  },
+  {
+    "groupName": "Rock",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023905330": "Rock"
+    }
+  },
+  {
+    "groupName": "Adam",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023903992": "Adam"
+    }
+  },
+  {
+    "groupName": "Hongrui Bian",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023905334": "Hongrui Bian"
+    }
+  },
+  {
+    "groupName": "Wren",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023905416": "Wren"
+    }
+  },
+  {
+    "groupName": "Xianqing Lin",
+    "repositoryLink": null,
+    "grade": 90.0,
+    "comments": null,
+    "members": {
+      "2023905315": "Xianqing Lin"
+    }
+  },
+  {
+    "groupName": "Elvis",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023905417": "Elvis"
+    }
+  },
+  {
+    "groupName": "Mercury",
+    "repositoryLink": null,
+    "grade": 95.0,
+    "comments": null,
+    "members": {
+      "2023900906": "Mercury"
+    }
+  },
+  {
+    "groupName": "Benyuan Dai",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023902791": "Benyuan Dai"
+    }
+  },
+  {
+    "groupName": "Jack Zhang",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023900904": "Jack Zhang"
+    }
+  },
+  {
+    "groupName": "Zikang Cao",
+    "repositoryLink": null,
+    "grade": 97.0,
+    "comments": null,
+    "members": {
+      "2023905938": "Zikang Cao"
+    }
+  },
+  {
+    "groupName": "Bo Liu",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023903115": "Bo Liu"
+    }
+  },
+  {
+    "groupName": "Lucas",
+    "repositoryLink": null,
+    "grade": 98.0,
+    "comments": null,
+    "members": {
+      "2023901562": "Lucas"
+    }
+  },
+  {
+    "groupName": "Eloise",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023900907": "Eloise"
+    }
+  },
+  {
+    "groupName": "Landy",
+    "repositoryLink": null,
+    "grade": 98.0,
+    "comments": null,
+    "members": {
+      "2023902038": "Landy"
+    }
+  },
+  {
+    "groupName": "John",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023902040": "John"
+    }
+  },
+  {
+    "groupName": "Marco",
+    "repositoryLink": null,
+    "grade": 85.0,
+    "comments": null,
+    "members": {
+      "2023903114": "Marco"
+    }
+  },
+  {
+    "groupName": "Mitch",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023901705": "Mitch"
+    }
+  },
+  {
+    "groupName": "Noah",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023901706": "Noah"
+    }
+  },
+  {
+    "groupName": "Apryl",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023902788": "Apryl"
+    }
+  },
+  {
+    "groupName": "Jim",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023901704": "Jim"
+    }
+  },
+  {
+    "groupName": "Link",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023902039": "Link"
+    }
+  },
+  {
+    "groupName": "Alan",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023903690": "Alan"
+    }
+  },
+  {
+    "groupName": "Peggy",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023903694": "Peggy"
+    }
+  },
+  {
+    "groupName": "Tom",
+    "repositoryLink": null,
+    "grade": 92.0,
+    "comments": null,
+    "members": {
+      "2023901563": "Tom"
+    }
+  },
+  {
+    "groupName": "Jacinda",
+    "repositoryLink": null,
+    "grade": 90.0,
+    "comments": null,
+    "members": {
+      "2023905322": "Jacinda"
+    }
+  },
+  {
+    "groupName": "Chen Zihan",
+    "repositoryLink": null,
+    "grade": 97.0,
+    "comments": null,
+    "members": {
+      "2023900905": "Chen Zihan"
+    }
+  },
+  {
+    "groupName": "Leo",
+    "repositoryLink": null,
+    "grade": 97.0,
+    "comments": null,
+    "members": {
+      "2023905932": "Leo"
+    }
+  },
+  {
+    "groupName": "Terry",
+    "repositoryLink": null,
+    "grade": 97.0,
+    "comments": null,
+    "members": {
+      "2023900899": "Terry"
+    }
+  },
+  {
+    "groupName": "Tom",
+    "repositoryLink": null,
+    "grade": 95.0,
+    "comments": null,
+    "members": {
+      "2023901699": "Tom"
+    }
+  },
+  {
+    "groupName": "Baron",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023905332": "Baron"
+    }
+  },
+  {
+    "groupName": "Liu Yunfei (leo)",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023905324": "Liu Yunfei (leo)"
+    }
+  },
+  {
+    "groupName": "Michael Yu",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023902046": "Michael Yu"
+    }
+  },
+  {
+    "groupName": "Victor",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023905933": "Victor"
+    }
+  },
+  {
+    "groupName": "Rayne Gao",
+    "repositoryLink": null,
+    "grade": 95.0,
+    "comments": null,
+    "members": {
+      "2023903116": "Rayne Gao"
+    }
+  },
+  {
+    "groupName": "Mark",
+    "repositoryLink": null,
+    "grade": 98.0,
+    "comments": null,
+    "members": {
+      "2023905418": "Mark"
+    }
+  },
+  {
+    "groupName": "Alger Zhu",
+    "repositoryLink": null,
+    "grade": 97.0,
+    "comments": null,
+    "members": {
+      "2023903988": "Alger Zhu"
+    }
+  },
+  {
+    "groupName": "Horace",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023903991": "Horace"
+    }
+  },
+  {
+    "groupName": "Joker",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023905496": "Joker"
+    }
+  },
+  {
+    "groupName": "lingche chi",
+    "repositoryLink": null,
+    "grade": 99.0,
+    "comments": null,
+    "members": {
+      "2023901707": "lingche chi"
+    }
+  },
+  {
+    "groupName": "Leo",
+    "repositoryLink": null,
+    "grade": 99.0,
+    "comments": null,
+    "members": {
+      "2023905934": "Leo"
+    }
+  },
+  {
+    "groupName": "Felix",
+    "repositoryLink": null,
+    "grade": 0.0,
+    "comments": null,
+    "members": {
+      "2023905328": "Felix"
+    }
+  }
+]

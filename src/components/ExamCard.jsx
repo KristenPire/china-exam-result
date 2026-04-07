@@ -7,11 +7,13 @@ import { ProgressBar } from "./ProgressBar";
 export function ExamCard({ exam, student, onClick, isLatest }) {
   const [hovered, setHovered] = useState(false);
   const pct = (student.grade / exam.totalPoints) * 100;
-  const hasDetail = student.wrong !== undefined;
+  const hasAnswers = student.wrong !== undefined;
+  const hasBody = exam.questions?.length > 0;
+  const hasDetail = hasAnswers || hasBody;
 
-  const wrongCount = hasDetail ? Object.keys(student.wrong).length : null;
+  const wrongCount = hasAnswers ? Object.keys(student.wrong).length : null;
   const totalQ = exam.questions?.length || 0;
-  const correctCount = hasDetail ? totalQ - wrongCount : null;
+  const correctCount = hasAnswers ? totalQ - wrongCount : null;
 
   const nudge = isLatest && hasDetail;
 
@@ -52,12 +54,14 @@ export function ExamCard({ exam, student, onClick, isLatest }) {
               student={student}
               pct={pct}
               hasDetail={hasDetail}
+              hasAnswers={hasAnswers}
               correctCount={correctCount}
             />
 
             {hasDetail && (
               <ReviewCallToAction
                 wrongCount={wrongCount}
+                hasAnswers={hasAnswers}
                 hovered={hovered}
               />
             )}
@@ -69,7 +73,7 @@ export function ExamCard({ exam, student, onClick, isLatest }) {
   );
 }
 
-function ExamCardBody({ exam, student, pct, hasDetail, correctCount }) {
+function ExamCardBody({ exam, student, pct, hasDetail, hasAnswers, correctCount }) {
   return (
     <div className="p-3 sm:p-5 pb-0">
 
@@ -90,8 +94,10 @@ function ExamCardBody({ exam, student, pct, hasDetail, correctCount }) {
       </div>
 
       <div className="flex gap-3 text-[11px] flex-wrap mb-4">
-        {hasDetail ? (
+        {hasAnswers ? (
           <span className="text-tm-green">● {correctCount} correct</span>
+        ) : hasDetail ? (
+          <span className="text-tm-cyan">● correction available</span>
         ) : (
           <span className="text-tm-dim">grade only</span>
         )}
@@ -115,7 +121,13 @@ function GradeDisplay({ student, pct, exam }) {
   );
 }
 
-function ReviewCallToAction({ wrongCount, hovered }) {
+function ReviewCallToAction({ wrongCount, hasAnswers, hovered }) {
+  const label = !hasAnswers
+    ? "view correction & explanations"
+    : wrongCount > 0
+      ? `${wrongCount} question${wrongCount > 1 ? "s" : ""} to review`
+      : "perfect score — see explanations";
+
   return (
     <div
       className="px-3 sm:px-5 py-3 flex items-center justify-between border-t transition-colors duration-200"
@@ -126,11 +138,9 @@ function ReviewCallToAction({ wrongCount, hovered }) {
     >
       <span
         className="text-[12px] tracking-wider font-bold"
-        style={{ color: wrongCount > 0 ? C.cyan : C.green }}
+        style={{ color: !hasAnswers ? C.cyan : wrongCount > 0 ? C.cyan : C.green }}
       >
-        {wrongCount > 0
-          ? `${wrongCount} question${wrongCount > 1 ? "s" : ""} to review`
-          : "perfect score — see explanations"}
+        {label}
       </span>
       <motion.span
         className="text-tm-cyan text-[16px]"

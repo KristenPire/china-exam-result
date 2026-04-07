@@ -13,9 +13,10 @@ export function ExamDetailScreen({ examId, studentId, onBack }) {
   const pct = (student.grade / exam.totalPoints) * 100;
   const label = pct >= 90 ? "EXCELLENT" : pct >= 70 ? "GOOD" : "";
 
+  const hasAnswers = student.wrong !== undefined;
   const wrong = student.wrong || {};
-  const wrongCount = Object.keys(wrong).length;
-  const correctCount = exam.questions.length - wrongCount;
+  const wrongCount = hasAnswers ? Object.keys(wrong).length : null;
+  const correctCount = hasAnswers ? exam.questions.length - wrongCount : null;
 
   return (
     <motion.div {...fadeSlide} className="min-h-screen p-4 sm:p-6 max-w-[720px] mx-auto">
@@ -29,19 +30,21 @@ export function ExamDetailScreen({ examId, studentId, onBack }) {
           studentId={studentId}
           pct={pct}
           label={label}
+          hasAnswers={hasAnswers}
           correctCount={correctCount}
           wrongCount={wrongCount}
         />
       </motion.div>
 
-      <SectionDivider label="QUESTION DETAILS" />
+      <SectionDivider label={hasAnswers ? "QUESTION DETAILS" : "CORRECTION"} />
 
       <motion.div variants={stagger} initial="initial" animate="animate">
         {exam.questions.map((q, i) => (
           <QuestionCard
             key={q.id}
             question={q}
-            wrongAnswer={wrong[String(q.id)]}
+            wrongAnswer={hasAnswers ? wrong[String(q.id)] : undefined}
+            correctionOnly={!hasAnswers}
             index={i}
           />
         ))}
@@ -70,7 +73,7 @@ function BackButton({ onBack }) {
   );
 }
 
-function ScoreHeader({ exam, student, studentId, pct, label, correctCount, wrongCount }) {
+function ScoreHeader({ exam, student, studentId, pct, label, hasAnswers, correctCount, wrongCount }) {
   return (
     <AsciiBox accent={C.cyan} className="p-4 sm:p-6 mb-5 sm:mb-6">
       <div className="text-tm-dim text-[11px] mb-1">── EXAM RESULTS ──</div>
@@ -100,8 +103,14 @@ function ScoreHeader({ exam, student, studentId, pct, label, correctCount, wrong
       </div>
 
       <div className="flex gap-4 mt-4 flex-wrap text-[12px]">
-        <span className="text-tm-green">● {correctCount} correct</span>
-        {wrongCount > 0 && <span className="text-tm-red">● {wrongCount} wrong</span>}
+        {hasAnswers ? (
+          <>
+            <span className="text-tm-green">● {correctCount} correct</span>
+            {wrongCount > 0 && <span className="text-tm-red">● {wrongCount} wrong</span>}
+          </>
+        ) : (
+          <span className="text-tm-cyan">● correction only — your answers are not recorded</span>
+        )}
       </div>
     </AsciiBox>
   );

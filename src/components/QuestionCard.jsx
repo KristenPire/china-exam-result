@@ -5,22 +5,26 @@ import { AsciiBox } from "./AsciiBox";
 import { Tag } from "./Tag";
 import { Md } from "../Md";
 
-export function QuestionCard({ question, wrongAnswer, index }) {
+export function QuestionCard({ question, wrongAnswer, correctionOnly, index }) {
   const [showWhy, setShowWhy] = useState(false);
 
   // wrongAnswer = what the student picked (e.g. "A" or "ABC"), undefined if correct, "x" if no answer
-  const isWrongQuestion = wrongAnswer !== undefined;
+  const isWrongQuestion = !correctionOnly && wrongAnswer !== undefined;
   const isNoAnswer = isWrongQuestion && wrongAnswer === "x";
-  const picked = isWrongQuestion
-    ? isNoAnswer
-      ? []
-      : wrongAnswer.split("")
-    : question.correct;
-  const accent = isWrongQuestion
-    ? isNoAnswer
-      ? C.yellowDim
-      : C.redDim
-    : C.greenDim;
+  const picked = correctionOnly
+    ? []
+    : isWrongQuestion
+      ? isNoAnswer
+        ? []
+        : wrongAnswer.split("")
+      : question.correct;
+  const accent = correctionOnly
+    ? C.cyanDim
+    : isWrongQuestion
+      ? isNoAnswer
+        ? C.yellowDim
+        : C.redDim
+      : C.greenDim;
   const isEitherOr = question.mode === "any" && question.correct.length > 1;
 
   return (
@@ -30,6 +34,7 @@ export function QuestionCard({ question, wrongAnswer, index }) {
           index={index}
           isNoAnswer={isNoAnswer}
           isWrongQuestion={isWrongQuestion}
+          correctionOnly={correctionOnly}
           question={question}
           isEitherOr={isEitherOr}
         />
@@ -40,6 +45,7 @@ export function QuestionCard({ question, wrongAnswer, index }) {
           question={question}
           picked={picked}
           isWrongQuestion={isWrongQuestion}
+          correctionOnly={correctionOnly}
         />
 
         <Explanation
@@ -56,6 +62,7 @@ function QuestionHeader({
   index,
   isNoAnswer,
   isWrongQuestion,
+  correctionOnly,
   question,
   isEitherOr,
 }) {
@@ -65,9 +72,11 @@ function QuestionHeader({
         <span className="text-tm-cyan text-[12px]">
           Q{String(index + 1).padStart(2, "0")}
         </span>
-        <Tag type={isNoAnswer ? "warn" : isWrongQuestion ? "fail" : "ok"}>
-          {isNoAnswer ? "NO ANSWER" : isWrongQuestion ? "WRONG" : "OK"}
-        </Tag>
+        {!correctionOnly && (
+          <Tag type={isNoAnswer ? "warn" : isWrongQuestion ? "fail" : "ok"}>
+            {isNoAnswer ? "NO ANSWER" : isWrongQuestion ? "WRONG" : "OK"}
+          </Tag>
+        )}
         {question.mode === "all" && <Tag type="info">SELECT ALL</Tag>}
         {isEitherOr && <Tag type="info">{question.correct.join(" or ")}</Tag>}
       </div>
@@ -83,7 +92,7 @@ function QuestionText({ question }) {
   );
 }
 
-function OptionList({ question, picked, isWrongQuestion }) {
+function OptionList({ question, picked, isWrongQuestion, correctionOnly }) {
   return (
     <div className="flex flex-col gap-1.5">
       {Object.entries(question.options).map(([letter, text]) => {
@@ -95,8 +104,9 @@ function OptionList({ question, picked, isWrongQuestion }) {
             letter={letter}
             text={text}
             isCorrect={isCorrect}
-            isPicked={studentPicked}
-            isWrong={isWrongQuestion && studentPicked && !isCorrect}
+            isPicked={correctionOnly ? false : studentPicked}
+            isWrong={!correctionOnly && isWrongQuestion && studentPicked && !isCorrect}
+            correctionOnly={correctionOnly}
           />
         );
       })}
@@ -104,20 +114,29 @@ function OptionList({ question, picked, isWrongQuestion }) {
   );
 }
 
-function OptionRow({ letter, text, isCorrect, isPicked, isWrong }) {
+function OptionRow({ letter, text, isCorrect, isPicked, isWrong, correctionOnly }) {
   let bg = "transparent",
     color = C.textDim,
     prefix = "  ",
-    suffix = "";
+    suffix = "",
+    borderColor = "transparent";
 
-  if (isPicked && isCorrect) {
+  if (correctionOnly && isCorrect) {
     bg = "rgba(0,255,65,0.08)";
     color = C.green;
     prefix = "» ";
+    borderColor = C.green;
+    suffix = " [✓]";
+  } else if (isPicked && isCorrect) {
+    bg = "rgba(0,255,65,0.08)";
+    color = C.green;
+    prefix = "» ";
+    borderColor = C.green;
   } else if (isPicked && isWrong) {
     bg = "rgba(255,51,51,0.08)";
     color = C.red;
     prefix = "» ";
+    borderColor = C.red;
   } else if (isCorrect && !isPicked) {
     color = C.greenDim;
     suffix = " [✓]";
@@ -129,9 +148,7 @@ function OptionRow({ letter, text, isCorrect, isPicked, isWrong }) {
       style={{
         background: bg,
         color,
-        borderLeft: isPicked
-          ? `2px solid ${isCorrect ? C.green : C.red}`
-          : "2px solid transparent",
+        borderLeft: `2px solid ${borderColor}`,
       }}
     >
       <span>
