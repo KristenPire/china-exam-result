@@ -1,0 +1,395 @@
+{
+  "bodyType": "mcq",
+  "questions": [
+    {
+      "id": 1,
+      "text": "Which OSI layer is responsible for finding the best path (routing) for data packets?",
+      "options": {
+        "A": "Layer 3 (Network)",
+        "B": "Layer 2 (Data Link)",
+        "C": "Layer 1 (Physical)",
+        "D": "Layer 4 (Transport)"
+      },
+      "correct": ["A"],
+      "mode": "any",
+      "explanation": "**Layer 3 (Network)** is responsible for logical addressing and routing.\n\nIt decides the best path for a packet to travel from source to destination — across multiple networks.\n\n- Layer 2 handles MAC addresses within the same network\n- Layer 1 handles raw bit transmission\n- Layer 4 handles end-to-end communication between applications"
+    },
+    {
+      "id": 2,
+      "text": "At which layer of the OSI model do MAC addresses operate?",
+      "options": {
+        "A": "Layer 3 (Network)",
+        "B": "Layer 2 (Data Link)",
+        "C": "Layer 1 (Physical)",
+        "D": "Layer 4 (Transport)"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "**MAC addresses** operate at Layer 2 (Data Link).\n\nMAC stands for Media Access Control. It is a hardware address burned into every network card.\n\n- Layer 2 uses MAC addresses to deliver frames within the same local network\n- Layer 3 uses IP addresses to route packets between different networks"
+    },
+    {
+      "id": 3,
+      "text": "Which tool is often described as the \"Microscope\" of the network to analyze packets?",
+      "options": {
+        "A": "Ping",
+        "B": "Traceroute",
+        "C": "Ipcalc",
+        "D": "Wireshark"
+      },
+      "correct": ["D"],
+      "mode": "any",
+      "explanation": "**Wireshark** is a packet analyzer — it captures and displays every packet on the network in detail.\n\n- Ping tests if a host is reachable\n- Traceroute shows the path a packet takes hop by hop\n- Ipcalc calculates IP subnet information\n\nWireshark lets you inspect headers at every OSI layer, like a microscope for network traffic."
+    },
+    {
+      "id": 4,
+      "text": "When receiving data, the process of removing headers layer by layer is called:",
+      "options": {
+        "A": "Encapsulation",
+        "B": "Decapsulation",
+        "C": "Multiplexing",
+        "D": "Routing"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "**Decapsulation** is the reverse of encapsulation.\n\nWhen sending data, each layer adds a header → **encapsulation**.\nWhen receiving data, each layer removes its header → **decapsulation**.\n\nExample (receiving):\n- Layer 1 receives bits\n- Layer 2 removes the Ethernet frame header\n- Layer 3 removes the IP header\n- Layer 4 removes the TCP/UDP header\n- The application gets the original data"
+    },
+    {
+      "id": 5,
+      "text": "Which protocol is used to establish a reliable connection at Layer 4?",
+      "options": {
+        "A": "IP",
+        "B": "UDP",
+        "C": "TCP",
+        "D": "HTTP"
+      },
+      "correct": ["C"],
+      "mode": "any",
+      "explanation": "**TCP** (Transmission Control Protocol) operates at Layer 4 and provides a reliable connection.\n\nTCP guarantees:\n- Delivery of all packets\n- Correct order of packets\n- Error detection via acknowledgments (ACK)\n\nUDP is also Layer 4 but is unreliable (no guarantees). IP is Layer 3. HTTP is Layer 7."
+    },
+    {
+      "id": 6,
+      "text": "What is the primary role of the Physical Layer (Layer 1)?",
+      "options": {
+        "A": "Transmitting electrical, optical, or radio signals (Bits)",
+        "B": "Managing MAC addresses",
+        "C": "Determining the best path for a packet",
+        "D": "Ensuring end-to-end error correction"
+      },
+      "correct": ["A"],
+      "mode": "any",
+      "explanation": "**Layer 1 (Physical)** deals with the raw transmission of bits over a physical medium.\n\nThis includes:\n- Electrical signals (copper cable)\n- Light pulses (fiber optic)\n- Radio waves (Wi-Fi)\n\nLayer 1 does not understand addresses or logic — it just transmits 0s and 1s."
+    },
+    {
+      "id": 7,
+      "text": "Which type of address is unique to each network card and is often called a \"hardware address\"?",
+      "options": {
+        "A": "IP Address",
+        "B": "Port Number",
+        "C": "Home Address",
+        "D": "MAC Address"
+      },
+      "correct": ["D"],
+      "mode": "any",
+      "explanation": "A **MAC address** is a unique identifier assigned to a network interface card (NIC) by the manufacturer.\n\n- It is 48 bits long, written as `AA:BB:CC:DD:EE:FF`\n- It is permanent (burned into hardware)\n- It operates at Layer 2\n\nIP addresses are logical and can change. MAC addresses are physical and unique to the device."
+    },
+    {
+      "id": 8,
+      "text": "Which network device works primarily at Layer 2 and makes decisions based on MAC addresses?",
+      "options": {
+        "A": "Hub",
+        "B": "Router",
+        "C": "Switch",
+        "D": "Repeater"
+      },
+      "correct": ["C"],
+      "mode": "any",
+      "explanation": "A **Switch** operates at Layer 2 and forwards frames based on MAC addresses.\n\n- It maintains a MAC address table to know which device is on which port\n- It only sends frames to the correct destination port (not to everyone)\n\nA Hub (Layer 1) sends data to all ports. A Router (Layer 3) uses IP addresses. A Repeater just amplifies the signal."
+    },
+    {
+      "id": 9,
+      "text": "What is a \"collision domain\"?",
+      "options": {
+        "A": "A group of devices that receive broadcast messages",
+        "B": "An area of the network where two messages sent simultaneously can collide",
+        "C": "The IP address range of a local network",
+        "D": "The path between two routers"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "A **collision domain** is a network segment where two devices can transmit at the same time and their signals can interfere (collide).\n\n- A Hub creates one big collision domain for all connected devices\n- A Switch separates each port into its own collision domain — eliminating collisions\n\nNote: A **broadcast domain** (option A) is different — it is the area that receives broadcast messages."
+    },
+    {
+      "id": 10,
+      "text": "Which protocol resolves a MAC address from a known IP address?",
+      "options": {
+        "A": "ARP",
+        "B": "DNS",
+        "C": "DHCP",
+        "D": "ICMP"
+      },
+      "correct": ["A"],
+      "mode": "any",
+      "explanation": "**ARP** (Address Resolution Protocol) finds the MAC address when you already know the IP address.\n\nHow it works:\n1. Device A wants to send data to IP `192.168.1.5`\n2. A broadcasts: \"Who has `192.168.1.5`?\"\n3. The device with that IP replies with its MAC address\n\n- DNS resolves domain names to IPs\n- DHCP assigns IPs automatically\n- ICMP is used for diagnostic messages (like Ping)"
+    },
+    {
+      "id": 11,
+      "text": "What is the universal MAC broadcast address?",
+      "options": {
+        "A": "00:00:00:00:00:00",
+        "B": "127.0.0.1",
+        "C": "255.255.255.255",
+        "D": "FF:FF:FF:FF:FF:FF"
+      },
+      "correct": ["D"],
+      "mode": "any",
+      "explanation": "**FF:FF:FF:FF:FF:FF** is the Layer 2 broadcast MAC address.\n\nA frame sent to this address is delivered to **all devices** on the local network segment.\n\n- `00:00:00:00:00:00` is not a valid broadcast address\n- `127.0.0.1` is the IP loopback address (Layer 3)\n- `255.255.255.255` is the IP broadcast address (Layer 3)"
+    },
+    {
+      "id": 12,
+      "text": "Which device is commonly used to connect multiple devices within the same local network (LAN)?",
+      "options": {
+        "A": "Router",
+        "B": "Switch",
+        "C": "Modem",
+        "D": "Firewall"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "A **Switch** is the standard device for connecting multiple devices in a LAN.\n\n- It forwards data only to the correct destination (using MAC addresses)\n- It supports full-duplex communication on each port\n\nA Router connects different networks. A Modem connects to the internet provider. A Firewall controls traffic but does not primarily connect devices."
+    },
+    {
+      "id": 13,
+      "text": "Which newer version of the IP protocol was created because the world ran out of IPv4 addresses?",
+      "options": {
+        "A": "IPv3",
+        "B": "IPv5",
+        "C": "IPv6",
+        "D": "IPv10"
+      },
+      "correct": ["C"],
+      "mode": "any",
+      "explanation": "**IPv6** was created to solve the IPv4 address exhaustion problem.\n\n- IPv4 uses 32 bits → ~4.3 billion addresses (not enough)\n- IPv6 uses 128 bits → ~340 undecillion addresses\n\nIPv6 addresses look like: `2001:0db8:85a3::8a2e:0370:7334`\n\nNote: IPv5 was an experimental protocol, never widely deployed. IPv3 and IPv10 do not exist."
+    },
+    {
+      "id": 14,
+      "text": "What is the primary purpose of a Router in a network?",
+      "options": {
+        "A": "To connect different networks together and direct traffic",
+        "B": "To connect devices within the same office",
+        "C": "To provide electricity to connected devices",
+        "D": "To store and play music files"
+      },
+      "correct": ["A"],
+      "mode": "any",
+      "explanation": "A **Router** operates at Layer 3 and connects multiple networks together.\n\nIt:\n- Reads IP addresses in packets\n- Chooses the best path using its routing table\n- Forwards packets toward their destination network\n\nA Switch connects devices within the same network. A Router connects networks to each other (e.g., your home network to the internet)."
+    },
+    {
+      "id": 15,
+      "text": "Which of these is a private IP address (used only inside a local network)?",
+      "options": {
+        "A": "8.8.8.8",
+        "B": "142.250.0.1",
+        "C": "1.1.1.1",
+        "D": "192.168.1.50"
+      },
+      "correct": ["D"],
+      "mode": "any",
+      "explanation": "**192.168.1.50** is a private IP address — it can only be used inside a local network.\n\nPrivate IP ranges (RFC 1918):\n- `10.0.0.0 – 10.255.255.255`\n- `172.16.0.0 – 172.31.255.255`\n- `192.168.0.0 – 192.168.255.255`\n\nThe others are public:\n- `8.8.8.8` → Google DNS\n- `1.1.1.1` → Cloudflare DNS\n- `142.250.0.1` → Google server"
+    },
+    {
+      "id": 16,
+      "text": "What does the /24 subnet mask represent in decimal notation?",
+      "options": {
+        "A": "255.0.0.0",
+        "B": "255.255.255.0",
+        "C": "255.255.0.0",
+        "D": "255.255.255.252"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "**/24** means the first 24 bits are the network part → `255.255.255.0`.\n\nCIDR to decimal:\n- `/8` → `255.0.0.0`\n- `/16` → `255.255.0.0`\n- `/24` → `255.255.255.0`\n- `/30` → `255.255.255.252`\n\nA /24 network contains 256 addresses (254 usable hosts)."
+    },
+    {
+      "id": 17,
+      "text": "Which address is the default Loopback address?",
+      "options": {
+        "A": "0.0.0.0",
+        "B": "192.168.1.1",
+        "C": "127.0.0.1",
+        "D": "169.254.0.1"
+      },
+      "correct": ["C"],
+      "mode": "any",
+      "explanation": "**127.0.0.1** is the loopback address — also called `localhost`.\n\nWhen you send data to `127.0.0.1`, it stays on your own machine (it loops back). No network traffic is actually sent.\n\n- `0.0.0.0` means \"all interfaces\" or \"no specific address\"\n- `169.254.x.x` is an APIPA address (assigned when DHCP fails)\n- `192.168.1.1` is typically a router's local IP"
+    },
+    {
+      "id": 18,
+      "text": "What is the role of a \"Default Gateway\"?",
+      "options": {
+        "A": "It is the router address used to send data outside the local network",
+        "B": "It is the DNS server address",
+        "C": "It is the main switch's MAC address",
+        "D": "It is the IP address of the computer itself"
+      },
+      "correct": ["A"],
+      "mode": "any",
+      "explanation": "The **Default Gateway** is the IP address of the router on your local network.\n\nWhen your computer wants to reach a destination outside the local network:\n1. It checks: is the destination in my subnet?\n2. If no → it sends the packet to the Default Gateway\n3. The router then forwards the packet toward the internet\n\nWithout a default gateway, your machine cannot communicate outside its own network."
+    },
+    {
+      "id": 19,
+      "text": "If a router has multiple routes to a destination, which one will it prioritize?",
+      "options": {
+        "A": "The default route (0.0.0.0/0)",
+        "B": "The shortest route in terms of physical distance",
+        "C": "The first route historically configured",
+        "D": "The route with the most specific subnet mask (longest prefix)"
+      },
+      "correct": ["D"],
+      "mode": "any",
+      "explanation": "Routers use the **longest prefix match** rule: the more specific route wins.\n\nExample — destination IP: `192.168.1.25`:\n- Route A: `192.168.0.0/16` → matches\n- Route B: `192.168.1.0/24` → also matches, but more specific\n\nThe router picks Route B (`/24`) because it has a longer prefix.\n\nThe default route `0.0.0.0/0` has the shortest prefix (matches everything) so it is always the last resort."
+    },
+    {
+      "id": 20,
+      "text": "What is the purpose of the TTL (Time To Live) field in an IP packet?",
+      "options": {
+        "A": "To measure connection speed",
+        "B": "To prevent a packet from looping infinitely on the network",
+        "C": "To indicate the packet creation time",
+        "D": "To define traffic priority"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "**TTL (Time To Live)** is a counter in the IP header that prevents packets from looping forever.\n\nHow it works:\n- The sender sets a TTL value (e.g., 64)\n- Each router that forwards the packet decrements TTL by 1\n- When TTL reaches 0, the router drops the packet and sends an ICMP error back\n\nThis protects the network from routing loops that could fill all bandwidth."
+    },
+    {
+      "id": 21,
+      "text": "Which tool deliberately uses TTL to identify each router on the path to a target?",
+      "options": {
+        "A": "Ping",
+        "B": "Ipconfig",
+        "C": "Traceroute",
+        "D": "Arp -a"
+      },
+      "correct": ["C"],
+      "mode": "any",
+      "explanation": "**Traceroute** (or `tracert` on Windows) uses TTL to discover each hop on the path.\n\nHow it works:\n1. Send a packet with TTL=1 → first router drops it and replies (identified!)\n2. Send with TTL=2 → second router replies (identified!)\n3. Repeat until destination is reached\n\nPing only tests reachability. Ipconfig shows your own network configuration. `arp -a` shows the ARP cache."
+    },
+    {
+      "id": 22,
+      "text": "Which command is used to test if a remote machine is reachable and responding?",
+      "options": {
+        "A": "Ping",
+        "B": "Ipconfig",
+        "C": "Notepad",
+        "D": "Exit"
+      },
+      "correct": ["A"],
+      "mode": "any",
+      "explanation": "**Ping** sends ICMP Echo Request packets to a target and waits for Echo Reply packets.\n\nIt tells you:\n- Is the host alive and reachable?\n- How long does the round-trip take (latency in ms)?\n- Are any packets lost?\n\n`ipconfig` shows your own network configuration — it does not test remote machines."
+    },
+    {
+      "id": 23,
+      "text": "What problem does the Transport Layer (Layer 4) solve compared to Layer 3?",
+      "options": {
+        "A": "Routing data between two remote machines",
+        "B": "Converting bits into electrical signals",
+        "C": "Managing collisions on the Ethernet cable",
+        "D": "Identifying which specific application on the machine should receive the data"
+      },
+      "correct": ["D"],
+      "mode": "any",
+      "explanation": "Layer 3 delivers a packet to the right **machine** (using IP address).\n\nBut a machine runs many applications at once — browser, email, game...\n\n**Layer 4 (Transport)** adds **port numbers** to identify which application should receive the data.\n\nExample:\n- IP `192.168.1.5` → the right machine (Layer 3)\n- Port `443` → the web browser on that machine (Layer 4)"
+    },
+    {
+      "id": 24,
+      "text": "What is a \"Socket\"?",
+      "options": {
+        "A": "A physical RJ45 connector",
+        "B": "The combination of an IP address, a port number, and a protocol",
+        "C": "A firewall software",
+        "D": "A type of fiber optic cable"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "A **Socket** is the combination of an IP address + port number + protocol.\n\nExample: `TCP 192.168.1.5:443`\n\nA socket uniquely identifies one end of a network connection:\n- IP address → which machine\n- Port number → which application\n- Protocol → TCP or UDP\n\nTwo sockets (client + server) form a complete connection."
+    },
+    {
+      "id": 25,
+      "text": "What is the range of \"Well-known ports\"?",
+      "options": {
+        "A": "0 - 255",
+        "B": "0 - 1023",
+        "C": "1024 - 49151",
+        "D": "49152 - 65535"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "**Well-known ports** are in the range **0–1023**. They are reserved for standard protocols.\n\nExamples:\n- Port 80 → HTTP\n- Port 443 → HTTPS\n- Port 22 → SSH\n- Port 53 → DNS\n\nPort ranges:\n- 0–1023 → Well-known (system)\n- 1024–49151 → Registered\n- 49152–65535 → Dynamic / ephemeral (used by clients)"
+    },
+    {
+      "id": 26,
+      "text": "Which characteristic belongs to the UDP protocol?",
+      "options": {
+        "A": "Fast, connectionless, and with low overhead",
+        "B": "Guaranteed data delivery",
+        "C": "Uses a 3-way handshake",
+        "D": "Reorders packets if they arrive out of sequence"
+      },
+      "correct": ["A"],
+      "mode": "any",
+      "explanation": "**UDP** (User Datagram Protocol) is fast and lightweight — but unreliable.\n\nUDP characteristics:\n- No connection setup (connectionless)\n- No acknowledgments → no guaranteed delivery\n- No reordering of packets\n- Very low overhead → fast\n\nTCP has the 3-way handshake, guaranteed delivery, and reordering. UDP trades those guarantees for speed."
+    },
+    {
+      "id": 27,
+      "text": "Which protocol is better suited for live video streaming because it is fast and doesn't wait for lost packets?",
+      "options": {
+        "A": "TCP",
+        "B": "IP",
+        "C": "HTTP",
+        "D": "UDP"
+      },
+      "correct": ["D"],
+      "mode": "any",
+      "explanation": "**UDP** is preferred for live video streaming.\n\nWhy:\n- Live video cannot wait for retransmission of lost packets (that would cause freezing)\n- A slightly degraded frame is better than a delayed one\n- UDP's low overhead keeps latency minimal\n\nTCP would pause and retransmit every lost packet — unacceptable for real-time media.\n\nUDP is also used for: online gaming, VoIP, DNS queries."
+    },
+    {
+      "id": 28,
+      "text": "What is the standard port number used for secure web browsing (HTTPS)?",
+      "options": {
+        "A": "21",
+        "B": "443",
+        "C": "80",
+        "D": "53"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "**Port 443** is the standard port for **HTTPS** (HTTP over TLS).\n\nKey port numbers to remember:\n- 80 → HTTP (unencrypted web)\n- 443 → HTTPS (encrypted web)\n- 21 → FTP (file transfer)\n- 53 → DNS (domain name resolution)\n- 22 → SSH (secure remote access)"
+    },
+    {
+      "id": 29,
+      "text": "In TCP, what is the purpose of an \"Acknowledgment\" (ACK) message?",
+      "options": {
+        "A": "To encrypt the data being sent",
+        "B": "To ask the router for a new IP address",
+        "C": "To confirm that a segment has been successfully received",
+        "D": "To measure the length of the cable"
+      },
+      "correct": ["C"],
+      "mode": "any",
+      "explanation": "In TCP, an **ACK (Acknowledgment)** confirms that a segment was received successfully.\n\nHow TCP reliability works:\n1. Sender sends segment 1\n2. Receiver gets it → sends ACK\n3. Sender sends segment 2...\n4. If no ACK is received within a timeout → sender retransmits\n\nThis is what makes TCP **reliable** — every segment must be acknowledged, or it is sent again."
+    },
+    {
+      "id": 30,
+      "text": "Which port number is used by default by the HTTP protocol?",
+      "options": {
+        "A": "80",
+        "B": "53",
+        "C": "22",
+        "D": "443"
+      },
+      "correct": ["A"],
+      "mode": "any",
+      "explanation": "**Port 80** is the default port for **HTTP** (HyperText Transfer Protocol).\n\nWhen you type `http://example.com` in a browser, it automatically connects to port 80.\n\n- Port 443 is for HTTPS (encrypted)\n- Port 53 is for DNS\n- Port 22 is for SSH\n\nIf a web server runs on a non-standard port, you must specify it in the URL: `http://example.com:8080`"
+    }
+  ]
+}
