@@ -18,6 +18,15 @@
     }
   },
   {
+     "groupName": "Alex",
+    "repositoryLink": null,
+    "grade": 60.0,
+    "comments": null,
+    "members": {
+      "2023905319": "Alex"
+    }
+  },
+  {
     "groupName": "Lilibet",
     "repositoryLink": null,
     "grade": 0.0,
