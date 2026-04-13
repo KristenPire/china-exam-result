@@ -17,6 +17,24 @@
       "2023905321": "Jerry"
     }
   },
+   {
+    "groupName": "Cadian",
+    "repositoryLink": null,
+    "grade": 40.0,
+    "comments": null,
+    "members": {
+      "2023902792": "Cadian"
+    }
+  },
+  {
+     "groupName": "Alex",
+    "repositoryLink": null,
+    "grade": 60.0,
+    "comments": null,
+    "members": {
+      "2023905319": "Alex"
+    }
+  },
   {
     "groupName": "Lilibet",
     "repositoryLink": null,
