@@ -1,0 +1,330 @@
+{
+  "bodyType": "mcq",
+  "questions": [
+    {
+      "id": 1,
+      "text": "How do you link a JavaScript file to an HTML page?",
+      "options": {
+        "A": "<link rel=\"javascript\" href=\"script.js\">",
+        "B": "<script src=\"script.js\"></script>",
+        "C": "<js file=\"script.js\">",
+        "D": "<style src=\"script.js\"></style>"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "Use the **`<script src=\"...\">` tag** to load an external JavaScript file.\n\nThe `<link>` tag is for CSS, `<style>` is for inline CSS, and `<js>` does not exist in HTML."
+    },
+    {
+      "id": 2,
+      "text": "Where should the <script> tag be placed in your HTML?",
+      "options": {
+        "A": "Inside <head>, before everything",
+        "B": "Before the <html> tag",
+        "C": "At the end of <body>, after all HTML elements",
+        "D": "Inside <title>"
+      },
+      "correct": ["C"],
+      "mode": "any",
+      "explanation": "Place `<script>` **at the end of `<body>`**, just before `</body>`.\n\nThis ensures all HTML elements are loaded before JavaScript tries to access them. If the script runs too early, elements may not exist yet."
+    },
+    {
+      "id": 3,
+      "text": "What will happen when this code runs?\n```js\nconst name = \"Alice\";\nname = \"Bob\";\n```",
+      "options": {
+        "A": "name becomes \"Bob\"",
+        "B": "Error — const cannot be reassigned",
+        "C": "name becomes \"AliceBob\"",
+        "D": "Nothing happens"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "**`const`** declares a constant — its value cannot be reassigned after declaration.\n\nTrying to do `name = \"Bob\"` throws a `TypeError` at runtime. Use `let` if you need to change the value later."
+    },
+    {
+      "id": 4,
+      "text": "Which keyword should you use for a variable whose value will change over time?",
+      "options": {
+        "A": "const",
+        "B": "let",
+        "C": "var",
+        "D": "define"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "Use **`let`** for variables that will be reassigned.\n\n- `const` → value never changes\n- `let` → value can change\n- `var` → old style, avoid it (has scope issues)\n- `define` → does not exist in JavaScript"
+    },
+    {
+      "id": 5,
+      "text": "How do you print a message in the browser console?",
+      "options": {
+        "A": "print(\"Hello\")",
+        "B": "echo(\"Hello\")",
+        "C": "console.log(\"Hello\")",
+        "D": "System.out.println(\"Hello\")"
+      },
+      "correct": ["C"],
+      "mode": "any",
+      "explanation": "**`console.log()`** is the standard way to print to the browser's developer console.\n\n`print()` is Python, `echo` is PHP, and `System.out.println()` is Java — none of these work in JavaScript."
+    },
+    {
+      "id": 6,
+      "text": "What does this code print?\n```js\nconst city = \"Xi'an\";\nconsole.log(\"Hello \" + city);\n```",
+      "options": {
+        "A": "\"Hello city\"",
+        "B": "\"Hello Xi'an\"",
+        "C": "\"Hellocity\"",
+        "D": "Error"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "The `+` operator **concatenates** strings in JavaScript.\n\n`\"Hello \" + \"Xi'an\"` → `\"Hello Xi'an\"`. The variable `city` is replaced by its value, not printed as the word \"city\"."
+    },
+    {
+      "id": 7,
+      "text": "What is the correct way to write an if statement in JavaScript?",
+      "options": {
+        "A": "if score > 10:",
+        "B": "if (score > 10) { }",
+        "C": "if score > 10 then { }",
+        "D": "if [score > 10] { }"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "JavaScript `if` syntax requires **parentheses** around the condition and **curly braces** for the block:\n```js\nif (condition) {\n  // code\n}\n```\nColons (Python), `then` (Pascal), and square brackets are not valid here."
+    },
+    {
+      "id": 8,
+      "text": "What does this code print?\n```js\nlet score = 0;\nscore = score + 1;\nscore = score + 1;\nconsole.log(score);\n```",
+      "options": {
+        "A": "0",
+        "B": "1",
+        "C": "2",
+        "D": "Error"
+      },
+      "correct": ["C"],
+      "mode": "any",
+      "explanation": "Step by step:\n- `score` starts at `0`\n- `score = 0 + 1` → `score = 1`\n- `score = 1 + 1` → `score = 2`\n- `console.log(2)` prints **2**"
+    },
+    {
+      "id": 9,
+      "text": "What does this code print?\n```js\nconst age = 15;\nif (age >= 18) {\n  console.log(\"adult\");\n} else {\n  console.log(\"minor\");\n}\n```",
+      "options": {
+        "A": "\"adult\"",
+        "B": "\"minor\"",
+        "C": "15",
+        "D": "Error"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "`age` is `15`, and `15 >= 18` is **false**, so the `else` branch runs.\n\nThe output is `\"minor\"`."
+    },
+    {
+      "id": 10,
+      "text": "In JavaScript, blocks of code (inside if, for, functions…) are delimited by:",
+      "options": {
+        "A": "Indentation (like Python)",
+        "B": "Curly braces { }",
+        "C": "Parentheses ( )",
+        "D": "Square brackets [ ]"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "JavaScript uses **curly braces `{ }`** to define code blocks.\n\nUnlike Python, indentation is not enforced by the language. Parentheses hold conditions or arguments. Square brackets are for arrays."
+    },
+    {
+      "id": 11,
+      "text": "What does this code print?\n```js\nfunction add(a, b) {\n  return a + b;\n}\nconsole.log(add(3, 7));\n```",
+      "options": {
+        "A": "\"37\"",
+        "B": "10",
+        "C": "undefined",
+        "D": "Error"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "`add(3, 7)` returns `3 + 7 = 10` (number addition, not string concatenation, because both arguments are numbers).\n\n`console.log(10)` prints **10**."
+    },
+    {
+      "id": 12,
+      "text": "What is the correct way to declare a function in JavaScript?",
+      "options": {
+        "A": "def greet(name):",
+        "B": "function greet(name) { }",
+        "C": "func greet(name) { }",
+        "D": "void greet(name) { }"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "JavaScript uses the **`function`** keyword to declare a function:\n```js\nfunction greet(name) {\n  // code\n}\n```\n`def` is Python, `func` is Go/Swift, and `void` is Java/C++."
+    },
+    {
+      "id": 13,
+      "text": "How many times does this loop run?\n```js\nfor (let i = 0; i < 3; i++) {\n  console.log(i);\n}\n```",
+      "options": {
+        "A": "2 times (prints 0, 1)",
+        "B": "3 times (prints 0, 1, 2)",
+        "C": "4 times (prints 0, 1, 2, 3)",
+        "D": "Infinite loop"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "`i` starts at `0` and increments while `i < 3`.\n\n- `i = 0` → print 0\n- `i = 1` → print 1\n- `i = 2` → print 2\n- `i = 3` → condition false, stop\n\nThe loop runs **3 times**."
+    },
+    {
+      "id": 14,
+      "text": "What does this code print?\n```js\nconst dishes = [\"Pizza\", \"Pasta\", \"Salad\"];\nfor (const dish of dishes) {\n  console.log(dish);\n}\n```",
+      "options": {
+        "A": "0, 1, 2",
+        "B": "\"Pizza\", \"Pasta\", \"Salad\"",
+        "C": "undefined",
+        "D": "Error"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "**`for...of`** iterates over the **values** of an array.\n\nEach iteration, `dish` holds the current element: `\"Pizza\"`, then `\"Pasta\"`, then `\"Salad\"`. Use `for...in` if you want the indexes (0, 1, 2)."
+    },
+    {
+      "id": 15,
+      "text": "What does this function print when called with no argument?\n```js\nfunction greet(name = \"stranger\") {\n  console.log(\"Hello \" + name);\n}\ngreet();\n```",
+      "options": {
+        "A": "\"Hello\"",
+        "B": "\"Hello undefined\"",
+        "C": "\"Hello stranger\"",
+        "D": "Error — missing argument"
+      },
+      "correct": ["C"],
+      "mode": "any",
+      "explanation": "`name = \"stranger\"` is a **default parameter**.\n\nWhen `greet()` is called with no argument, `name` automatically takes the value `\"stranger\"`. The output is `\"Hello stranger\"`."
+    },
+    {
+      "id": 16,
+      "text": "What does this code print?\n```js\nconst arr = [1, 2, 3];\narr.push(4);\nconsole.log(arr.length);\n```",
+      "options": {
+        "A": "3",
+        "B": "4",
+        "C": "Error — const array cannot be modified",
+        "D": "undefined"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "**`const`** prevents reassigning the variable, but you can still **modify the array's contents**.\n\n`arr.push(4)` adds `4` to the array → `[1, 2, 3, 4]`. The length is now **4**."
+    },
+    {
+      "id": 17,
+      "text": "What does menu[1].name return?\n```js\nconst menu = [\n  { name: \"Rice\", price: 22 },\n  { name: \"Tofu\", price: 28 },\n  { name: \"Duck\", price: 88 }\n];\n```",
+      "options": {
+        "A": "\"Rice\"",
+        "B": "\"Tofu\"",
+        "C": "\"Duck\"",
+        "D": "28"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "Arrays are **zero-indexed**: index `0` is Rice, index `1` is Tofu, index `2` is Duck.\n\n`menu[1]` → `{ name: \"Tofu\", price: 28 }`, then `.name` → **\"Tofu\"**."
+    },
+    {
+      "id": 18,
+      "text": "What does this code print?\n```js\nconst arr = [\"a\", \"b\", \"c\"];\narr.pop();\nconsole.log(arr);\n```",
+      "options": {
+        "A": "[\"a\", \"b\", \"c\"]",
+        "B": "[\"b\", \"c\"]",
+        "C": "[\"a\", \"b\"]",
+        "D": "\"c\""
+      },
+      "correct": ["C"],
+      "mode": "any",
+      "explanation": "**`pop()`** removes and returns the **last element** of an array.\n\n`arr.pop()` removes `\"c\"`, leaving `[\"a\", \"b\"]`."
+    },
+    {
+      "id": 19,
+      "text": "How do you access the age property of this object?\n```js\nconst user = { name: \"Alice\", age: 21 };\n```",
+      "options": {
+        "A": "user[0]",
+        "B": "user.age",
+        "C": "user.get(\"age\")",
+        "D": "user->age"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "Use **dot notation** `object.property` to access object properties in JavaScript.\n\n- `user[0]` → array index (not an object property)\n- `user.get()` → does not exist\n- `user->age` → C++ / PHP syntax, not valid in JavaScript"
+    },
+    {
+      "id": 20,
+      "text": "What does the second parameter i represent here?\n```js\nchoices.forEach(function(choice, i) {\n  console.log(i, choice);\n});\n```",
+      "options": {
+        "A": "The total length of the array",
+        "B": "The current index (0, 1, 2…)",
+        "C": "The previous element",
+        "D": "The array itself"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "`forEach` passes two arguments to the callback: the **current element** and its **index**.\n\nHere `choice` is the element and `i` is its **position** in the array (0, 1, 2…)."
+    },
+    {
+      "id": 21,
+      "text": "Which method selects the element with id \"title\"?",
+      "options": {
+        "A": "document.querySelector(\"#title\")",
+        "B": "document.querySelector(\".title\")",
+        "C": "document.querySelector(\"title\")",
+        "D": "document.select(\"#title\")"
+      },
+      "correct": ["A"],
+      "mode": "any",
+      "explanation": "`querySelector` uses **CSS selector syntax**:\n- `#title` → selects by **id**\n- `.title` → selects by **class**\n- `title` → selects by **tag name** (e.g. `<title>`)\n\n`document.select()` does not exist."
+    },
+    {
+      "id": 22,
+      "text": "What does this code do?\n```js\nconst title = document.querySelector(\"#title\");\ntitle.textContent = \"Welcome!\";\n```",
+      "options": {
+        "A": "Creates a new element called \"title\"",
+        "B": "Changes the text inside the element with id \"title\"",
+        "C": "Deletes the element with id \"title\"",
+        "D": "Adds a CSS class called \"Welcome!\""
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "**`textContent`** sets or gets the text content of a DOM element.\n\nAssigning a new string replaces whatever text was inside the element. It does not create, delete, or style anything."
+    },
+    {
+      "id": 23,
+      "text": "What does this code do?\n```js\nconst btn = document.querySelector(\"#btn\");\nbtn.addEventListener(\"click\", function() {\n  console.log(\"Clicked!\");\n});\n```",
+      "options": {
+        "A": "Immediately prints \"Clicked!\" when the page loads",
+        "B": "Prints \"Clicked!\" every second",
+        "C": "Prints \"Clicked!\" each time the user clicks the button",
+        "D": "Creates a new button element"
+      },
+      "correct": ["C"],
+      "mode": "any",
+      "explanation": "**`addEventListener(\"click\", callback)`** registers a function that runs only when the user **clicks** the element.\n\nThe callback is not called immediately — it waits for the event to happen."
+    },
+    {
+      "id": 24,
+      "text": "What does container.innerHTML = \"\" do?",
+      "options": {
+        "A": "Adds an empty string as text",
+        "B": "Removes all child elements inside the container",
+        "C": "Hides the container with CSS",
+        "D": "Deletes the container itself from the page"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "Setting **`innerHTML = \"\"`** replaces all inner HTML with nothing, effectively **clearing all child elements**.\n\nThe container element itself stays in the page — only its contents are removed."
+    },
+    {
+      "id": 25,
+      "text": "How do you create a new HTML element and add it to the page?",
+      "options": {
+        "A": "document.add(\"li\")",
+        "B": "document.insert(\"li\")",
+        "C": "document.createElement(\"li\") then container.appendChild(li)",
+        "D": "document.write(\"<li>\")"
+      },
+      "correct": ["C"],
+      "mode": "any",
+      "explanation": "The correct two-step process:\n1. **Create** the element: `const li = document.createElement(\"li\")`\n2. **Add** it to the DOM: `container.appendChild(li)`\n\n`document.add()` and `document.insert()` do not exist. `document.write()` is outdated and can erase the whole page."
+    }
+  ]
+}
