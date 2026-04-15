@@ -336,13 +336,28 @@ https://gitee.com/maplegannache/rpg-2024900797
 
 ---
 
----
+Log 2024905122
+https://gitee.com/Log_666/rpg-2024905122
 
 ---
 
----
+Eric 2024900806
+https://gitee.com/clashroya1/rpg-2024900806.git
 
 ---
+
+Emile 2024902263
+https://gitee.com/wu-fengnian183/rpg-2024902263
+
+---
+
+Simon 2024902585
+https://gitee.com/miao-chenghao/rpg-2024902585
+
+---
+
+Kenley 2024902262
+https://gitee.com/jiaqili_yyds/rpg-2024902262
 
 ---
 
