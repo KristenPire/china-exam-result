@@ -9,8 +9,14 @@ export function QuestionCard({ question, wrongAnswer, correctionOnly, index }) {
   const [showWhy, setShowWhy] = useState(false);
 
   // wrongAnswer = what the student picked (e.g. "A" or "ABC"), undefined if correct, "x" if no answer
-  const isWrongQuestion = !correctionOnly && wrongAnswer !== undefined;
-  const isNoAnswer = isWrongQuestion && wrongAnswer === "x";
+  const hasAnswerData = !correctionOnly && wrongAnswer !== undefined;
+  const isNoAnswer = hasAnswerData && wrongAnswer === "x";
+
+  // For multi-answer questions, treat as correct if same set of letters regardless of order
+  const isActuallyCorrect = hasAnswerData && !isNoAnswer &&
+    wrongAnswer.split("").sort().join("") === question.correct.slice().sort().join("");
+
+  const isWrongQuestion = hasAnswerData && !isActuallyCorrect;
   const picked = correctionOnly
     ? []
     : isWrongQuestion
