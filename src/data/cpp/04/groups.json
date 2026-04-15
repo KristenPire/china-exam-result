@@ -124,5 +124,41 @@
     "members": {
       "2024900799": "Riley"
     }
+  },
+  {
+    "groupName": "c-individual",
+    "repositoryLink": "https://gitee.com/xie-mingjin/c-individual.git",
+    "grade": null,
+    "comments": null,
+    "members": {
+      "2024904085": "Lucy"
+    }
+  },
+  {
+    "groupName": "delta-force-terminal-breakout",
+    "repositoryLink": "https://gitee.com/EasonLYB/delta-force_-terminal-breakout",
+    "grade": null,
+    "comments": null,
+    "members": {
+      "2024900807": "Eason"
+    }
+  },
+  {
+    "groupName": "rpg-2024902583",
+    "repositoryLink": "https://gitee.com/jesparko/rpg---2024902583",
+    "grade": null,
+    "comments": null,
+    "members": {
+      "2024902583": "Jesko"
+    }
+  },
+  {
+    "groupName": "text-rpg-2024903713",
+    "repositoryLink": "https://gitee.com/wc_jcx/text-rpg.git",
+    "grade": null,
+    "comments": null,
+    "members": {
+      "2024903713": "Andrew"
+    }
   }
 ]
