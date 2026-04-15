@@ -391,12 +391,27 @@ https://gitee.com/tigerviolet/rpg_2024903532
 
 ---
 
----
+2024900593 livia
+https://gitee.com/anti_enchanted/rpg-2024900593
 
 ---
 
----
+Robin The Wise 2024902589
+https://gitee.com/robin_liao/rpg-2024902589
 
 ---
+
+2024903710 Sky
+https://gitee.com/XCT221919/rpg--2024903710
+
+---
+
+Samody 2024902261
+https://gitee.com/lv_s_room/rpg_2024902261
+
+---
+
+2024904791 stella
+https://gitee.com/yan-binyue/rpg-2024904791
 
 ---
