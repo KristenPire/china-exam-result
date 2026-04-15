@@ -1,0 +1,395 @@
+{
+  "bodyType": "mcq",
+  "questions": [
+    {
+      "id": 1,
+      "text": "Which expression prints the city?\n```cpp\nstruct Address { std::string city; int zip; };\nstruct Person  { std::string name; Address home; };\nPerson p = {\"Alice\", {\"Beijing\", 100000}};\n```",
+      "options": {
+        "A": "`std::cout << p.city;`",
+        "B": "`std::cout << Address.city;`",
+        "C": "`std::cout << p.home.city;`",
+        "D": "`std::cout << p->home.city;`"
+      },
+      "correct": ["C"],
+      "mode": "any",
+      "explanation": "`Person` does not have a `city` member directly — it has a nested `Address` called `home`. You must chain the `.` operator to reach it.\n\nWhy the others are wrong:\n- A) `p.city` — `city` is not a direct member of `Person`\n- B) `Address.city` — `Address` is a type, not a variable. You cannot use `.` on a type.\n- D) `p->home.city` — `->` is for pointers. `p` is a value, not a pointer.\n\n```cpp\nPerson p = {\"Alice\", {\"Beijing\", 100000}};\nstd::cout << p.home.city; // prints \"Beijing\"\n```"
+    },
+    {
+      "id": 2,
+      "text": "Given `Student s; Student* ptr = &s;`, which accesses `name`?",
+      "options": {
+        "A": "`ptr.name`",
+        "B": "`ptr::name`",
+        "C": "`*ptr->name`",
+        "D": "`ptr->name`"
+      },
+      "correct": ["D"],
+      "mode": "any",
+      "explanation": "`ptr` is a **pointer** to a `Student`. To access a member through a pointer, use `->` (arrow operator).\n\nWhy the others are wrong:\n- A) `ptr.name` — `.` is for values, not pointers. This is a compilation error.\n- B) `ptr::name` — `::` is the scope resolution operator, used for namespaces and classes, not for accessing instance members.\n- C) `*ptr->name` — `->` already dereferences the pointer. `*ptr->name` would try to dereference `name` itself, which makes no sense here.\n\n```cpp\nStudent s;\nStudent* ptr = &s;\nptr->name = \"Alice\"; // correct\n(*ptr).name = \"Alice\"; // also correct, but verbose\n```\n`ptr->name` is exactly equivalent to `(*ptr).name`."
+    },
+    {
+      "id": 3,
+      "text": "Which signature lets the function **modify** the original struct?\n```cpp\nstruct Config { int width; int height; };\n```",
+      "options": {
+        "A": "`void resize(Config& c, int w, int h)`",
+        "B": "`void resize(Config c, int w, int h)`",
+        "C": "`void resize(const Config& c, int w, int h)`",
+        "D": "Both b and c"
+      },
+      "correct": ["A"],
+      "mode": "any",
+      "explanation": "Only **pass by reference** (`&`) lets the function modify the original variable.\n\n- A) `Config& c` — **reference**: the function works directly on the original struct. Changes persist. ✓\n- B) `Config c` — **copy**: a new copy is made. Changes are lost when the function returns.\n- C) `const Config& c` — reference, but `const` forbids any modification. This is for read-only access.\n\n```cpp\nvoid resize(Config& c, int w, int h) {\n    c.width = w;  // modifies the original\n    c.height = h; // modifies the original\n}\n```"
+    },
+    {
+      "id": 4,
+      "text": "Which correctly uses this namespace?\n```cpp\nnamespace Game {\n    struct Player { std::string name; int hp; };\n    void heal(Player& p, int amount);\n}\n```",
+      "options": {
+        "A": "`Player p = {\"Hero\", 100}; heal(p, 20);`",
+        "B": "`Game::Player p = {\"Hero\", 100}; Game::heal(p, 20);`",
+        "C": "`Game.Player p = {\"Hero\", 100}; Game.heal(p, 20);`",
+        "D": "`Game->Player p = {\"Hero\", 100}; Game->heal(p, 20);`"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "Everything inside a namespace must be accessed with the `::` **scope resolution operator**.\n\n- A) Incorrect — `Player` and `heal` are not in the global scope. The compiler cannot find them without `Game::`.\n- B) Correct ✓ — `Game::Player` and `Game::heal` properly qualify both the type and the function.\n- C) Incorrect — `.` is for struct/class member access on instances, not for namespaces.\n- D) Incorrect — `->` is for pointer member access, not for namespaces.\n\n```cpp\nGame::Player p = {\"Hero\", 100};\nGame::heal(p, 20); // correct\n```\nAlternatively: `using namespace Game;` brings everything into scope so you can omit `Game::`."
+    },
+    {
+      "id": 5,
+      "text": "**(multiple answers possible)** Which create a Point with x=3, y=7?\n```cpp\nstruct Point { int x; int y; };\n```",
+      "options": {
+        "A": "`Point p = {3, 7};`",
+        "B": "`Point p(3, 7);`",
+        "C": "`Point p; p.x = 3; p.y = 7;`",
+        "D": "`Point p = {7, 3};`"
+      },
+      "correct": ["A", "C"],
+      "mode": "all",
+      "explanation": "**A** uses **aggregate initialization** — values are assigned in declaration order. Since `x` comes first, `x=3` and `y=7`. ✓\n\n**C** declares the struct first, then assigns members individually. This always works. ✓\n\nWhy B and D are wrong:\n- B) `Point p(3, 7)` — this constructor-call syntax requires a constructor. A plain struct with no constructor does not support this.\n- D) `Point p = {7, 3}` — aggregate order: `x=7`, `y=3`. The values are swapped.\n\n```cpp\nPoint a = {3, 7};      // x=3, y=7 ✓\nPoint b; b.x=3; b.y=7; // x=3, y=7 ✓\nPoint c = {7, 3};      // x=7, y=3 ✗\n```"
+    },
+    {
+      "id": 6,
+      "text": "**(multiple answers possible)** Which are true about C++ structs?",
+      "options": {
+        "A": "Members are public by default",
+        "B": "`->` accesses members through a pointer",
+        "C": "A struct must have a constructor to be used",
+        "D": "A function can take a struct as parameter"
+      },
+      "correct": ["A", "B", "D"],
+      "mode": "all",
+      "explanation": "**A** — True. In a `struct`, all members are `public` by default. (In a `class`, they are `private` by default.) ✓\n\n**B** — True. `->` dereferences a pointer and accesses a member in one step: `ptr->x` is equivalent to `(*ptr).x`. ✓\n\n**D** — True. A struct is a regular type and can be passed to functions by value, reference, or pointer. ✓\n\n**C** — False. A struct does NOT need a constructor. You can use it with aggregate initialization (`{...}`) or just declare a variable and assign members one by one."
+    },
+    {
+      "id": 7,
+      "text": "A header has **no** include guard and is `#include`d twice. What happens?",
+      "options": {
+        "A": "Compiles and runs normally",
+        "B": "Runtime error: code runs twice",
+        "C": "Linking error: duplicate symbols",
+        "D": "Compilation error: types redefined"
+      },
+      "correct": ["D"],
+      "mode": "any",
+      "explanation": "Without an include guard, the preprocessor pastes the header's content twice into the same file. If the header defines a type (struct, class, enum), the compiler sees two identical definitions and raises a **redefinition error** at compile time.\n\nExample:\n```cpp\n// player.hh — no guard\nstruct Player { int hp; };\n\n// main.cpp\n#include \"player.hh\"\n#include \"player.hh\" // pasted again → error: 'Player' redefined\n```\n\nThe fix is an include guard:\n```cpp\n#pragma once\nstruct Player { int hp; };\n```\nOr the classic `#ifndef` guard."
+    },
+    {
+      "id": 8,
+      "text": "Which is the correct include guard for `player.hh`?",
+      "options": {
+        "A": "`#pragma once` followed by declarations",
+        "B": "`#guard PLAYER_HH` … `#endguard`",
+        "C": "`#include_once \"player.hh\"` followed by declarations",
+        "D": "`#define PLAYER_HH` … `#undef PLAYER_HH`"
+      },
+      "correct": ["A"],
+      "mode": "any",
+      "explanation": "`#pragma once` is the simplest and most widely supported way to prevent a header from being included more than once. It tells the compiler to skip the file if it has already been processed.\n\nWhy the others are wrong:\n- B) `#guard` / `#endguard` — these directives **do not exist** in C++.\n- C) `#include_once` — also **does not exist**.\n- D) `#define PLAYER_HH` then `#undef PLAYER_HH` — `#undef` immediately removes the macro, so it provides no protection at all.\n\nThe classic alternative to `#pragma once` is:\n```cpp\n#ifndef PLAYER_HH\n#define PLAYER_HH\n// declarations\n#endif\n```"
+    },
+    {
+      "id": 9,
+      "text": "`void display(const Student& s)` is declared in `student.hh`. Where should its body go?",
+      "options": {
+        "A": "In `student.hh`, after the declaration",
+        "B": "In `student.cpp`",
+        "C": "In `main.cpp`",
+        "D": "Any file — it doesn't matter"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "The standard convention in multi-file C++ projects is:\n- **`.hh` files** — declarations (what exists and what it looks like)\n- **`.cpp` files** — definitions/implementations (how it works)\n\nPutting the body in `student.hh` would cause a **multiple definition** error if more than one `.cpp` file includes it.\n\nPutting it in `main.cpp` would work for small projects but breaks separation of concerns and makes the function unavailable to other translation units.\n\n```\nstudent.hh  → void display(const Student& s); // declaration only\nstudent.cpp → void display(const Student& s) { // body here\n                  std::cout << s.name;\n              }\n```"
+    },
+    {
+      "id": 10,
+      "text": "Inside a member function, what does `this` point to?",
+      "options": {
+        "A": "The class definition",
+        "B": "The first member variable",
+        "C": "The object that called the method",
+        "D": "The .cpp file of the class"
+      },
+      "correct": ["C"],
+      "mode": "any",
+      "explanation": "`this` is a hidden pointer that the compiler passes to every non-static member function. It points to **the specific object on which the method was called**.\n\n```cpp\nclass Dog {\n    std::string name;\npublic:\n    void bark() {\n        std::cout << this->name; // 'this' points to the Dog that called bark()\n    }\n};\n\nDog d1, d2;\nd1.bark(); // inside bark(), this == &d1\nd2.bark(); // inside bark(), this == &d2\n```\n\n`this` is a pointer to the object, not to the class blueprint or any individual member."
+    },
+    {
+      "id": 11,
+      "text": "For `obj.add(1).add(2).add(3)` to work, what must `add()` return?",
+      "options": {
+        "A": "`void`",
+        "B": "A new copy of the object",
+        "C": "An integer",
+        "D": "A reference to `*this`"
+      },
+      "correct": ["D"],
+      "mode": "any",
+      "explanation": "This is called **method chaining**. For `obj.add(1).add(2).add(3)` to work, each call to `add()` must return something you can call `.add()` on again — the same object.\n\nReturning `*this` by reference gives back the original object (not a copy), so the next `.add()` works on the same instance.\n\n```cpp\nclass Builder {\npublic:\n    Builder& add(int x) {\n        // do something with x\n        return *this; // return reference to self\n    }\n};\n\nBuilder b;\nb.add(1).add(2).add(3); // each call returns b itself\n```\n\nIf `add()` returned `void`, `obj.add(1)` would return nothing and `.add(2)` would be a compilation error."
+    },
+    {
+      "id": 12,
+      "text": "**(multiple answers possible)** Which are benefits of .hh/.cpp separation?",
+      "options": {
+        "A": "Only changed .cpp files need recompilation",
+        "B": "Multiple .cpp files can share declarations",
+        "C": "It separates interface from implementation",
+        "D": "It makes the program faster at runtime"
+      },
+      "correct": ["A", "B", "C"],
+      "mode": "all",
+      "explanation": "**A** — True. Each `.cpp` is compiled independently. If you change `player.cpp`, only that file is recompiled — not the whole project. ✓\n\n**B** — True. Multiple `.cpp` files can `#include \"player.hh\"` to share the same declarations without duplicating code. ✓\n\n**C** — True. The `.hh` file shows *what* the module provides (the interface). The `.cpp` file shows *how* it works (the implementation). Users only need to read the header. ✓\n\n**D** — False. The separation is a **compile-time** organization. It has no effect on runtime performance. The final executable is identical either way."
+    },
+    {
+      "id": 13,
+      "text": "What is the difference between `class` and `struct`?",
+      "options": {
+        "A": "A struct cannot have member functions",
+        "B": "A struct lives on the stack, a class on the heap",
+        "C": "Struct members are public by default, class members are private",
+        "D": "No difference — they are identical"
+      },
+      "correct": ["C"],
+      "mode": "any",
+      "explanation": "In C++, `struct` and `class` are almost identical. The **only** difference is the **default access level**:\n\n- `struct` → members are **public** by default\n- `class` → members are **private** by default\n\nWhy the others are wrong:\n- A) Structs *can* have member functions, constructors, destructors, and inheritance.\n- B) Where an object lives (stack vs heap) depends on how you create it (`new` = heap), not on whether it is a `struct` or `class`.\n- D) They are nearly identical, but not perfectly — the default visibility differs.\n\n```cpp\nstruct S { int x; };  // x is public\nclass  C { int x; };  // x is private\n```"
+    },
+    {
+      "id": 14,
+      "text": "What is the error?\n```cpp\nclass Dog {\n    std::string name;\npublic:\n    Dog(std::string n) : name(n) {}\n};\n\nint main() {\n    Dog d(\"Rex\");\n    std::cout << d.name;\n}\n```",
+      "options": {
+        "A": "`name` is private — cannot access it outside the class",
+        "B": "Initializer list syntax is invalid",
+        "C": "`std::string` cannot be a class member",
+        "D": "No error — prints \"Rex\""
+      },
+      "correct": ["A"],
+      "mode": "any",
+      "explanation": "`name` is declared inside `class Dog` **before** `public:`, so it is **private** by default. Accessing `d.name` from outside the class is a compilation error.\n\nWhy the others are wrong:\n- B) The initializer list `: name(n)` is perfectly valid C++ syntax for initializing members in a constructor.\n- C) `std::string` is a valid type for class members.\n- D) It will NOT compile.\n\nFix: either make `name` public, or add a getter:\n```cpp\nclass Dog {\n    std::string name;\npublic:\n    Dog(std::string n) : name(n) {}\n    std::string getName() const { return name; }\n};\nstd::cout << d.getName();\n```"
+    },
+    {
+      "id": 15,
+      "text": "When must you use `this->` inside a method?",
+      "options": {
+        "A": "When calling a private method",
+        "B": "When a parameter has the same name as a member",
+        "C": "When accessing any member variable",
+        "D": "Never — it is only a style choice"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "When a **parameter name shadows a member variable**, the compiler sees the parameter first. Using `this->` explicitly refers to the member.\n\n```cpp\nclass Circle {\n    double radius;\npublic:\n    void setRadius(double radius) {\n        this->radius = radius; // 'this->radius' = member, 'radius' = parameter\n    }\n};\n```\n\nWithout `this->`, `radius = radius` would assign the parameter to itself — a silent bug.\n\nWhy the others are wrong:\n- A) `this->` is not required to call private methods from within the class.\n- C) You do NOT need `this->` every time you access a member — the compiler resolves it automatically unless there is a naming conflict.\n- D) In normal cases it is a style choice, but in the shadowing case it is **necessary**."
+    },
+    {
+      "id": 16,
+      "text": "What does `const` mean here?\n```cpp\nint getAge() const;\n```",
+      "options": {
+        "A": "The return value cannot be modified",
+        "B": "The method cannot modify any member variable",
+        "C": "The method can only be called once",
+        "D": "The parameter cannot be changed"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "When `const` appears **after the parameter list** of a method, it means the method promises not to modify any member variable of the object. This is called a **const member function**.\n\n```cpp\nclass Person {\n    int age;\npublic:\n    int getAge() const { return age; }      // OK: only reads\n    void birthday() const { age++; }        // Error: cannot modify member\n    void birthday()       { age++; }        // OK: non-const method\n};\n```\n\nConst methods can be called on `const` objects. Non-const methods cannot.\n\n```cpp\nconst Person p = {25};\np.getAge();   // OK\np.birthday(); // Error: cannot call non-const method on const object\n```"
+    },
+    {
+      "id": 17,
+      "text": "Why use private variables with getters/setters?",
+      "options": {
+        "A": "Private variables use less memory",
+        "B": "Public variables cause errors in multi-file projects",
+        "C": "Getters/setters improve runtime performance",
+        "D": "Setters can validate input and prevent invalid states"
+      },
+      "correct": ["D"],
+      "mode": "any",
+      "explanation": "The main benefit of **encapsulation** is control over how data is modified. A setter can check that a value is valid before storing it.\n\n```cpp\nclass Circle {\n    double radius;\npublic:\n    void setRadius(double r) {\n        if (r < 0) return; // reject invalid input\n        radius = r;\n    }\n};\n```\n\nWith a public variable, any code can write `c.radius = -5;` and the object ends up in an invalid state.\n\nWhy the others are wrong:\n- A) Private/public access has no effect on memory usage.\n- B) Public variables do not inherently cause errors in multi-file projects.\n- C) Getters/setters are regular function calls — they add a tiny overhead, not a speedup."
+    },
+    {
+      "id": 18,
+      "text": "Which is the correct constructor?\n```cpp\nclass Circle {\nprivate:\n    double radius;\npublic:\n    // constructor here\n};\n```",
+      "options": {
+        "A": "`void Circle(double r) { radius = r; }`",
+        "B": "`Circle Circle(double r) { radius = r; }`",
+        "C": "`Circle(double r) { radius = r; }`",
+        "D": "`new Circle(double r) { radius = r; }`"
+      },
+      "correct": ["C"],
+      "mode": "any",
+      "explanation": "A constructor has **the same name as the class** and **no return type** — not even `void`.\n\nWhy the others are wrong:\n- A) `void Circle(...)` — adding a return type makes this a regular function named `Circle`, not a constructor. The compiler will reject it.\n- B) `Circle Circle(...)` — `Circle` is not a valid return type here.\n- D) `new Circle(...)` — `new` is an operator used to allocate memory, not a keyword for declaring a constructor.\n\n```cpp\nclass Circle {\n    double radius;\npublic:\n    Circle(double r) { radius = r; } // correct\n    // or with initializer list:\n    Circle(double r) : radius(r) {}  // preferred style\n};\n```"
+    },
+    {
+      "id": 19,
+      "text": "A `Rectangle` needs a position and dimensions. A `Point` class exists. Which design is best?",
+      "options": {
+        "A": "`class Rectangle { double x, y, width, height; };`",
+        "B": "`class Rectangle : public Point { double width, height; };`",
+        "C": "`class Rectangle { Point topLeft; double width, height; };`",
+        "D": "`class Rectangle { double data[4]; };`"
+      },
+      "correct": ["C"],
+      "mode": "any",
+      "explanation": "**C** uses **composition** — `Rectangle` *has a* `Point`. This is the correct relationship: a rectangle is not a point, but it has a position.\n\nWhy the others are wrong:\n- A) Scatters `x` and `y` as raw doubles. If `Point` already exists and handles position logic, this duplicates that work.\n- B) `Rectangle : public Point` uses **inheritance** which implies \"a Rectangle *is a* Point\". That is semantically wrong — a rectangle is not a type of point.\n- D) `double data[4]` hides the meaning. Which index is x? Which is width? This kills readability.\n\n```cpp\nclass Rectangle {\n    Point topLeft;    // composition: has-a relationship\n    double width;\n    double height;\n};\n```\n\n**Rule of thumb:** prefer composition over inheritance unless a true \"is-a\" relationship exists."
+    },
+    {
+      "id": 20,
+      "text": "Which is **NOT** part of the orthodox canonical form?",
+      "options": {
+        "A": "Parameterized constructor (`MyClass(int value)`)",
+        "B": "Default constructor (`MyClass()`)",
+        "C": "Copy constructor (`MyClass(const MyClass&)`)",
+        "D": "Destructor (`~MyClass()`)"
+      },
+      "correct": ["A"],
+      "mode": "any",
+      "explanation": "The **Orthodox Canonical Form** (OCF) defines the four special member functions every class that manages resources should implement:\n\n1. **Default constructor** — `MyClass()`\n2. **Copy constructor** — `MyClass(const MyClass&)`\n3. **Copy assignment operator** — `MyClass& operator=(const MyClass&)`\n4. **Destructor** — `~MyClass()`\n\nA **parameterized constructor** like `MyClass(int value)` is useful and common, but it is **not** part of the canonical form. The OCF is about managing the object lifecycle (creation, copying, and destruction), not about how you initialize specific values."
+    },
+    {
+      "id": 21,
+      "text": "Which line calls the **copy constructor**?\n```cpp\nNum a(5);          // Line 1\nNum b;             // Line 2\nb = a;             // Line 3\nNum c = a;         // Line 4\n```",
+      "options": {
+        "A": "Line 1",
+        "B": "Line 4",
+        "C": "Line 3",
+        "D": "Line 2"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "The copy constructor is called when a **new object is initialized from an existing one**.\n\n- Line 1: calls the parameterized constructor (`Num(int)`)\n- Line 2: calls the default constructor (`Num()`)\n- Line 3: calls the **copy assignment operator** (`operator=`). `b` already exists.\n- Line 4: `Num c = a` — `c` is being **created** and initialized from `a`. This calls the **copy constructor**. ✓\n\nThe key distinction:\n```cpp\nNum c = a;  // copy constructor  (c is new)\nb = a;       // copy assignment   (b already exists)\n```\nDespite looking similar, `=` in a declaration is initialization (copy constructor), not assignment."
+    },
+    {
+      "id": 22,
+      "text": "A class has `int* data = new int[10]` but no custom copy constructor. What happens when copied?",
+      "options": {
+        "A": "The compiler creates a deep copy with new memory",
+        "B": "The copy has `data` set to `nullptr`",
+        "C": "Both objects share the same pointer — double free",
+        "D": "Compilation error — cannot copy classes with pointers"
+      },
+      "correct": ["C"],
+      "mode": "any",
+      "explanation": "Without a custom copy constructor, the compiler generates a **shallow copy**: it copies the pointer value, not the data it points to. Both objects end up pointing to the **same memory**.\n\n```cpp\nMyClass a;      // a.data points to some memory\nMyClass b = a;  // b.data == a.data (same address!)\n```\n\nThis causes two problems:\n1. Modifying `b.data[0]` also changes `a.data[0]`.\n2. When both destructors run, they both call `delete[] data` on the same address — **double free** → undefined behavior / crash.\n\nThe fix is a **deep copy constructor** that allocates new memory:\n```cpp\nMyClass(const MyClass& other) {\n    data = new int[10];\n    std::copy(other.data, other.data + 10, data);\n}\n```"
+    },
+    {
+      "id": 23,
+      "text": "Why should `operator=` check `if (this != &other)`?",
+      "options": {
+        "A": "To prevent infinite recursion",
+        "B": "To avoid deleting own data before reading it (`a = a`)",
+        "C": "The compiler requires it to compile",
+        "D": "To skip unnecessary work for every assignment"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "**Self-assignment** (`a = a`) is rare but valid C++. A naive `operator=` that deletes its own memory first and then copies from `other` will crash when `this == &other`:\n\n```cpp\nMyClass& operator=(const MyClass& other) {\n    delete[] data;          // frees memory\n    data = new int[size];\n    std::copy(other.data, ...); // 'other.data' was just freed!\n    return *this;\n}\n```\n\nThe guard prevents this:\n```cpp\nMyClass& operator=(const MyClass& other) {\n    if (this != &other) { // skip if assigning to itself\n        delete[] data;\n        data = new int[size];\n        std::copy(other.data, other.data + size, data);\n    }\n    return *this;\n}\n```\n\nNote: the check also avoids unnecessary work, but the primary reason is **correctness**, not performance."
+    },
+    {
+      "id": 24,
+      "text": "Which is the correct copy constructor signature for `Num`?",
+      "options": {
+        "A": "`Num copy(const Num& other);`",
+        "B": "`Num(Num other);`",
+        "C": "`void Num(const Num& other);`",
+        "D": "`Num(const Num& other);`"
+      },
+      "correct": ["D"],
+      "mode": "any",
+      "explanation": "A copy constructor must:\n1. Have the **same name as the class** (no return type)\n2. Take a **const reference** to the same class\n\nWhy the others are wrong:\n- A) `Num copy(...)` — this is a regular member function named `copy`, not a constructor.\n- B) `Num(Num other)` — passing by value would require calling the copy constructor to make the copy, causing **infinite recursion**. The compiler forbids this.\n- C) `void Num(...)` — constructors have no return type, not even `void`.\n\n```cpp\nclass Num {\n    int value;\npublic:\n    Num(const Num& other) : value(other.value) {} // correct\n};\n```"
+    },
+    {
+      "id": 25,
+      "text": "What distinguishes postfix `operator++(int)` from prefix `operator++()`?",
+      "options": {
+        "A": "Postfix has a dummy `int` parameter",
+        "B": "Prefix has a dummy `int` parameter",
+        "C": "They differ by return type only",
+        "D": "Postfix puts `++` after the function name"
+      },
+      "correct": ["A"],
+      "mode": "any",
+      "explanation": "C++ uses a dummy `int` parameter to distinguish the two `operator++` overloads, since they have the same name.\n\n```cpp\nCounter& operator++()    { ++v; return *this; } // prefix:  ++obj\nCounter  operator++(int) { Counter old=*this; ++v; return old; } // postfix: obj++\n```\n\nThe `int` in `operator++(int)` is never used — it is only there to give the overload a different signature so the compiler can tell them apart.\n\nWhy the others are wrong:\n- B) The prefix operator has **no** dummy parameter.\n- C) They differ by the dummy parameter, not just by return type (both typically return a `Counter`).\n- D) `++` is always written before or after the *operand*, never the function name."
+    },
+    {
+      "id": 26,
+      "text": "Why does this fail to compile?\n```cpp\nint convert(int x);\ndouble convert(int x);\n```",
+      "options": {
+        "A": "Two functions cannot share the same name",
+        "B": "Same parameters — overloading needs different types or count",
+        "C": "`convert` is a reserved keyword",
+        "D": "The first function must be `const`"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "**Function overloading** allows multiple functions with the same name, but they must differ in their **parameter types or count**. The return type alone is **not** enough to distinguish them.\n\nWhen you write `convert(42)`, the compiler cannot know which version to call — it only sees the argument `42`, not where the result will be stored.\n\n```cpp\nint convert(int x);    //\ndouble convert(int x); // Error: same parameters, differs only in return type\n\n// Valid overloads:\nint    convert(int x);    // int parameter\ndouble convert(double x); // double parameter — OK\n```\n\n`convert` is not a reserved keyword (option C is false)."
+    },
+    {
+      "id": 27,
+      "text": "What is the output?\n```cpp\nclass Obj {\n    char id;\npublic:\n    Obj(char c) : id(c) { std::cout << \"+\" << id; }\n    ~Obj() { std::cout << \"-\" << id; }\n};\n\nint main() {\n    Obj a('A');\n    Obj b('B');\n}\n```",
+      "options": {
+        "A": "+A+B-A-B",
+        "B": "+A+B-A-A",
+        "C": "+B+A-A-B",
+        "D": "+A+B-B-A"
+      },
+      "correct": ["D"],
+      "mode": "any",
+      "explanation": "Objects on the stack are constructed in **declaration order** and destroyed in **reverse order** (last in, first out — like a stack).\n\nStep by step:\n1. `Obj a('A')` → constructor runs → prints `+A`\n2. `Obj b('B')` → constructor runs → prints `+B`\n3. `main()` ends — stack unwinds in reverse:\n4. `b` is destroyed first → destructor → prints `-B`\n5. `a` is destroyed second → destructor → prints `-A`\n\nOutput: `+A+B-B-A`\n\nThis LIFO (Last In, First Out) destruction order is guaranteed by the C++ standard."
+    },
+    {
+      "id": 28,
+      "text": "What is the output?\n```cpp\nclass Cnt {\n    int v;\npublic:\n    Cnt(int n) : v(n) {}\n    Cnt& operator++() { v++; return *this; }\n    Cnt operator++(int) { Cnt old = *this; v++; return old; }\n    int get() const { return v; }\n};\n\nint main() {\n    Cnt a(5);\n    Cnt b = a++;\n    Cnt c = ++a;\n    std::cout << b.get() << \" \" << c.get();\n}\n```",
+      "options": {
+        "A": "6 7",
+        "B": "5 7",
+        "C": "5 6",
+        "D": "6 6"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "Trace step by step:\n\n1. `Cnt a(5)` → `a.v = 5`\n2. `Cnt b = a++` → **postfix**: saves old value (`old.v = 5`), increments `a` to `6`, returns old → `b.v = 5`\n3. `Cnt c = ++a` → **prefix**: increments `a` to `7`, returns reference to `a` → `c.v = 7`\n4. Output: `b.get()` = 5, `c.get()` = 7 → prints `5 7`\n\nKey rule:\n- **Postfix `a++`**: use current value, then increment → caller gets old value\n- **Prefix `++a`**: increment first, then use → caller gets new value"
+    },
+    {
+      "id": 29,
+      "text": "Which declares `operator<<` so `std::cout << vec` works?",
+      "options": {
+        "A": "`friend std::ostream& operator<<(std::ostream& os, const Vec& v);`",
+        "B": "`std::ostream& Vec::operator<<(std::ostream& os);`",
+        "C": "`void operator<<(const Vec& v);`",
+        "D": "`Vec& operator<<(std::ostream& os, const Vec& v);`"
+      },
+      "correct": ["A"],
+      "mode": "any",
+      "explanation": "`std::cout << vec` translates to `operator<<(std::cout, vec)`. This is a **free function** (not a member of `Vec`) that takes the stream as its first argument.\n\nWhy `friend` is used: the operator needs access to `Vec`'s private members, so it is declared as a friend inside the class.\n\nWhy the others are wrong:\n- B) `Vec::operator<<(ostream&)` would be called as `vec << cout` — the operands are reversed.\n- C) Returns `void` — this breaks chaining like `cout << a << b`. The stream must be returned.\n- D) Returns `Vec&` — the stream object must be returned, not a `Vec`, to allow chaining.\n\n```cpp\nclass Vec {\n    int x, y;\npublic:\n    friend std::ostream& operator<<(std::ostream& os, const Vec& v) {\n        return os << v.x << \" \" << v.y;\n    }\n};\n```"
+    },
+    {
+      "id": 30,
+      "text": "Which operator CANNOT be overloaded?",
+      "options": {
+        "A": "`+` (addition)",
+        "B": "`==` (comparison)",
+        "C": "`.` (member access)",
+        "D": "`<<` (stream output)"
+      },
+      "correct": ["C"],
+      "mode": "any",
+      "explanation": "The `.` (member access) operator **cannot be overloaded** in C++. The language forbids it to preserve the fundamental ability to access any object's members reliably.\n\nThe other operators in this question can all be overloaded:\n- `+` → `operator+`\n- `==` → `operator==`\n- `<<` → `operator<<`\n\nOther operators that **cannot** be overloaded:\n- `::` (scope resolution)\n- `.*` (pointer-to-member access)\n- `?:` (ternary)\n- `sizeof`\n\nNote: `->` (pointer member access) *can* be overloaded, but `.` cannot."
+    }
+  ]
+}

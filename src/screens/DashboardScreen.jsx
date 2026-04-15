@@ -40,9 +40,9 @@ export function DashboardScreen({ studentId, onSelectExam, onLogout }) {
   const items = useMemo(() => {
     const all = [
       ...exams.map((e) => ({ kind: "exam", date: e.exam.publishedDate, ...e })),
-      ...projects.map((p) => ({ kind: "project", date: p.project.deadline, ...p })),
+      ...projects.map((p) => ({ kind: "project", date: p.project.publishedDate ?? p.project.deadline, ...p })),
     ];
-    return all.sort((a, b) => (a.date < b.date ? 1 : -1));
+    return all.sort((a, b) => (a.date > b.date ? -1 : a.date < b.date ? 1 : 0));
   }, [exams, projects]);
 
   const avg = computeWeightedAverage(exams, projects);
