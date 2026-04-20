@@ -111,14 +111,14 @@
   {
     "groupName": "cardgame",
     "repositoryLink": "https://gitee.com/klee3jcj/cardgame.git",
-    "grade": null,
+    "grade": 90,
     "comments": null,
     "members": {
       "2024903713": "Andrew",
       "2024903530": "Ramos",
       "2024902588": "Judge"
     },
-    "markdown": null
+    "markdown": "cardgame-Andrew-Ramos-Judge.md"
   },
   {
     "groupName": "c-oop-wizard",
@@ -408,11 +408,11 @@
   {
     "groupName": "c--projects",
     "repositoryLink": "https://gitee.com/vernonchenyili/c--projects",
-    "grade": 0,
-    "comments": null,
+    "grade": 84,
+    "comments": "LATE: Card.cpp was empty at deadline (Apr 14). Implementation pushed Apr 20 (+6 days). Grade reflects current state; teacher decides if deadline is enforced (→ 0).",
     "members": {
       "2023905494": "Vernon"
     },
-    "markdown": "c--projects.md"
+    "markdown": "c--projects-Vernon.md"
   }
 ]
