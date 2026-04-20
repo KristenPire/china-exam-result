@@ -1,0 +1,613 @@
+{
+  "bodyType": "mcq",
+  "questions": [
+    {
+      "id": 1,
+      "text": "In early systems, one program ran at a time using all of physical memory. Why did this become unacceptable?",
+      "options": {
+        "A": "Programs were too large to fit in physical memory",
+        "B": "The OS needed half of memory for its own data structures",
+        "C": "Users could not save files between sessions on the machine",
+        "D": "The CPU sat idle during I/O, wasting expensive hardware"
+      },
+      "correct": [
+        "D"
+      ],
+      "mode": "any",
+      "explanation": "Early single-program systems blocked the CPU completely whenever the program waited for I/O:\n\n```\nProgram: ──CPU──|────── I/O wait (disk, tape) ──────|──CPU──\nCPU:      busy  |            IDLE                    | busy\n```\n\nCPU time was enormously expensive. An idle CPU during I/O was an unacceptable waste — this drove the invention of **multiprogramming**, where multiple programs share memory so the CPU always has something to run."
+    },
+    {
+      "id": 2,
+      "text": "A C++ programmer prints the address of a local variable with `std::cout << &x` and gets `0x7fff5ac3`. What kind of address is this?",
+      "options": {
+        "A": "A physical address showing the exact RAM chip location",
+        "B": "A virtual address that OS and hardware translate to a physical one",
+        "C": "A page frame number used internally by the TLB hardware",
+        "D": "A segment offset relative to the stack segment base"
+      },
+      "correct": [
+        "B"
+      ],
+      "mode": "any",
+      "explanation": "Every address a user program ever sees is a **virtual address**. The MMU (Memory Management Unit) transparently translates it to a physical address at runtime.\n\n```cpp\nint x = 42;\nstd::cout << &x;   // prints e.g. 0x7fff5ac3  ← virtual address\n                   // physical RAM might be at 0x3a1b2000 — you never see that\n```\n\nThe OS sets up the mapping; the hardware performs the translation on every memory access."
+    },
+    {
+      "id": 3,
+      "text": "Which statements about a process's address space are true?",
+      "options": {
+        "A": "Code starts at lower addresses and does not grow at runtime",
+        "B": "The heap grows toward higher addresses",
+        "C": "The stack grows toward higher addresses",
+        "D": "Free space between heap and stack needs no physical memory with paging"
+      },
+      "correct": [
+        "A",
+        "B",
+        "D"
+      ],
+      "mode": "all",
+      "explanation": "Classic virtual address space layout:\n\n```\n  low address (0x0000)\n ┌────────────┐\n │    code    │ ← starts at low addresses, read-only, never grows\n ├────────────┤\n │    data    │\n ├────────────┤\n │    heap    │ ← grows UP (toward higher addresses)\n │     ↑      │\n │            │  ← free virtual space (no physical pages needed)\n │     ↓      │\n │   stack    │ ← grows DOWN (toward lower addresses)\n └────────────┘\n  high address\n```\n\n**A ✓** Code is fixed at low addresses.\n**B ✓** Heap grows upward via `malloc`/`new`.\n**C ✗** Stack grows *downward*, not upward.\n**D ✓** With paging, un-touched virtual pages have no physical backing — the gap is free."
+    },
+    {
+      "id": 4,
+      "text": "Virtual memory must achieve three goals. Which set correctly lists all three?",
+      "options": {
+        "A": "Transparency, efficiency, and isolation",
+        "B": "Speed, simplicity, and portability",
+        "C": "Portability, compression, and persistence",
+        "D": "Concurrency, fairness, and security"
+      },
+      "correct": [
+        "A"
+      ],
+      "mode": "any",
+      "explanation": "The three goals of virtual memory (from OSTEP):\n\n| Goal | Meaning |\n|------|---------|\n| **Transparency** | Programs see a private address space; they don't know sharing is happening |\n| **Efficiency** | Translation overhead is minimal (hardware TLB caching) |\n| **Isolation** | A buggy process can't corrupt another process or the OS |\n\nSpeed and simplicity aren't primary VM goals — VM *adds* complexity to gain the other three."
+    },
+    {
+      "id": 5,
+      "text": "Process A writes to an invalid address and the OS terminates it. Process B, running at the same time, is unaffected. Which design goal of virtual memory is responsible?",
+      "options": {
+        "A": "Transparency — processes believe they have dedicated access to all of memory",
+        "B": "Efficiency — address translation adds minimal overhead with hardware support",
+        "C": "Isolation — each process can only access its own virtual address space",
+        "D": "Dynamic relocation — the hardware converts virtual addresses to physical ones"
+      },
+      "correct": [
+        "C"
+      ],
+      "mode": "any",
+      "explanation": "**Isolation** means each process is confined to its own virtual address space. An invalid access triggers a hardware fault → OS kills the offending process, leaving all other processes untouched.\n\n```\nProcess A: writes to 0xDEADBEEF → SEGFAULT → killed by OS\nProcess B:                                 → unaware, keeps running\n```\n\nWithout isolation (early systems), one buggy program could overwrite the OS or another program's memory."
+    },
+    {
+      "id": 6,
+      "text": "A process has BASE = 16KB and BOUNDS = 8KB. It accesses virtual address 5KB. What is the physical address?",
+      "options": {
+        "A": "5KB",
+        "B": "24KB",
+        "C": "11KB",
+        "D": "21KB"
+      },
+      "correct": [
+        "D"
+      ],
+      "mode": "any",
+      "explanation": "With base-and-bounds dynamic relocation:\n\n```\nPhysical address = Virtual address + BASE\n                = 5KB + 16KB\n                = 21KB\n```\n\nBounds check: is 5KB < 8KB (BOUNDS)? Yes → valid access.\n\nThe hardware adds BASE to every virtual address. The process thinks it starts at 0; it actually lives at 16KB."
+    },
+    {
+      "id": 7,
+      "text": "A process has BASE = 32KB and BOUNDS = 16KB. It accesses virtual address 20KB. What happens?",
+      "options": {
+        "A": "The hardware raises an exception because 20KB exceeds the bounds",
+        "B": "The hardware translates it to physical address 52KB and continues normally",
+        "C": "The OS moves the process to a larger region of physical memory first",
+        "D": "The hardware wraps the address around to physical address 4KB"
+      },
+      "correct": [
+        "A"
+      ],
+      "mode": "any",
+      "explanation": "Bounds check:\n\n```\nVirtual address 20KB  vs.  BOUNDS 16KB\n         20KB ≥ 16KB  →  OUT OF BOUNDS\n```\n\nThe hardware raises a protection fault *before* adding BASE. The OS kills the process.\n\nNote: if the access were valid (VA < BOUNDS), the physical address would be 20KB + 32KB = 52KB. But it never gets there."
+    },
+    {
+      "id": 8,
+      "text": "Why must only the OS in kernel mode change the base and bounds registers?",
+      "options": {
+        "A": "The registers are too slow for user-mode programs to read or write during execution",
+        "B": "Changing base or bounds registers requires a full CPU restart each time",
+        "C": "A user program could point base at another process's memory",
+        "D": "The registers are stored on disk and need I/O operations to modify"
+      },
+      "correct": [
+        "C"
+      ],
+      "mode": "any",
+      "explanation": "If user programs could write BASE, a malicious program could do:\n\n```\nBASE = &OS_password_table   // point base at OS kernel memory\nread(0)                     // now reads from OS memory directly!\n```\n\nThe CPU enforces that BASE/BOUNDS are *privileged registers* — only modifiable in kernel mode. User code attempting to write them triggers a fault."
+    },
+    {
+      "id": 9,
+      "text": "With base and bounds, a process has a 16KB address space but uses only 4KB (code, heap, stack). What happens to the other 12KB?",
+      "options": {
+        "A": "The OS automatically shares it with other processes that need more memory",
+        "B": "It wastes physical memory — the full address space is allocated contiguously",
+        "C": "It is stored on disk until the process expands into it",
+        "D": "The hardware compresses the unused region to free physical memory"
+      },
+      "correct": [
+        "B"
+      ],
+      "mode": "any",
+      "explanation": "This is **internal fragmentation** — the defining weakness of base-and-bounds.\n\n```\nPhysical memory (16KB allocated for process):\n ┌──────────────────────────────────────────┐\n │ code (2KB) │ heap (1KB) │ unused (12KB)  │  ← all contiguous, all allocated\n └──────────────────────────────────────────┘\n```\n\nThe entire 16KB must be contiguous in physical memory. The 12KB gap is real RAM that no one can use. Segmentation was invented to eliminate this waste."
+    },
+    {
+      "id": 10,
+      "text": "When the OS switches from Process A to Process B (context switch), what must it do with the base and bounds registers?",
+      "options": {
+        "A": "Reset both registers to zero so Process B starts with a clean state",
+        "B": "Copy A's registers into B's address space so B can access A's data",
+        "C": "Leave them unchanged — all processes share the same physical region",
+        "D": "Save A's values to its PCB and load B's values from B's PCB"
+      },
+      "correct": [
+        "D"
+      ],
+      "mode": "any",
+      "explanation": "Each process has its own BASE and BOUNDS stored in its PCB (Process Control Block). On a context switch:\n\n```\n1. Save current BASE, BOUNDS → Process A's PCB\n2. Load Process B's BASE, BOUNDS from B's PCB → hardware registers\n3. Resume B\n```\n\nNow all of B's memory accesses use B's mapping. If you left A's registers, B would read/write A's physical memory — a massive security breach."
+    },
+    {
+      "id": 11,
+      "text": "What problem does segmentation solve that base and bounds cannot?",
+      "options": {
+        "A": "Base and bounds cannot translate virtual addresses to physical ones",
+        "B": "Base and bounds cannot protect one process from reading another's data",
+        "C": "Free space between heap and stack wastes physical memory",
+        "D": "Base and bounds does not support more than one running process"
+      },
+      "correct": [
+        "C"
+      ],
+      "mode": "any",
+      "explanation": "Base-and-bounds allocates one contiguous physical region per process — so the gap between heap and stack wastes real RAM:\n\n```\nBase-and-bounds:  [code|heap|         gap         |stack]  ← all 1 block\nSegmentation:     [code] [heap]          [stack]           ← 3 separate blocks\n```\n\nWith segmentation each logical segment (code, heap, stack) gets its own base+bounds pair. Only used memory gets physical pages — the gap disappears."
+    },
+    {
+      "id": 12,
+      "text": "The heap segment has base = 34KB and starts at virtual address 4096. A process accesses VA 4200. What is the correct first step to translate this address?",
+      "options": {
+        "A": "Compute the offset: 4200 − 4096 = 104",
+        "B": "Add the full virtual address (4200) to the heap base (34KB) directly",
+        "C": "Subtract the base (34KB) from the virtual address to get a physical offset",
+        "D": "Divide the virtual address by the segment size to find which entry to use"
+      },
+      "correct": [
+        "A"
+      ],
+      "mode": "any",
+      "explanation": "Segment translation:\n\n```\n1. offset = VA − segment_start = 4200 − 4096 = 104 bytes\n2. check: 104 < segment_size?  (bounds check)\n3. physical = segment_base + offset = 34KB + 104 = 34KB + 104 bytes\n```\n\nYou subtract the *virtual segment start*, not the physical base. The offset is how far into the segment the access is."
+    },
+    {
+      "id": 13,
+      "text": "What causes a \"segmentation fault\"?",
+      "options": {
+        "A": "The program tried to load a segment from a missing or corrupted file",
+        "B": "Two programs tried to use the same segment number at the same time",
+        "C": "The program created more segments than the hardware supports",
+        "D": "The program accessed an offset beyond the segment's bounds"
+      },
+      "correct": [
+        "D"
+      ],
+      "mode": "any",
+      "explanation": "A segfault fires when the calculated offset ≥ the segment's size (bounds check fails):\n\n```c\nint arr[10];\narr[20] = 5;  // offset 80 bytes → beyond segment bounds → SIGSEGV\n```\n\nThe hardware computes: `offset = VA − base`, checks `offset < bounds`, and raises a fault if the offset is out of range. The OS delivers SIGSEGV to the process."
+    },
+    {
+      "id": 14,
+      "text": "After running many processes, physical memory has scattered small holes. 15KB is free total, but no single hole fits a new 10KB segment. What is this called?",
+      "options": {
+        "A": "Internal fragmentation",
+        "B": "External fragmentation",
+        "C": "Page fault",
+        "D": "Segmentation overflow"
+      },
+      "correct": [
+        "B"
+      ],
+      "mode": "any",
+      "explanation": "**External fragmentation**: free memory exists in total, but it's split into pieces too small to satisfy a contiguous request.\n\n```\nPhysical memory:\n [used][4KB free][used][5KB free][used][6KB free]\n  total free = 15KB — but no 10KB contiguous hole!\n```\n\nThis is the fundamental weakness of segmentation. Paging solves it by breaking memory into fixed-size frames so any frame works for any page."
+    },
+    {
+      "id": 15,
+      "text": "The stack grows toward lower addresses. What extra hardware support does segmentation need for this?",
+      "options": {
+        "A": "A \"grows positive\" bit per segment to indicate growth direction",
+        "B": "A second base register that marks the stack's highest virtual address",
+        "C": "A separate MMU dedicated only to stack address translations",
+        "D": "The stack must always be placed at physical address 0 to simplify math"
+      },
+      "correct": [
+        "A"
+      ],
+      "mode": "any",
+      "explanation": "Each segment entry needs a **growth direction bit**:\n\n| Segment | Grows | Direction bit |\n|---------|-------|---------------|\n| Code    | no    | positive      |\n| Heap    | up    | positive      |\n| Stack   | down  | **negative**  |\n\nWith a negative direction bit, the hardware knows the offset is computed differently:\n```\noffset = top_of_segment − VA   (instead of VA − base)\n```\nThis lets bounds checking work correctly for a downward-growing stack."
+    },
+    {
+      "id": 16,
+      "text": "Two processes run the same program. With segmentation, both can share the same physical code segment. What protection bits must this shared segment have?",
+      "options": {
+        "A": "Read-write — so both processes can modify the shared code as needed",
+        "B": "Write-execute — so the CPU can write compiled code and then run it",
+        "C": "Read-execute — code must be readable and executable but not writable",
+        "D": "No bits needed — shared segments have no access restrictions at all"
+      },
+      "correct": [
+        "C"
+      ],
+      "mode": "any",
+      "explanation": "A shared code segment must be **read-only + executable** (`rx`):\n\n- **Read**: CPU fetches instructions\n- **Execute**: CPU can run the code  \n- **Write**: ❌ forbidden — if one process could write, it would silently modify the code seen by all sharing processes\n\nThis is why modern systems enforce W^X (Write XOR Execute): memory is never both writable and executable at the same time."
+    },
+    {
+      "id": 17,
+      "text": "What property of paging prevents external fragmentation?",
+      "options": {
+        "A": "Pages are compressed before being stored in physical memory",
+        "B": "The OS sorts physical memory after each page allocation to close gaps",
+        "C": "Pages are stored on disk and loaded into memory on demand",
+        "D": "All pages and frames are the same fixed size"
+      },
+      "correct": [
+        "D"
+      ],
+      "mode": "any",
+      "explanation": "External fragmentation occurs when free holes are too small for a contiguous allocation. Paging eliminates this by making all units identical:\n\n```\nPaging: every page = 4KB, every frame = 4KB\n→ any free frame fits any page\n→ no hole is ever \"too small\" for a page\n→ external fragmentation = 0\n```\n\nThe tradeoff is *internal* fragmentation: the last page of a process may not be fully used."
+    },
+    {
+      "id": 18,
+      "text": "In paging, a virtual address is split into two parts. What are they?",
+      "options": {
+        "A": "Virtual Page Number (VPN) and offset",
+        "B": "Segment number and base offset",
+        "C": "Physical Frame Number (PFN) and page size",
+        "D": "Page directory index and bounds register value"
+      },
+      "correct": [
+        "A"
+      ],
+      "mode": "any",
+      "explanation": "Virtual address split (example: 32-bit VA, 4KB pages → 12-bit offset):\n\n```\nVirtual Address (32 bits):\n┌─────────────────────┬──────────────┐\n│     VPN (20 bits)   │ offset (12)  │\n└─────────────────────┴──────────────┘\n         │                  │\n    page table          unchanged\n    lookup → PFN         in PA\n```\n\nVPN → page table lookup → PFN. Then: PA = PFN × page_size + offset."
+    },
+    {
+      "id": 19,
+      "text": "A process accesses a virtual page whose PTE has the valid bit set to 0. What does the hardware do?",
+      "options": {
+        "A": "Returns zero-filled data since the page has not been written yet",
+        "B": "Uses the previous translation cached in the TLB instead",
+        "C": "Raises a page fault exception, trapping into the OS",
+        "D": "Maps the virtual address directly to physical frame 0"
+      },
+      "correct": [
+        "C"
+      ],
+      "mode": "any",
+      "explanation": "The **valid bit** in a PTE indicates whether the page is currently in physical memory:\n\n```\nvalid = 1 → page is in RAM → use the PFN from the PTE\nvalid = 0 → page is NOT in RAM → hardware raises PAGE FAULT\n```\n\nOn a page fault, the CPU traps to the OS. The OS finds the page on disk, loads it into a free frame, updates the PTE, and restarts the faulting instruction."
+    },
+    {
+      "id": 20,
+      "text": "A system has 4KB pages and a 64KB address space. How many virtual pages does the process have?",
+      "options": {
+        "A": "4",
+        "B": "16",
+        "C": "256",
+        "D": "64"
+      },
+      "correct": [
+        "B"
+      ],
+      "mode": "any",
+      "explanation": "```\nNumber of pages = Address space size ÷ Page size\n               = 64KB ÷ 4KB\n               = 16 pages\n```\n\nEach virtual page is 4KB. The 64KB address space is divided into 16 equal pages numbered 0–15. The page table therefore has 16 entries."
+    },
+    {
+      "id": 21,
+      "text": "Which control bits are found in a Page Table Entry (PTE)?",
+      "options": {
+        "A": "Valid/present bit",
+        "B": "ASID",
+        "C": "Dirty bit",
+        "D": "Protection (read/write) bits"
+      },
+      "correct": [
+        "A",
+        "C",
+        "D"
+      ],
+      "mode": "all",
+      "explanation": "A typical PTE contains:\n\n| Bit | Purpose |\n|-----|---------|\n| **Valid** | Is the page currently in physical memory? |\n| **Dirty** | Has the page been written to since it was loaded? (needed for swap) |\n| **Protection** | Read / Write / Execute permissions |\n| PFN | Physical Frame Number (the actual mapping) |\n\n**ASID** (Address Space Identifier) is stored in *TLB entries*, not in PTEs. It lets the TLB distinguish between different processes' translations without flushing."
+    },
+    {
+      "id": 22,
+      "text": "A student proposes storing the entire page table in hardware registers instead of memory. For a 32-bit address space with 4KB pages, why is this impractical?",
+      "options": {
+        "A": "Page tables change too frequently during execution for static registers to track",
+        "B": "Registers are slower than memory for sequential lookups across large tables",
+        "C": "The OS cannot modify hardware registers during context switches",
+        "D": "The table has about 1 million entries — far too many for registers"
+      },
+      "correct": [
+        "D"
+      ],
+      "mode": "any",
+      "explanation": "```\nAddress space: 2^32 bytes = 4GB\nPage size:     2^12 bytes = 4KB\nNumber of entries: 2^32 / 2^12 = 2^20 = 1,048,576  entries\n```\n\nOne million hardware registers is physically impossible — registers are extremely expensive (large, power-hungry). This is why page tables live in **main memory** and the TLB caches the hot translations."
+    },
+    {
+      "id": 23,
+      "text": "A linear page table is stored as an array in physical memory. What makes looking up a PTE fast?",
+      "options": {
+        "A": "The table is sorted by physical frame number for binary search",
+        "B": "The VPN is used directly as the array index — no searching needed",
+        "C": "The OS pre-loads frequently used PTEs into a special lookup cache",
+        "D": "Each PTE contains a pointer to the next entry, forming a linked list"
+      },
+      "correct": [
+        "B"
+      ],
+      "mode": "any",
+      "explanation": "A linear page table is just an array. The VPN *is* the index:\n\n```\nPTE = page_table[VPN]   // O(1) — direct array access\n```\n\nNo searching, no hashing, no pointer chasing. This is O(1) lookup — the whole point of the linear design.\n\nThe downside: the array must exist for *every possible VPN*, even unmapped ones. For a 32-bit address space this is ~1M entries × 4 bytes = **4MB per process** just for the page table."
+    },
+    {
+      "id": 24,
+      "text": "A system uses a single-level (linear) page table and has no TLB. Every virtual memory access costs two physical memory accesses. What are they?",
+      "options": {
+        "A": "One to read the PTE from the page table, one to access the actual data",
+        "B": "One to verify the page's permissions, one to read the data from memory",
+        "C": "One to read the page directory entry, one to read the page table entry",
+        "D": "One to flush the CPU cache line, one to load the new translation entry"
+      },
+      "correct": [
+        "A"
+      ],
+      "mode": "any",
+      "explanation": "Without a TLB, every memory access is double the work:\n\n```\nAccess 1: read PTE from page table in RAM  (to find the physical frame)\nAccess 2: read/write the actual data in RAM (the real memory operation)\n```\n\nThis 2× overhead is why the TLB was invented. A TLB hit eliminates Access 1 entirely, making most accesses cost just 1 physical memory operation."
+    },
+    {
+      "id": 25,
+      "text": "A TLB has 64 entries and pages are 4KB. What is the TLB coverage?",
+      "options": {
+        "A": "64KB",
+        "B": "4MB",
+        "C": "256KB",
+        "D": "16KB"
+      },
+      "correct": [
+        "C"
+      ],
+      "mode": "any",
+      "explanation": "```\nTLB coverage = number of TLB entries × page size\n             = 64 × 4KB\n             = 256KB\n```\n\nIf the working set of a program fits within 256KB, all translations can be cached in the TLB → near-100% hit rate → fast execution. When the working set exceeds TLB coverage, misses increase significantly."
+    },
+    {
+      "id": 26,
+      "text": "A program loops over an array of 10 integers spanning 4 pages. The TLB starts empty. How many TLB misses occur on the first pass?",
+      "options": {
+        "A": "10",
+        "B": "4",
+        "C": "6",
+        "D": "0"
+      },
+      "correct": [
+        "B"
+      ],
+      "mode": "any",
+      "explanation": "Each TLB miss happens once per *new page*, not once per element:\n\n```\nPage 0: first access → TLB MISS (load translation), rest of page → TLB hit\nPage 1: first access → TLB MISS, rest → hit\nPage 2: first access → TLB MISS, rest → hit\nPage 3: first access → TLB MISS, rest → hit\n\nTotal misses: 4 (one per page)\n```\n\nThis is **spatial locality** — nearby elements share a page, so one miss pays for many accesses."
+    },
+    {
+      "id": 27,
+      "text": "What type of locality causes the TLB to perform well when a program accesses array elements in order?",
+      "options": {
+        "A": "Temporal locality — reusing the same data soon after",
+        "B": "Spatial locality — nearby data shares the same page",
+        "C": "Sequential locality — the CPU pre-fetches the next instruction automatically",
+        "D": "Random locality — accessing scattered addresses across the virtual space"
+      },
+      "correct": [
+        "B"
+      ],
+      "mode": "any",
+      "explanation": "**Spatial locality**: nearby memory locations (same page) tend to be accessed together.\n\n```\nint arr[1000];   // elements at arr[0], arr[1], arr[2]... share pages\nfor (int i = 0; i < 1000; i++)\n    sum += arr[i];  // sequential → one TLB miss per page, not per element\n```\n\nWith 4KB pages and 4-byte ints, each page holds 1024 elements → only 1 TLB miss per 1024 accesses."
+    },
+    {
+      "id": 28,
+      "text": "A loop runs over the same pages a second time. All translations are still cached. Every access on the second pass is a TLB hit. What principle explains this?",
+      "options": {
+        "A": "Spatial locality",
+        "B": "Random access optimization",
+        "C": "Temporal locality",
+        "D": "Hardware prefetching"
+      },
+      "correct": [
+        "C"
+      ],
+      "mode": "any",
+      "explanation": "**Temporal locality**: recently used data is likely to be used again soon.\n\n```\nPass 1: TLB misses load translations for pages 0–3\nPass 2: same pages accessed again → TLB still holds the translations → all hits\n```\n\nThe first pass was spatial locality (nearby elements, same page). The second pass reusing the *same translations* is temporal locality — the TLB acts as a cache for recently used address translations."
+    },
+    {
+      "id": 29,
+      "text": "After a context switch, the TLB contains stale translations from the old process. What is the simplest solution?",
+      "options": {
+        "A": "Copy all TLB entries into the new process's page table to preserve them",
+        "B": "Lock the TLB so the new process cannot read any cached translations",
+        "C": "Double the TLB size so both processes fit at the same time",
+        "D": "Flush the entire TLB"
+      },
+      "correct": [
+        "D"
+      ],
+      "mode": "any",
+      "explanation": "The simplest fix is a **TLB flush** on every context switch:\n\n```\nswitch to process B:\n  1. invalidate all TLB entries\n  2. load B's page table pointer\n  3. resume B → TLB starts empty\n```\n\nDownside: B starts with a cold TLB → many misses. This cost is why ASIDs were invented: instead of flushing, each entry carries a process tag, so both processes' translations can coexist."
+    },
+    {
+      "id": 30,
+      "text": "What advantage does an ASID (Address Space Identifier) in each TLB entry provide during context switches?",
+      "options": {
+        "A": "It doubles TLB lookup speed by halving the search space each time",
+        "B": "Entries from multiple processes coexist in the TLB at the same time",
+        "C": "The TLB can grow larger dynamically when more processes are running",
+        "D": "It removes the need for a page table entirely since the ASID is the full mapping"
+      },
+      "correct": [
+        "B"
+      ],
+      "mode": "any",
+      "explanation": "With ASIDs, each TLB entry is tagged with its owner's process ID:\n\n```\nTLB entry: [ VPN | PFN | ASID | valid | ... ]\n```\n\nOn a lookup, the hardware matches both VPN *and* ASID. Process A's entries are still valid in the TLB after switching to Process B — no flush needed. This preserves TLB warmth across context switches, reducing miss penalties."
+    },
+    {
+      "id": 31,
+      "text": "Which statements about hardware-managed vs software-managed TLBs are correct?",
+      "options": {
+        "A": "In hardware-managed, the hardware walks the page table on a miss",
+        "B": "In software-managed, the OS trap handler finds the translation on a miss",
+        "C": "Software-managed TLBs are slower because the OS must handle every TLB hit",
+        "D": "Software-managed TLBs let the OS use any page table format it wants"
+      },
+      "correct": [
+        "A",
+        "B",
+        "D"
+      ],
+      "mode": "all",
+      "explanation": "Two TLB management models:\n\n| | Hardware-managed | Software-managed |\n|-|-----------------|------------------|\n| Miss handler | CPU walks page table | OS trap handler |\n| Page table format | Fixed by hardware | **Any format** |\n| Example | x86 | MIPS, SPARC |\n\n**A ✓** Hardware walks the page table (fixed format, e.g., x86 CR3).\n**B ✓** Software: miss raises exception → OS finds the mapping → loads TLB entry.\n**C ✗** OS only handles *misses*, not hits. Hits are still hardware-fast.\n**D ✓** The OS controls the page table format — the hardware just needs the OS to fill the TLB."
+    },
+    {
+      "id": 32,
+      "text": "A TLB has 32 entries. A program loops over 33 different pages with LRU replacement. What happens?",
+      "options": {
+        "A": "The first 32 pages stay cached and only page 33 causes misses each iteration",
+        "B": "LRU evenly rotates entries so each page gets approximately equal cache time",
+        "C": "The OS detects the pathological pattern and increases the TLB size at runtime",
+        "D": "Every access is a TLB miss"
+      },
+      "correct": [
+        "D"
+      ],
+      "mode": "any",
+      "explanation": "This is the classic **LRU cache thrashing** scenario (n+1 pages, n entries):\n\n```\nLoop iteration, TLB size = 32:\nAccess page 0:  miss, evict oldest\nAccess page 1:  miss, evict oldest\n...\nAccess page 32: miss, evict page 0  ← page 0 is now gone!\nAccess page 0 again: miss, evict page 1  ← page 1 is now gone!\n...\n```\n\nEvery single access is a miss because each new page evicts the oldest one, which is always needed next."
+    },
+    {
+      "id": 33,
+      "text": "A student says: \"A linear page table wastes no space because every entry maps a real page.\" What is wrong?",
+      "options": {
+        "A": "Most entries map unused virtual pages but still consume physical memory",
+        "B": "The entries are too slow to search through sequentially on every memory access",
+        "C": "The entries are stored in CPU registers, not in physical memory",
+        "D": "Each entry at 4 bytes is too large for modern hardware to store efficiently"
+      },
+      "correct": [
+        "A"
+      ],
+      "mode": "any",
+      "explanation": "A linear page table has one entry per virtual page — whether or not that page is used:\n\n```\n32-bit address space, 4KB pages → 1M entries × 4B = 4MB per process\n\nTypical process memory:\n  code:  ~100KB   (25 pages used)\n  heap:  ~500KB   (125 pages used)\n  stack: ~100KB   (25 pages used)\n  TOTAL: ~175 pages used out of 1,000,000 entries\n  → 999,825 entries are invalid but still occupy RAM!\n```\n\nMulti-level page tables solve this by only allocating table space for used regions."
+    },
+    {
+      "id": 34,
+      "text": "In a multi-level page table, a PDE has valid bit = 0. What does this mean?",
+      "options": {
+        "A": "That virtual page has been swapped to disk for later retrieval by the OS",
+        "B": "The page directory itself is corrupt and must be rebuilt from scratch entirely",
+        "C": "All PTEs in that region are invalid, so the page table page is not allocated",
+        "D": "The PDE's physical frame number is zero, which maps to reserved OS memory"
+      },
+      "correct": [
+        "C"
+      ],
+      "mode": "any",
+      "explanation": "In a two-level page table:\n\n```\nPage Directory:\n  PDE[0]: valid=1 → points to page table page 0  (code region — in use)\n  PDE[1]: valid=0 → NO page table page allocated   ← this is the point\n  PDE[2]: valid=1 → points to page table page 2  (stack — in use)\n```\n\nA PDE with valid=0 means the entire 4MB region (for 4KB pages, 1K entries per table) is unmapped. No page table page is allocated for it — saving memory for all those invalid PTEs that would otherwise exist."
+    },
+    {
+      "id": 35,
+      "text": "In a two-level page table, the VPN is split into PDIndex and PTIndex. What does the PDIndex select?",
+      "options": {
+        "A": "The byte offset within the target data page in physical memory",
+        "B": "Which process currently owns this particular virtual address",
+        "C": "Which page directory entry to read, to find the correct PT page",
+        "D": "The physical frame number directly, without consulting any table structure"
+      },
+      "correct": [
+        "C"
+      ],
+      "mode": "any",
+      "explanation": "Two-level address translation:\n\n```\nVirtual Address:\n┌──────────────┬──────────────┬──────────────┐\n│ PDIndex (10) │ PTIndex (10) │ offset (12)  │\n└──────────────┴──────────────┴──────────────┘\n       │               │\n       │               └── indexes into the page table page\n       └── indexes into the Page Directory\n           → PDE gives address of correct page table page\n```\n\nPDIndex → PDE → address of PT page. PTIndex → PTE → PFN. Then PA = PFN × 4KB + offset."
+    },
+    {
+      "id": 36,
+      "text": "Which are advantages of multi-level page tables over linear page tables?",
+      "options": {
+        "A": "Only allocates page table space for regions of the address space in use",
+        "B": "TLB misses are faster because fewer memory accesses are needed",
+        "C": "Each piece of the page table fits in one page — no contiguous allocation needed",
+        "D": "Multi-level tables eliminate internal fragmentation within the page table itself"
+      },
+      "correct": [
+        "A",
+        "C",
+        "D"
+      ],
+      "mode": "all",
+      "explanation": "Multi-level page table advantages:\n\n**A ✓** Sparse address spaces only allocate PT pages for used regions → saves RAM.\n\n**B ✗** TLB misses are actually *more expensive* with multi-level tables — each level requires an extra memory access (2 accesses for 2-level vs. 1 for linear).\n\n**C ✓** Each page table page is exactly one physical page (e.g., 4KB) — no large contiguous allocation required.\n\n**D ✓** A linear table wastes space for unused entries; multi-level tables skip entire subtrees of unmapped virtual addresses."
+    },
+    {
+      "id": 37,
+      "text": "In a two-level page table, a TLB miss requires how many memory accesses to find the translation (not counting the final data access)?",
+      "options": {
+        "A": "2 — one for the PDE, one for the PTE",
+        "B": "1 — only the PTE is read from memory",
+        "C": "3 — one to load the PTBR, one for the PDE, one for the PTE",
+        "D": "0 — the page directory is cached in a CPU register"
+      },
+      "correct": [
+        "A"
+      ],
+      "mode": "any",
+      "explanation": "On a TLB miss with a two-level page table:\n\n```\nAccess 1: read PDE from Page Directory in RAM  (PTBR register → PD base address)\nAccess 2: read PTE from Page Table page in RAM (PDE → PT page base address)\n──────\nTotal: 2 memory accesses just to get the physical address\nAccess 3 (not counted): read/write the actual data\n```\n\nThe PTBR is a register (not a memory access). With a 3-level table it would be 3 accesses, etc. This is the TLB miss cost overhead for deeper page tables."
+    },
+    {
+      "id": 38,
+      "text": "A system has a large address space. With a two-level page table, the page directory spans multiple pages and must be stored contiguously. Why does this defeat the purpose of multi-level page tables?",
+      "options": {
+        "A": "Contiguous page directories waste TLB entries that could cache data translations",
+        "B": "Multi-level tables are designed so each piece fits in one page — a multi-page directory breaks this",
+        "C": "The OS cannot allocate contiguous physical memory for any structure larger than 4KB",
+        "D": "Page directories stored across multiple pages cause the hardware to stall during walks"
+      },
+      "correct": [
+        "B"
+      ],
+      "mode": "any",
+      "explanation": "The entire point of multi-level paging is that **every table piece fits in exactly one page**:\n\n```\n✓ Good: Page Directory = 1 page (e.g., 1024 entries × 4B = 4KB)\n        Each PT page  = 1 page\n        → OS can place any piece anywhere — no contiguous allocation\n\n✗ Bad:  Page Directory = 4 pages (contiguous)\n        → back to the same problem as a linear table!\n```\n\nThe fix: add another level of indirection (3-level table) so the top level itself fits in one page."
+    },
+    {
+      "id": 39,
+      "text": "In x86-64, the number of page table levels and the index size at each level are determined by a single constraint. What is it?",
+      "options": {
+        "A": "The total number of levels must equal the number of CPU cache levels",
+        "B": "Each level must use at least 8 bits to ensure enough entries for any workload",
+        "C": "The sum of all index widths must be divisible by the CPU word size (64 bits)",
+        "D": "Each page table page must fit within a single physical page"
+      },
+      "correct": [
+        "D"
+      ],
+      "mode": "any",
+      "explanation": "The constraint: **one page table page = one physical page** (e.g., 4KB).\n\nx86-64 example:\n```\nPage size = 4KB = 4096 bytes\nEach PTE  = 8 bytes\nEntries per PT page = 4096 / 8 = 512 = 2^9\n\n→ each level uses 9-bit index\n→ 4 levels × 9 bits = 36 bits + 12-bit offset = 48-bit VA\n```\n\nThe index width is derived from the page size and PTE size, not from the CPU word size or cache levels."
+    },
+    {
+      "id": 40,
+      "text": "Using larger pages (e.g., 2MB instead of 4KB) reduces the total number of virtual pages. How does this affect a multi-level page table?",
+      "options": {
+        "A": "Fewer virtual pages means a smaller page table, potentially requiring fewer levels",
+        "B": "The page directory grows larger because each entry must store a bigger frame number",
+        "C": "Multi-level tables cannot support large pages — only linear tables can",
+        "D": "The number of levels stays the same, but each level uses wider index bits"
+      },
+      "correct": [
+        "A"
+      ],
+      "mode": "any",
+      "explanation": "Larger pages → fewer total pages → smaller page table → possibly fewer levels needed:\n\n```\n4KB pages:  2^32 / 2^12 = 2^20 pages → needs multi-level to avoid 4MB table\n2MB pages:  2^32 / 2^21 = 2^11 pages → only 2048 entries → single-level fits!\n```\n\nThis is why hardware supports \"huge pages\" (2MB/1GB) — fewer TLB entries cover more memory, reducing misses and potentially simplifying the page table structure."
+    }
+  ]
+}
