@@ -14,7 +14,7 @@ const infoFiles    = import.meta.glob("./*/*/info.json",    { eager: true });
 const bodyFiles    = import.meta.glob("./*/*/body.json",    { eager: true });
 const studentFiles = import.meta.glob("./*/*/students.json",{ eager: true });
 const groupFiles   = import.meta.glob("./*/*/groups.json",  { eager: true });
-const reportFiles  = import.meta.glob("./*/*/reports/*.md", { eager: true, query: "?raw", import: "default" });
+const reportFiles  = import.meta.glob("./*/*/markdown/*.md", { eager: true, query: "?raw", import: "default" });
 
 export const CLASSES = CLASSES_JSON;
 
@@ -38,6 +38,15 @@ function loadAll() {
       projects.push({ id, classId, num, ...info });
       projectGroups[id] = groups;
 
+      // Build report map from the "report" field declared in each group
+      for (const group of groups) {
+        if (!group.markdown) continue;
+        const content = reportFiles[`./${classId}/${num}/markdown/${group.markdown}`];
+        if (content == null) continue;
+        if (!projectReports[id]) projectReports[id] = {};
+        projectReports[id][group.groupName] = content;
+      }
+
     } else {
       // ── Exam ─────────────────────────────────────────
       const body        = bodyFiles[`./${classId}/${num}/body.json`]?.default;
@@ -52,17 +61,6 @@ function loadAll() {
       // Grade is provided by the teacher. "wrong" is optional.
       students[id] = studentData;
     }
-  }
-
-  for (const [path, content] of Object.entries(reportFiles)) {
-    // path: "./cpp/03/reports/cardgame-foo.md"
-    const parts = path.split("/");
-    const classId = parts[1];
-    const num = parts[2];
-    const groupName = parts[4].replace(/\.md$/, "");
-    const projectId = `${classId}-${num}`;
-    if (!projectReports[projectId]) projectReports[projectId] = {};
-    projectReports[projectId][groupName] = content;
   }
 
   exams.sort((a, b) => {

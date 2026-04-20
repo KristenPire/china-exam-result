@@ -8,7 +8,8 @@
       "2024900805": "Jason",
       "2024900813": "Froncois",
       "2024902592": "Mike"
-    }
+    },
+    "markdown": "cardgame-jason-froncois-mike.md"
   },
   {
     "groupName": "card-game",
@@ -20,7 +21,8 @@
       "2024900795": "Echo",
       "2024900809": "Carry",
       "2024902586": "Betty"
-    }
+    },
+    "markdown": "card-game.md"
   },
   {
     "groupName": "yu-gi-oh",
@@ -32,7 +34,8 @@
       "2024903034": "Daniel",
       "2024902264": "Brown",
       "2024903534": "Noah"
-    }
+    },
+    "markdown": "yu-gi-oh.md"
   },
   {
     "groupName": "cardgame-serein-yori",
@@ -42,7 +45,8 @@
     "members": {
       "2024903382": "Yori",
       "2024905120": "Serein"
-    }
+    },
+    "markdown": "cardgame-serein-yori.md"
   },
   {
     "groupName": "cardgame-jason-hilbert",
@@ -53,7 +57,8 @@
       "2024903531": "Jason",
       "2024903383": "Hilbert",
       "2024902587": "Shane"
-    }
+    },
+    "markdown": "cardgame-jason-hilbert.md"
   },
   {
     "groupName": "cardgame-henry-latain-upster-mika",
@@ -65,7 +70,8 @@
       "2024902256": "Latain",
       "2024903032": "Upster",
       "2024903384": "Mika"
-    }
+    },
+    "markdown": "cardgame-henry-latain-upster-mika.md"
   },
   {
     "groupName": "babel-2nd-project",
@@ -76,7 +82,8 @@
       "2024902584": "Othersen",
       "2024903712": "Andy",
       "2024904788": "Tiara"
-    }
+    },
+    "markdown": "babel-2nd-project.md"
   },
   {
     "groupName": "flush",
@@ -87,7 +94,8 @@
       "2024904088": "Han (王子涵)",
       "2024904789": "Jett (唐健乔)",
       "2024903036": "Alice (李培生)"
-    }
+    },
+    "markdown": "flush.md"
   },
   {
     "groupName": "card-game-texas-solo",
@@ -97,7 +105,8 @@
     "members": {
       "2024904721": "Brimstone",
       "2024903715": "Simon Nian"
-    }
+    },
+    "markdown": "card-game-texas-solo.md"
   },
   {
     "groupName": "cardgame",
@@ -108,7 +117,8 @@
       "2024903713": "Andrew",
       "2024903530": "Ramos",
       "2024902588": "Judge"
-    }
+    },
+    "markdown": null
   },
   {
     "groupName": "c-oop-wizard",
@@ -120,7 +130,8 @@
       "2024900591": "Search",
       "2024903381": "Borios",
       "2024902259": "Simon"
-    }
+    },
+    "markdown": "c-oop-wizard.md"
   },
   {
     "groupName": "quarter",
@@ -132,7 +143,8 @@
       "2024903533": "Nimo",
       "2024900810": "Makayla",
       "2024904084": "Alex"
-    }
+    },
+    "markdown": "quarter.md"
   },
   {
     "groupName": "deepsleep",
@@ -144,7 +156,8 @@
       "2024900592": "Winham",
       "2024903035": "Clare",
       "2024904082": "Tohsaka"
-    }
+    },
+    "markdown": "deepsleep.md"
   },
   {
     "groupName": "flush-gamblers",
@@ -156,7 +169,8 @@
       "2024904790": "Akali (王恩奇)",
       "2024902583": "Jesko (张效通)",
       "2024900796": "Nancy (张慧珍)"
-    }
+    },
+    "markdown": "flush-gamblers.md"
   },
   {
     "groupName": "cardgame-rafael-charles",
@@ -167,7 +181,8 @@
       "2024903711": "Rafael (Huang Weibo)",
       "2024903717": "Charles (Lu Yucheng)",
       "2024900806": "Eric (Hu Weilin)"
-    }
+    },
+    "markdown": "cardgame-rafael-charles.md"
   },
   {
     "groupName": "baltro",
@@ -179,7 +194,8 @@
       "2024900595": "Johnny",
       "2024904718": "Johnson",
       "2024905118": "Cooper"
-    }
+    },
+    "markdown": "baltro.md"
   },
   {
     "groupName": "cardgame-freya-ivan",
@@ -189,7 +205,8 @@
     "members": {
       "2024900794": "Freya",
       "2024900596": "Ivan"
-    }
+    },
+    "markdown": "cardgame-freya-ivan.md"
   },
   {
     "groupName": "c--group-project-card-game",
@@ -199,7 +216,8 @@
     "members": {
       "2024903709": "Deckard (项阳洋)",
       "2024904089": "Jasonbond (王帅然)"
-    }
+    },
+    "markdown": "c--group-project-card-game.md"
   },
   {
     "groupName": "freeway",
@@ -211,7 +229,8 @@
       "2024900594": "Daniel",
       "2024900803": "Zack",
       "2024902262": "Kenley"
-    }
+    },
+    "markdown": "freeway.md"
   },
   {
     "groupName": "cardgame-simon-ricardo-gillian-carter",
@@ -223,7 +242,8 @@
       "2024900814": "Gillian",
       "2024904717": "Ricardo",
       "2024903716": "Carter"
-    }
+    },
+    "markdown": "cardgame-simon-ricardo-gillian-carter.md"
   },
   {
     "groupName": "cardgame_keith_smody",
@@ -233,7 +253,8 @@
     "members": {
       "2024900812": "Keith (王樱棋)",
       "2024902261": "Smody (吕伟涛)"
-    }
+    },
+    "markdown": "cardgame_keith_smody.md"
   },
   {
     "groupName": "cardgame_li_zhou",
@@ -243,7 +264,8 @@
     "members": {
       "2024900593": "Livia",
       "2024904086": "Melody"
-    }
+    },
+    "markdown": "cardgame_li_zhou.md"
   },
   {
     "groupName": "gandalf",
@@ -255,7 +277,8 @@
       "2024902258": "Liesel",
       "2024904791": "Stella",
       "2024900804": "Melkiades"
-    }
+    },
+    "markdown": "gandalf.md"
   },
   {
     "groupName": "poker-mate",
@@ -266,7 +289,8 @@
       "2024903033": "Simple",
       "2024900597": "Buck",
       "2024904720": "Ike"
-    }
+    },
+    "markdown": "poker-mate.md"
   },
   {
     "groupName": "nova",
@@ -278,7 +302,8 @@
       "2024900800": "Peter",
       "2024903387": "Ronaldo",
       "2024903710": "Sky"
-    }
+    },
+    "markdown": "nova.md"
   },
   {
     "groupName": "123321",
@@ -289,7 +314,8 @@
       "2024904090": "Rhys (肖梓涵)",
       "2024904787": "Victoria (郭星彤)",
       "2024904083": "Laura (刘子墨)"
-    }
+    },
+    "markdown": "123321.md"
   },
   {
     "groupName": "cardgame-pojock-stephen-valentine",
@@ -300,7 +326,8 @@
       "2024900798": "Pojock",
       "2024905121": "Stephen",
       "2024900802": "Valentine"
-    }
+    },
+    "markdown": "cardgame-pojock-stephen-valentine.md"
   },
   {
     "groupName": "cardgame-tom-log-maple-leo",
@@ -312,7 +339,8 @@
       "2024902590": "Leo",
       "2024905122": "Log",
       "2024900797": "Maple"
-    }
+    },
+    "markdown": "cardgame-tom-log-maple-leo.md"
   },
   {
     "groupName": "cardgame-emile-carl",
@@ -322,7 +350,8 @@
     "members": {
       "2024902263": "Emile",
       "2024903385": "Carl"
-    }
+    },
+    "markdown": "cardgame-emile-carl.md"
   },
   {
     "groupName": "cardgame-bob--jimmy",
@@ -332,7 +361,8 @@
     "members": {
       "2024902257": "Bob",
       "2024900808": "Jimmy"
-    }
+    },
+    "markdown": "cardgame-bob--jimmy.md"
   },
   {
     "groupName": "card-game-violet",
@@ -342,7 +372,8 @@
     "members": {
       "2024903532": "Violet",
       "2024902265": "Arrco"
-    }
+    },
+    "markdown": "card-game-violet.md"
   },
   {
     "groupName": "cardgame-doris",
@@ -351,7 +382,8 @@
     "comments": null,
     "members": {
       "2023905492": "Doris (陈怡彤)"
-    }
+    },
+    "markdown": "cardgame-doris.md"
   },
   {
     "groupName": "chinese-dou-di-zhu",
@@ -360,7 +392,8 @@
     "comments": null,
     "members": {
       "2024904719": "Sakuya (李思远)"
-    }
+    },
+    "markdown": "chinese-dou-di-zhu.md"
   },
   {
     "groupName": "cardgame-verena",
@@ -369,6 +402,17 @@
     "comments": null,
     "members": {
       "2023905495": "Verena"
-    }
+    },
+    "markdown": "cardgame-verena.md"
+  },
+  {
+    "groupName": "c--projects",
+    "repositoryLink": "https://gitee.com/vernonchenyili/c--projects",
+    "grade": 0,
+    "comments": null,
+    "members": {
+      "2023905494": "Vernon"
+    },
+    "markdown": "c--projects.md"
   }
 ]
