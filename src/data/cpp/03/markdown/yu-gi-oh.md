@@ -4,7 +4,7 @@
 | --------------- | ------------------------------ |
 | **Members**     | Arthur · Daniel · Brown · Noah |
 | **Submission**  | ⏰ Late (~14 hours)            |
-| **Final Score** | 86 / 100                       |
+| **Final Score** | 94 / 100                       |
 
 ---
 
@@ -18,7 +18,7 @@ I expect great things from you all in the individual project.
 
 ## Sections
 
-**Subject Requirements — 26 / 30**
+**Subject Requirements — 28 / 30**
 
 - Card, Deck, Hand, End condition all correct
 - README full marks — rules, per-member breakdown
@@ -32,7 +32,7 @@ I expect great things from you all in the individual project.
   // main.cpp allocates players with new, no delete — leaked at exit
   ```
 
-**Clean Code — 22 / 40**
+**Clean Code — 28 / 40**
 
 - `Logic.cpp`, `Player.cpp`, `Item.cpp`, `Shop.cpp` all show well-decomposed, focused methods
 
