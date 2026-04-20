@@ -14,6 +14,7 @@ const infoFiles    = import.meta.glob("./*/*/info.json",    { eager: true });
 const bodyFiles    = import.meta.glob("./*/*/body.json",    { eager: true });
 const studentFiles = import.meta.glob("./*/*/students.json",{ eager: true });
 const groupFiles   = import.meta.glob("./*/*/groups.json",  { eager: true });
+const reportFiles  = import.meta.glob("./*/*/reports/*.md", { eager: true, query: "?raw", import: "default" });
 
 export const CLASSES = CLASSES_JSON;
 
@@ -22,6 +23,7 @@ function loadAll() {
   const students = {};
   const projects = [];
   const projectGroups = {};
+  const projectReports = {};
 
   for (const [path, mod] of Object.entries(infoFiles)) {
     const [, classId, num] = path.split("/");
@@ -52,6 +54,17 @@ function loadAll() {
     }
   }
 
+  for (const [path, content] of Object.entries(reportFiles)) {
+    // path: "./cpp/03/reports/cardgame-foo.md"
+    const parts = path.split("/");
+    const classId = parts[1];
+    const num = parts[2];
+    const groupName = parts[4].replace(/\.md$/, "");
+    const projectId = `${classId}-${num}`;
+    if (!projectReports[projectId]) projectReports[projectId] = {};
+    projectReports[projectId][groupName] = content;
+  }
+
   exams.sort((a, b) => {
     if (a.publishedDate !== b.publishedDate)
       return a.publishedDate < b.publishedDate ? 1 : -1;
@@ -59,14 +72,15 @@ function loadAll() {
   });
   projects.sort((a, b) => (a.deadline < b.deadline ? 1 : -1));
 
-  return { exams, students, projects, projectGroups };
+  return { exams, students, projects, projectGroups, projectReports };
 }
 
 const data = loadAll();
-export const EXAMS          = data.exams;
-export const STUDENTS       = data.students;
-export const PROJECTS       = data.projects;
-export const PROJECT_GROUPS = data.projectGroups;
+export const EXAMS           = data.exams;
+export const STUDENTS        = data.students;
+export const PROJECTS        = data.projects;
+export const PROJECT_GROUPS  = data.projectGroups;
+export const PROJECT_REPORTS = data.projectReports;
 
 // ── Helpers ─────────────────────────────────────
 

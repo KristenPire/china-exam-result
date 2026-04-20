@@ -7,4 +7,4 @@ export { ExamCard }        from "./ExamCard";
 export { ProjectCard }     from "./ProjectCard";
 export { QuestionCard }    from "./QuestionCard";
 
-export { CLASSES, EXAMS, STUDENTS, PROJECTS, PROJECT_GROUPS } from "../data";
+export { CLASSES, EXAMS, STUDENTS, PROJECTS, PROJECT_GROUPS, PROJECT_REPORTS } from "../data";

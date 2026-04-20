@@ -21,9 +21,10 @@ import {
   getStudentName,
   getDefaultClassId,
   computeWeightedAverage,
+  PROJECT_REPORTS,
 } from "../data";
 
-export function DashboardScreen({ studentId, onSelectExam, onLogout }) {
+export function DashboardScreen({ studentId, onSelectExam, onSelectProject, onLogout }) {
   const name = getStudentName(studentId);
   const [classId, setClassId] = useState(() => getDefaultClassId(studentId));
 
@@ -101,6 +102,8 @@ export function DashboardScreen({ studentId, onSelectExam, onLogout }) {
                 project={item.project}
                 group={item.group}
                 studentId={studentId}
+                hasReport={!!PROJECT_REPORTS[item.project.id]?.[item.group.groupName]}
+                onViewReport={() => onSelectProject(item.project.id, item.group.groupName)}
               />
             )
           )}

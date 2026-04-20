@@ -83,11 +83,34 @@ function renderInlineTokens(text, keyPrefix) {
   return parts;
 }
 
-/** Render a plain-text chunk (no code blocks) into lines, bullets, and inline tokens */
+const headingStyle = (level) => ({
+  color: level === 1 ? "#f0f0f0" : level === 2 ? "#00d4ff" : "#d4d4d4",
+  fontSize: level === 1 ? 17 : level === 2 ? 14 : 13,
+  fontWeight: "bold",
+  margin: level === 1 ? "14px 0 6px" : "10px 0 4px",
+  letterSpacing: "0.03em",
+});
+
+const tableStyle = {
+  borderCollapse: "collapse",
+  margin: "8px 0",
+  width: "100%",
+  fontSize: 12,
+};
+
+const tdStyle = {
+  border: "1px solid #2a2a4a",
+  padding: "4px 10px",
+  verticalAlign: "top",
+  color: "#d4d4d4",
+};
+
+/** Render a plain-text chunk (no code blocks) into lines, bullets, headings, tables, and inline tokens */
 function renderTextBlock(text, keyPrefix) {
   const lines = text.split("\n");
   const result = [];
   let bulletBuffer = [];
+  let tableBuffer = [];
 
   function flushBullets() {
     if (bulletBuffer.length === 0) return;
@@ -106,16 +129,74 @@ function renderTextBlock(text, keyPrefix) {
     bulletBuffer = [];
   }
 
+  function flushTable() {
+    if (tableBuffer.length === 0) return;
+    const dataRows = tableBuffer.filter((r) => !/^\|[\s|:-]+\|$/.test(r.trim()));
+    result.push(
+      <table key={`${keyPrefix}-tbl${result.length}`} style={tableStyle}>
+        <tbody>
+          {dataRows.map((row, ri) => {
+            const cells = row.split("|").slice(1, -1).map((c) => c.trim());
+            return (
+              <tr key={ri}>
+                {cells.map((cell, ci) => (
+                  <td key={ci} style={tdStyle}>
+                    {renderInlineTokens(cell, `${keyPrefix}-tc${ri}-${ci}`)}
+                  </td>
+                ))}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>,
+    );
+    tableBuffer = [];
+  }
+
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
-    const bulletMatch = line.match(/^[-•]\s+(.*)/);
 
+    // Table row (starts and ends with |)
+    if (/^\|.*\|$/.test(line.trim())) {
+      flushBullets();
+      tableBuffer.push(line.trim());
+      continue;
+    }
+    flushTable();
+
+    // Headings
+    const h3 = line.match(/^### (.+)/);
+    const h2 = line.match(/^## (.+)/);
+    const h1 = line.match(/^# (.+)/);
+    if (h1) {
+      flushBullets();
+      result.push(<div key={`${keyPrefix}-h1${i}`} style={headingStyle(1)}>{renderInlineTokens(h1[1], `${keyPrefix}-h1t${i}`)}</div>);
+      continue;
+    }
+    if (h2) {
+      flushBullets();
+      result.push(<div key={`${keyPrefix}-h2${i}`} style={headingStyle(2)}>{renderInlineTokens(h2[1], `${keyPrefix}-h2t${i}`)}</div>);
+      continue;
+    }
+    if (h3) {
+      flushBullets();
+      result.push(<div key={`${keyPrefix}-h3${i}`} style={headingStyle(3)}>{renderInlineTokens(h3[1], `${keyPrefix}-h3t${i}`)}</div>);
+      continue;
+    }
+
+    // Horizontal rule
+    if (line.trim() === "---") {
+      flushBullets();
+      result.push(<hr key={`${keyPrefix}-hr${i}`} style={{ border: "none", borderTop: "1px solid #2a2a4a", margin: "10px 0" }} />);
+      continue;
+    }
+
+    const bulletMatch = line.match(/^[-•]\s+(.*)/);
     if (bulletMatch) {
       bulletBuffer.push(bulletMatch[1]);
     } else {
       flushBullets();
       if (line.trim() === "") {
-        // blank line → small spacer
         result.push(<div key={`${keyPrefix}-sp${i}`} style={{ height: 6 }} />);
       } else {
         result.push(
@@ -130,6 +211,7 @@ function renderTextBlock(text, keyPrefix) {
     }
   }
   flushBullets();
+  flushTable();
   return result;
 }
 
