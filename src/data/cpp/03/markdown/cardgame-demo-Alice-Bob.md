@@ -156,13 +156,3 @@ No inheritance used. Score: 0/10.
 | Replace magic numbers with named constants | +2 |
 | Remove dead code (commented-out block) | +1 |
 
----
-
-## AI Usage
-
-**AI_USAGE: 1 / 5** — The missing `operator>`, the infinite loop, the incomplete README, and the 88-line monolithic `run()` are organic student mistakes inconsistent with AI-generated output; the clean `Card.cpp` and `Hand.cpp` operator implementations are slightly polished but within reach for this level.
-
-- `Game.cpp:8–95` — 88-line monolith with magic numbers and dead code — clearly hand-written (lower↓)
-- `Game.cpp:60–72` — commented-out "old scoring logic" left in final submission — human development artifact (lower↓)
-- `Card.cpp:34–50` — comparison operators and operator<< are clean and correct (raise↑ slightly)
-- `Hand.cpp:3–22` — canonical form attempted but incomplete (Rule of Three violation) — organic student oversight (lower↓)
