@@ -1,5 +1,16 @@
 [
   {
+    "groupName": "cardgame-demo",
+    "repositoryLink": "https://gitee.com/example/cardgame-demo",
+    "grade": 74,
+    "comments": "Demo group created to showcase the grading method. Not a real submission.",
+    "members": {
+      "1234": "Alice",
+      "5678": "Bob"
+    },
+    "markdown": "cardgame-demo-Alice-Bob.md"
+  },
+  {
     "groupName": "cardgame-jason-froncois-mike",
     "repositoryLink": "https://gitee.com/Mike_JanetChen/cardgame-jason-froncois-mike/",
     "grade": 98,
