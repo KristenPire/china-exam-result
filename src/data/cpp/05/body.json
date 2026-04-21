@@ -1,0 +1,425 @@
+{
+  "bodyType": "mcq",
+  "questions": [
+    {
+      "id": 1,
+      "points": 4,
+      "text": "Which is the correct include guard for `student.hh`?",
+      "options": {
+        "A": "```cpp\n#guard STUDENT_HH\n// declarations\n#endguard\n```",
+        "B": "```cpp\n#include_once \"student.hh\"\n// declarations\n```",
+        "C": "```cpp\n#define STUDENT_HH\n// declarations\n#undef STUDENT_HH\n```",
+        "D": "```cpp\n#pragma once\n// declarations\n```"
+      },
+      "correct": ["D"],
+      "mode": "any",
+      "explanation": "`#pragma once` is the standard modern way to prevent a header from being included more than once. It tells the compiler to include the file only the first time it is encountered.\n\nWhy the others are wrong:\n- A) `#guard` / `#endguard` — these preprocessor directives do not exist in C++.\n- B) `#include_once` — not a valid C++ directive.\n- C) `#define STUDENT_HH` then `#undef STUDENT_HH` — this defines then immediately undefines the macro, providing no protection at all.\n\nThe classical alternative is:\n```cpp\n#ifndef STUDENT_HH\n#define STUDENT_HH\n// declarations\n#endif\n```\nbut `#pragma once` is simpler and supported by all modern compilers."
+    },
+    {
+      "id": 2,
+      "points": 3,
+      "text": "Which is true about the `this` pointer?",
+      "options": {
+        "A": "It must be declared as a parameter in every method",
+        "B": "It points to the object that called the method",
+        "C": "It only exists inside constructors",
+        "D": "It points to the class definition, not an object"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "`this` is an implicit pointer available inside any non-static member function. It always points to the specific object on which the method was called.\n\n```cpp\nclass Counter {\n    int count;\npublic:\n    void increment() {\n        this->count++;  // same as count++\n    }\n};\n\nCounter c;\nc.increment(); // inside increment(), this == &c\n```\n\nWhy the others are wrong:\n- A) `this` is implicit — you never declare it as a parameter.\n- C) `this` exists in all non-static member functions, not just constructors.\n- D) `this` points to the object instance, not to the class definition."
+    },
+    {
+      "id": 3,
+      "points": 3,
+      "text": "What problem do include guards prevent?",
+      "options": {
+        "A": "Header files being modified by other files",
+        "B": "Functions being called more than once at runtime",
+        "C": "Same declarations processed twice, causing redefinition errors",
+        "D": "Linking errors between .cpp files"
+      },
+      "correct": ["C"],
+      "mode": "any",
+      "explanation": "When a header is included multiple times in the same translation unit (e.g. `a.hh` includes `b.hh` and `c.hh`, both of which include `student.hh`), the compiler processes it twice and sees the same declaration twice — causing a **redefinition error**. Include guards prevent this.\n\n```cpp\n// Without guard: student.hh included twice → error: redefinition of 'struct Student'\n// With #pragma once: second inclusion is silently skipped\n```\n\nWhy the others are wrong:\n- A) Include guards do not prevent modification of files.\n- B) This is a runtime concept — include guards operate at compile time, before any function calls.\n- D) Linking errors come from missing definitions, not double inclusions."
+    },
+    {
+      "id": 4,
+      "points": 3,
+      "text": "Which is **NOT** a benefit of .hh/.cpp separation?",
+      "options": {
+        "A": "Makes the program faster at runtime",
+        "B": "Only changed .cpp files need recompilation",
+        "C": "Multiple .cpp files can share declarations",
+        "D": "Separates interface from implementation"
+      },
+      "correct": ["A"],
+      "mode": "any",
+      "explanation": "Separating code into `.hh` (header) and `.cpp` (implementation) files is a **compile-time** technique — it has no effect on the speed of the resulting executable at runtime.\n\nThe real benefits are:\n- B) **Incremental compilation**: if you change `player.cpp`, only that file is recompiled.\n- C) **Shared declarations**: any `.cpp` that `#include`s the header can use the declared types and functions.\n- D) **Separation of concerns**: the header is the public interface; the `.cpp` contains the private implementation details."
+    },
+    {
+      "id": 5,
+      "points": 3,
+      "text": "Which belongs in a .cpp file, **NOT** a .hh file?",
+      "options": {
+        "A": "Structure definitions",
+        "B": "Function prototypes",
+        "C": "Include guards",
+        "D": "Function implementations (bodies)"
+      },
+      "correct": ["D"],
+      "mode": "any",
+      "explanation": "Function **bodies** (the actual code that runs) belong in `.cpp` files. If a function body were placed in a header included by multiple `.cpp` files, the linker would see multiple definitions and produce an error.\n\nWhat goes in a header (`.hh`):\n- Structure and class definitions\n- Function prototypes (declarations only)\n- Include guards (`#pragma once`)\n\nWhat goes in the implementation (`.cpp`):\n- Function bodies\n- `#include` for headers it needs\n- Definitions of static/global variables"
+    },
+    {
+      "id": 6,
+      "points": 4,
+      "text": "What does `return *this;` do at the end of a method?",
+      "options": {
+        "A": "Deletes the object and frees memory",
+        "B": "Returns a reference to the current object",
+        "C": "Creates and returns a new copy of the object",
+        "D": "Returns the address of the first member"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "`this` is a pointer to the current object. Dereferencing it with `*this` gives the object itself. Returning it by reference (`Type&`) means the caller gets a reference to the same object — no copy is made.\n\nThis is the standard pattern for the copy-assignment operator and enables **method chaining**:\n```cpp\nVec& operator=(const Vec& other) {\n    x = other.x;\n    y = other.y;\n    return *this; // return reference to self\n}\n\n// enables: a = b = c;\n```\n\nWhy the others are wrong:\n- A) `return *this` does not free memory — `delete this` would (and is almost always wrong).\n- C) Returning by value would create a copy; `return *this` in a `Type&` method does not.\n- D) `this` points to the whole object, not just the first member."
+    },
+    {
+      "id": 7,
+      "points": 3,
+      "text": "Given `Player p; Player* ptr = &p;`, which accesses `score`?",
+      "options": {
+        "A": "`ptr.score`",
+        "B": "`ptr::score`",
+        "C": "`ptr->score`",
+        "D": "`*ptr.score`"
+      },
+      "correct": ["C"],
+      "mode": "any",
+      "explanation": "`ptr` is a **pointer** to a `Player`. To access a member through a pointer, use the arrow operator `->`. It is shorthand for `(*ptr).score`.\n\n```cpp\nPlayer p;\nPlayer* ptr = &p;\nptr->score = 10;   // correct\n(*ptr).score = 10; // also correct, but verbose\n```\n\nWhy the others are wrong:\n- A) `ptr.score` — `.` works on values, not pointers. Compilation error.\n- B) `ptr::score` — `::` is for scope resolution (namespaces, classes), not for instances.\n- D) `*ptr.score` — operator precedence: `.` binds tighter than `*`, so this is `*(ptr.score)` — trying to dereference `score`, not `ptr`."
+    },
+    {
+      "id": 8,
+      "points": 4,
+      "text": "What is the error?\n```cpp\nnamespace Game {\n    struct Player { std::string name; int hp; };\n    void heal(Player& p, int amount);\n}\n\nint main() {\n    Player hero = {\"Warrior\", 100};\n    heal(hero, 20);\n}\n```",
+      "options": {
+        "A": "`Player` and `heal` need `Game::` in `main()`",
+        "B": "`{\"Warrior\", 100}` is invalid initialization",
+        "C": "`heal` cannot take a reference parameter",
+        "D": "A namespace cannot contain structs and functions"
+      },
+      "correct": ["A"],
+      "mode": "any",
+      "explanation": "`Player` and `heal` are defined inside the `Game` namespace. Outside that namespace, they must be qualified with `Game::` or brought in with `using`.\n\n```cpp\nint main() {\n    Game::Player hero = {\"Warrior\", 100}; // correct\n    Game::heal(hero, 20);                  // correct\n}\n// or: using namespace Game; at the top\n```\n\nWhy the others are wrong:\n- B) Aggregate initialization `{\"Warrior\", 100}` is perfectly valid for structs.\n- C) Reference parameters are legal everywhere — this is a core C++ feature.\n- D) Namespaces can contain any declarations, including structs, functions, and classes."
+    },
+    {
+      "id": 9,
+      "points": 3,
+      "text": "Which expression prints the department name?\n```cpp\nstruct Department { std::string name; int floor; };\nstruct Employee   { std::string name; Department dept; };\nEmployee e = {\"Bob\", {\"Engineering\", 3}};\n```",
+      "options": {
+        "A": "`std::cout << e.name;`",
+        "B": "`std::cout << e.dept.name;`",
+        "C": "`std::cout << Department.name;`",
+        "D": "`std::cout << e->dept.name;`"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "`Employee` has a nested `Department` member called `dept`. To reach `dept`'s `name`, chain the dot operator: `e.dept.name`.\n\n```cpp\nstd::cout << e.dept.name; // prints \"Engineering\"\n```\n\nWhy the others are wrong:\n- A) `e.name` prints the employee's name (\"Bob\"), not the department name.\n- C) `Department.name` — `Department` is a type, not a variable. You cannot use `.` on a type.\n- D) `e->dept.name` — `->` is for pointers. `e` is a value, not a pointer."
+    },
+    {
+      "id": 10,
+      "points": 3,
+      "text": "Which statement about structs is **FALSE**?",
+      "options": {
+        "A": "Members are public by default",
+        "B": "A function can return a struct by value",
+        "C": "A struct must have a constructor to be used",
+        "D": "`->` accesses members through a pointer"
+      },
+      "correct": ["C"],
+      "mode": "any",
+      "explanation": "Structs do **not** need a constructor. If none is defined, the compiler provides a default one, and aggregate initialization `{val1, val2}` works automatically.\n\n```cpp\nstruct Point { int x; int y; };\nPoint p = {3, 7}; // no constructor needed\n```\n\nWhy the others are true:\n- A) In a `struct`, all members are `public` by default (unlike `class` where they are `private`).\n- B) C++ structs are value types and can be returned by value just like `int` or `double`.\n- D) `->` is exactly the member-access operator for pointers: `ptr->x` is `(*ptr).x`."
+    },
+    {
+      "id": 11,
+      "points": 3,
+      "text": "What is `player.points` after calling `reset`?\n```cpp\nstruct Score { int points; };\n\nvoid reset(Score s) { s.points = 0; }\n\nint main() {\n    Score player = {100};\n    reset(player);\n}\n```",
+      "options": {
+        "A": "100 — the function received a copy",
+        "B": "0 — the function modified the original",
+        "C": "Undefined — the struct is destroyed after the call",
+        "D": "Compilation error — structs cannot be passed"
+      },
+      "correct": ["A"],
+      "mode": "any",
+      "explanation": "`reset` takes `Score s` **by value** — a copy of `player` is made. Modifying `s.points` inside the function only affects the local copy. When `reset` returns, the copy is destroyed and `player` is unchanged.\n\n```cpp\nvoid reset(Score s) { s.points = 0; } // modifies the copy only\n\nint main() {\n    Score player = {100};\n    reset(player);\n    // player.points is still 100\n}\n```\n\nTo actually modify the original, pass by reference:\n```cpp\nvoid reset(Score& s) { s.points = 0; } // modifies the original\n```"
+    },
+    {
+      "id": 12,
+      "points": 4,
+      "text": "What is `r.height`?\n```cpp\nstruct Rect { int width; int height; };\nRect r = {10, 20};\n```",
+      "options": {
+        "A": "0",
+        "B": "10",
+        "C": "Undefined",
+        "D": "20"
+      },
+      "correct": ["D"],
+      "mode": "any",
+      "explanation": "Aggregate initialization assigns values **in declaration order**. `Rect` declares `width` first, then `height`. So `{10, 20}` sets `width = 10` and `height = 20`.\n\n```cpp\nRect r = {10, 20};\nstd::cout << r.width;  // 10\nstd::cout << r.height; // 20\n```\n\nThe order of members in the struct definition is what matters, not anything else. This is a common trap: always check the struct definition to know which initializer maps to which field."
+    },
+    {
+      "id": 13,
+      "points": 3,
+      "text": "Which line calls the **assignment operator** (not copy constructor)?\n```cpp\nVec a(1, 2);       // Line 1\nVec b = a;          // Line 2\nVec c(a);           // Line 3\nVec d(3, 4);       // Line 4\nd = a;              // Line 5\n```",
+      "options": {
+        "A": "Line 2",
+        "B": "Line 3",
+        "C": "Line 4",
+        "D": "Line 5"
+      },
+      "correct": ["D"],
+      "mode": "any",
+      "explanation": "The **assignment operator** (`operator=`) is called when you assign to an **already-existing** object. The **copy constructor** is called when a new object is created from an existing one.\n\n- Line 1: `Vec a(1, 2)` — parameterized constructor\n- Line 2: `Vec b = a` — looks like assignment but is actually **copy construction** (object `b` is being created here)\n- Line 3: `Vec c(a)` — explicitly calls the copy constructor\n- Line 4: `Vec d(3, 4)` — parameterized constructor\n- **Line 5: `d = a`** — `d` already exists, so this calls `operator=` ✓\n\nThe key rule: if the object is being **initialized** (created), it is the copy constructor. If it already exists, it is the assignment operator."
+    },
+    {
+      "id": 14,
+      "points": 3,
+      "text": "**(multiple answers possible)** Which are part of the orthodox canonical form?",
+      "options": {
+        "A": "Copy constructor",
+        "B": "Parameterized constructor (`MyClass(int value)`)",
+        "C": "Destructor",
+        "D": "Copy assignment operator (`operator=`)"
+      },
+      "correct": ["A", "C", "D"],
+      "mode": "all",
+      "explanation": "The **Rule of Three** (orthodox canonical form) states that if a class needs any one of these, it almost certainly needs all three:\n\n1. **Copy constructor** — `MyClass(const MyClass& other)` — how to copy-construct from another instance\n2. **Copy-assignment operator** — `MyClass& operator=(const MyClass& other)` — how to assign from another instance\n3. **Destructor** — `~MyClass()` — how to clean up (free resources)\n\nA **parameterized constructor** (B) is useful but not part of the canonical form — it is not needed for correct copy/move/destruction behavior."
+    },
+    {
+      "id": 15,
+      "points": 4,
+      "text": "What is wrong with this copy constructor?\n```cpp\nclass Num {\npublic:\n    Num(Num other) { /* ... */ }\n};\n```",
+      "options": {
+        "A": "Constructor name must differ from class name",
+        "B": "No error — this is valid",
+        "C": "Parameter should be `const Num& other`",
+        "D": "Constructor should return `Num`"
+      },
+      "correct": ["C"],
+      "mode": "any",
+      "explanation": "A copy constructor must take its parameter **by reference** (`const Num&`). If it takes by value (`Num other`), the compiler must copy the argument to create the parameter — which would call the copy constructor again, causing **infinite recursion**.\n\n```cpp\n// Wrong — infinite recursion:\nNum(Num other) { ... }\n\n// Correct:\nNum(const Num& other) { ... }\n```\n\nWhy the others are wrong:\n- A) Constructors must have the same name as the class — that is intentional.\n- B) This code will not compile — most compilers reject it outright.\n- D) Constructors never have a return type — not even `void`."
+    },
+    {
+      "id": 16,
+      "points": 3,
+      "text": "What happens when `d = d` runs?\n```cpp\nclass Data {\n    int* arr;\npublic:\n    Data(int n) { arr = new int[n]; }\n    ~Data() { delete[] arr; }\n    Data& operator=(const Data& other) {\n        delete[] arr;\n        arr = new int[5];\n        for (int i = 0; i < 5; i++) arr[i] = other.arr[i];\n        return *this;\n    }\n};\n\nint main() { Data d(5); d = d; }\n```",
+      "options": {
+        "A": "Data is safely copied",
+        "B": "Compilation error",
+        "C": "Assignment is silently skipped",
+        "D": "`arr` is deleted, then `other.arr` (same memory) is read — undefined behavior"
+      },
+      "correct": ["D"],
+      "mode": "any",
+      "explanation": "When `d = d` is called, `this` and `&other` point to the **same object**. The assignment operator first does `delete[] arr` — which frees the memory. Then it tries to read `other.arr[i]` — but `other.arr` is the same pointer that was just deleted. This is **undefined behavior** (use-after-free).\n\nThe fix is a **self-assignment guard**:\n```cpp\nData& operator=(const Data& other) {\n    if (this == &other) return *this; // guard\n    delete[] arr;\n    arr = new int[5];\n    for (int i = 0; i < 5; i++) arr[i] = other.arr[i];\n    return *this;\n}\n```\nThis is why the self-assignment check is mandatory in any raw-pointer assignment operator."
+    },
+    {
+      "id": 17,
+      "points": 4,
+      "text": "A class has `int* data` from `new`. What must a custom copy constructor do that the default does not?",
+      "options": {
+        "A": "Allocate new memory and copy the values",
+        "B": "Set `data` to `nullptr` in the copy",
+        "C": "Delete the original's data before copying",
+        "D": "Call the destructor of the source object"
+      },
+      "correct": ["A"],
+      "mode": "any",
+      "explanation": "The **default copy constructor** performs a **shallow copy** — it copies the pointer value, so both objects point to the same memory. When one of them is destroyed, it deletes the array, leaving the other with a dangling pointer.\n\nA custom copy constructor must perform a **deep copy**: allocate fresh memory and copy the actual values.\n\n```cpp\nMyClass(const MyClass& other) {\n    data = new int[other.size]; // allocate new memory\n    for (int i = 0; i < other.size; i++)\n        data[i] = other.data[i]; // copy the values\n    size = other.size;\n}\n```\n\nWhy the others are wrong:\n- B) Setting `data` to `nullptr` discards the data — the copy would be empty and useless.\n- C) You must never delete the original's data — you are making a copy, not moving.\n- D) Never call a destructor manually on a live object."
+    },
+    {
+      "id": 18,
+      "points": 4,
+      "text": "In which order are destructors called for local variables?",
+      "options": {
+        "A": "Same order as creation (first created → first destroyed)",
+        "B": "Reverse order (last created → first destroyed)",
+        "C": "Alphabetical order of variable names",
+        "D": "Undefined — depends on the compiler"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "Local variables are destroyed in **reverse order of construction** — last in, first out (LIFO), like a stack. This is guaranteed by the C++ standard.\n\n```cpp\n{\n    A a; // constructed first\n    B b; // constructed second\n    C c; // constructed third\n}     // c destroyed first, then b, then a\n```\n\nThis matters when objects depend on each other: an object that uses another in its destructor must be destroyed first. The LIFO order ensures that dependencies are always cleaned up in the correct sequence."
+    },
+    {
+      "id": 19,
+      "points": 3,
+      "text": "Which is the **postfix** increment operator?",
+      "options": {
+        "A": "`Num& operator++() { val++; return *this; }`",
+        "B": "`Num operator++(int) { Num old = *this; val++; return old; }`",
+        "C": "`Num operator++() { val++; return *this; }`",
+        "D": "`Num& operator++(int) { val++; return *this; }`"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "The dummy `int` parameter distinguishes postfix from prefix:\n\n- **Prefix** `++x`: `operator++()` — no parameter, returns reference to modified self\n- **Postfix** `x++`: `operator++(int)` — dummy `int` parameter (never used), saves old value, increments, returns old value **by value**\n\n```cpp\nNum operator++(int) {   // postfix\n    Num old = *this;    // save current state\n    val++;              // increment\n    return old;         // return what it was before\n}\n```\n\nPostfix must return **by value** (not reference) because `old` is a local variable that would be destroyed at function exit."
+    },
+    {
+      "id": 20,
+      "points": 4,
+      "text": "Which declares `operator<<` so `std::cout << point` works?",
+      "options": {
+        "A": "`void operator<<(const Point& p);`",
+        "B": "`std::ostream& Point::operator<<(std::ostream& os);`",
+        "C": "`friend std::ostream& operator<<(std::ostream& os, const Point& p);`",
+        "D": "`Point& operator<<(std::ostream& os, const Point& p);`"
+      },
+      "correct": ["C"],
+      "mode": "any",
+      "explanation": "`operator<<` for stream output must be a **free function** (not a member) because `std::cout` is the left operand — and you cannot add methods to `std::ostream`. Declaring it `friend` inside the class gives it access to private members.\n\n```cpp\nclass Point {\n    int x, y;\npublic:\n    friend std::ostream& operator<<(std::ostream& os, const Point& p) {\n        os << \"(\" << p.x << \", \" << p.y << \")\";\n        return os; // enables chaining: cout << p1 << p2\n    }\n};\n```\n\nWhy the others are wrong:\n- A) Returns `void` — cannot chain `cout << p1 << p2`.\n- B) `Point::operator<<` is a member function. Its left operand would be a `Point`, not `std::ostream`.\n- D) Returns `Point&` instead of `std::ostream&` — breaks chaining."
+    },
+    {
+      "id": 21,
+      "points": 4,
+      "text": "Which pair is a valid function overload?",
+      "options": {
+        "A": "```cpp\nint calculate(int a);\ndouble calculate(int a);\n```",
+        "B": "```cpp\nvoid print(int x);\nvoid print(double x);\n```",
+        "C": "```cpp\nint getValue();\nint getValue();\n```",
+        "D": "```cpp\nvoid process(int a);\nint process(int a);\n```"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "Function overloading requires the functions to differ in their **parameter types or count**. The return type alone is not enough.\n\n- A) Same parameter (`int a`), only return type differs → **not valid** — ambiguous\n- B) `print(int)` vs `print(double)` — different parameter type → **valid overload** ✓\n- C) Identical signatures → **redefinition error**\n- D) Same parameter (`int a`), only return type differs → **not valid**\n\n```cpp\nvoid print(int x)    { std::cout << x; }\nvoid print(double x) { std::cout << x; }\n\nprint(42);    // calls print(int)\nprint(3.14);  // calls print(double)\n```"
+    },
+    {
+      "id": 22,
+      "points": 3,
+      "text": "**(multiple answers possible)** Which operators CAN be overloaded?",
+      "options": {
+        "A": "`+` (addition)",
+        "B": "`.` (member access)",
+        "C": "`==` (comparison)",
+        "D": "`<<` (stream output)"
+      },
+      "correct": ["A", "C", "D"],
+      "mode": "all",
+      "explanation": "Most C++ operators can be overloaded. The notable exceptions are: `.` (member access), `::` (scope resolution), `?:` (ternary), and `sizeof`.\n\n- A) `+` ✓ — very commonly overloaded (e.g., `Vec + Vec`)\n- B) `.` ✗ — **cannot** be overloaded; it is a language-level operator reserved for member access\n- C) `==` ✓ — commonly overloaded for value comparison\n- D) `<<` ✓ — overloaded for stream output (`std::cout << obj`)\n\nRemember: overloading `.` would break the language's ability to access members, so it is intentionally forbidden."
+    },
+    {
+      "id": 23,
+      "points": 3,
+      "text": "What does postfix `a++` return?",
+      "options": {
+        "A": "The value before incrementing (old value)",
+        "B": "The value after incrementing (new value)",
+        "C": "A reference to `a`",
+        "D": "Nothing — returns `void`"
+      },
+      "correct": ["A"],
+      "mode": "any",
+      "explanation": "Postfix `a++` **increments `a`** but returns the **value it had before the increment**. This is why the overloaded postfix operator saves the old state before modifying.\n\n```cpp\nint a = 5;\nint b = a++; // b = 5 (old value), a is now 6\nint c = ++a; // c = 7 (new value), a is now 7\n```\n\nThis distinction matters in loops and expressions. Prefer prefix `++a` when the old value is not needed — it avoids creating a temporary copy."
+    },
+    {
+      "id": 24,
+      "points": 3,
+      "text": "Which line compiles?\n```cpp\nclass Student {\n    std::string name;\n    int grade;\npublic:\n    Student(std::string n, int g) : name(n), grade(g) {}\n    std::string getName() const { return name; }\n    int getGrade() const { return grade; }\n};\nStudent s(\"Li Wei\", 85);\n```",
+      "options": {
+        "A": "`std::cout << s.name;`",
+        "B": "`s.grade = 100;`",
+        "C": "`s.name = \"Alice\";`",
+        "D": "`std::cout << s.getName();`"
+      },
+      "correct": ["D"],
+      "mode": "any",
+      "explanation": "`name` and `grade` are declared in the `private` section of the class — they can only be accessed from within the class itself or from `friend` functions. The only way to access them from outside is through the public interface.\n\n- A) `s.name` — private member, compilation error\n- B) `s.grade = 100` — private member, compilation error\n- C) `s.name = \"Alice\"` — private member, compilation error\n- D) `s.getName()` — public method, calls the getter → compiles and prints `\"Li Wei\"` ✓"
+    },
+    {
+      "id": 25,
+      "points": 4,
+      "text": "Which method can be declared `const`?",
+      "options": {
+        "A": "`void setAge(int a) { age = a; }`",
+        "B": "`void reset() { age = 0; name = \"\"; }`",
+        "C": "`int getAge() { return age; }`",
+        "D": "`void increment() { count++; }`"
+      },
+      "correct": ["C"],
+      "mode": "any",
+      "explanation": "A `const` method promises not to modify any member variables of the object. Only **read-only** methods (getters) can be `const`.\n\n```cpp\nint getAge() const { return age; } // correct: reads only\n```\n\nWhy the others cannot be `const`:\n- A) `setAge` writes to `age` — modifies a member → cannot be `const`\n- B) `reset` writes to `age` and `name` — modifies members → cannot be `const`\n- D) `increment` writes to `count` — modifies a member → cannot be `const`\n\n`const` methods are important: they allow your class to be used with `const` references and `const` objects."
+    },
+    {
+      "id": 26,
+      "points": 3,
+      "text": "What happens when you compile this?\n```cpp\nstruct A { int x; };\nclass B  { int x; };\n\nint main() {\n    A a; a.x = 10;\n    B b; b.x = 10;\n}\n```",
+      "options": {
+        "A": "`b.x` fails — class members are private by default",
+        "B": "Both compile fine",
+        "C": "`a.x` fails — struct members are private by default",
+        "D": "Both fail — constructors are required first"
+      },
+      "correct": ["A"],
+      "mode": "any",
+      "explanation": "The only difference between `struct` and `class` in C++ is the **default access level**:\n- `struct` → members are **public** by default → `a.x = 10` is fine\n- `class` → members are **private** by default → `b.x = 10` is a compilation error\n\n```cpp\nstruct A { int x; };   // x is public\nclass  B { int x; };   // x is private\n\nA a; a.x = 10; // OK\nB b; b.x = 10; // Error: 'x' is private\n```\n\nTo fix: add `public:` before `int x;` in class B, or change `class` to `struct`."
+    },
+    {
+      "id": 27,
+      "points": 3,
+      "text": "What is the error?\n```cpp\nclass Circle {\n    double radius;\npublic:\n    void Circle(double r) { radius = r; }\n};\n```",
+      "options": {
+        "A": "Constructors cannot have parameters",
+        "B": "Should use `this->radius`",
+        "C": "`radius` should be initialized in the class definition",
+        "D": "Constructors have no return type — remove `void`"
+      },
+      "correct": ["D"],
+      "mode": "any",
+      "explanation": "Constructors in C++ **never have a return type** — not even `void`. Writing `void Circle(...)` turns it into a regular member function named `Circle`, not a constructor.\n\n```cpp\n// Wrong:\nvoid Circle(double r) { radius = r; }\n\n// Correct constructor:\nCircle(double r) { radius = r; }\n// or with initializer list:\nCircle(double r) : radius(r) {}\n```\n\nWhy the others are wrong:\n- A) Constructors can absolutely have parameters.\n- B) `this->radius` vs `radius` is a style choice, not an error here (the parameter name is `r`, not `radius`, so no ambiguity).\n- C) Class-level initialization of member variables is optional and unrelated to this error."
+    },
+    {
+      "id": 28,
+      "points": 3,
+      "text": "What is the error?\n```cpp\nclass Timer {\n    int seconds;\npublic:\n    Timer(int seconds) { seconds = seconds; }\n};\n```",
+      "options": {
+        "A": "`seconds = seconds` assigns parameter to itself — member never set",
+        "B": "Parameter cannot share a name with a member",
+        "C": "Must use an initializer list instead",
+        "D": "No error — member is correctly set"
+      },
+      "correct": ["A"],
+      "mode": "any",
+      "explanation": "Inside the constructor body, the name `seconds` refers to the **parameter** (it shadows the member). So `seconds = seconds` assigns the parameter to itself — the member `this->seconds` is never set.\n\n```cpp\nTimer(int seconds) { seconds = seconds; } // parameter = parameter (noop)\n```\n\nTwo correct fixes:\n```cpp\n// Fix 1: use this->\nTimer(int seconds) { this->seconds = seconds; }\n\n// Fix 2: use initializer list (preferred)\nTimer(int seconds) : seconds(seconds) {}\n// In the initializer list, left side = member, right side = parameter\n```\n\nThis silent bug compiles without error — the member stays uninitialized (garbage value). Always use initializer lists or `this->` to avoid name shadowing."
+    },
+    {
+      "id": 29,
+      "points": 3,
+      "text": "A `Student` needs an address (city, zip) and a name. An `Address` class exists. Which design is best?",
+      "options": {
+        "A": "```cpp\nclass Student {\n    std::string city;\n    int zip;\n    std::string name;\n};\n```",
+        "B": "```cpp\nclass Student {\n    Address address;\n    std::string name;\n};\n```",
+        "C": "```cpp\nclass Student : public Address {\n    std::string name;\n};\n```",
+        "D": "```cpp\nclass Student {\n    std::string data[3];\n};\n```"
+      },
+      "correct": ["B"],
+      "mode": "any",
+      "explanation": "Use **composition** (has-a) when one object contains another as a component. A student *has an* address — it does not *inherit from* address.\n\n- B) `Student` contains an `Address` object → correct ✓\n- A) Duplicating `city` and `zip` directly in `Student` breaks the reuse of the `Address` class and couples Student to address internals.\n- C) `Student : public Address` (inheritance) means \"Student is an Address\" — that is not true. Inheritance models is-a relationships. This is a design error.\n- D) `std::string data[3]` loses all type safety and structure — the meaning of each element is unclear."
+    },
+    {
+      "id": 30,
+      "points": 3,
+      "text": "What does this setter prevent?\n```cpp\nclass Student {\n    int grade;\npublic:\n    void setGrade(int g) {\n        if (g >= 0 && g <= 100) grade = g;\n    }\n};\n```",
+      "options": {
+        "A": "Grade being read by other classes",
+        "B": "Memory leaks on destruction",
+        "C": "Grades outside 0–100 being stored",
+        "D": "Constructor being called twice"
+      },
+      "correct": ["C"],
+      "mode": "any",
+      "explanation": "The setter validates its input before storing it. Only values in the range [0, 100] are accepted — any other value is silently rejected and `grade` remains unchanged.\n\n```cpp\nstudent.setGrade(85);  // OK — stored\nstudent.setGrade(-5);  // rejected — grade unchanged\nstudent.setGrade(110); // rejected — grade unchanged\n```\n\nThis is **encapsulation** in practice: by making `grade` private and routing all writes through a setter, the class guarantees its invariant (grade is always valid). If `grade` were public, any code could set it to `-999`."
+    }
+  ]
+}
