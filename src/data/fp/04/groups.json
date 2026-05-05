@@ -2,7 +2,7 @@
   {
     "groupName": "Sage",
     "repositoryLink": null,
-    "grade": 0.0,
+    "grade": 75.0,
     "comments": null,
     "members": {
       "2023905493": "Sage"
@@ -11,28 +11,10 @@
   {
     "groupName": "Jerry",
     "repositoryLink": null,
-    "grade": 0.0,
+    "grade": 78.0,
     "comments": null,
     "members": {
       "2023905321": "Jerry"
-    }
-  },
-   {
-    "groupName": "Cadian",
-    "repositoryLink": null,
-    "grade": 40.0,
-    "comments": null,
-    "members": {
-      "2023902792": "Cadian"
-    }
-  },
-  {
-     "groupName": "Alex",
-    "repositoryLink": null,
-    "grade": 60.0,
-    "comments": null,
-    "members": {
-      "2023905319": "Alex"
     }
   },
   {
@@ -47,7 +29,7 @@
   {
     "groupName": "Steven",
     "repositoryLink": null,
-    "grade": 94.0,
+    "grade": 0.0,
     "comments": null,
     "members": {
       "2023900908": "Steven"
@@ -56,7 +38,7 @@
   {
     "groupName": "Star",
     "repositoryLink": null,
-    "grade": 0.0,
+    "grade": 70.0,
     "comments": null,
     "members": {
       "2023902044": "Star"
@@ -65,7 +47,7 @@
   {
     "groupName": "Theodore",
     "repositoryLink": null,
-    "grade": 85.0,
+    "grade": 65.0,
     "comments": null,
     "members": {
       "2023903113": "Theodore"
@@ -83,7 +65,7 @@
   {
     "groupName": "James William",
     "repositoryLink": null,
-    "grade": 75.0,
+    "grade": 60.0,
     "comments": null,
     "members": {
       "2023903693": "James William"
@@ -92,7 +74,7 @@
   {
     "groupName": "Vernon",
     "repositoryLink": null,
-    "grade": 20.0,
+    "grade": 80.0,
     "comments": null,
     "members": {
       "2023905494": "Vernon"
@@ -101,7 +83,7 @@
   {
     "groupName": "Beluga",
     "repositoryLink": null,
-    "grade": 64.0,
+    "grade": 88.0,
     "comments": null,
     "members": {
       "2023905419": "Beluga"
@@ -119,7 +101,7 @@
   {
     "groupName": "Kevin Chou",
     "repositoryLink": null,
-    "grade": 92.0,
+    "grade": 60.0,
     "comments": null,
     "members": {
       "2023900903": "Kevin Chou"
@@ -137,7 +119,7 @@
   {
     "groupName": "Ikun Hututu",
     "repositoryLink": null,
-    "grade": 82.0,
+    "grade": 60.0,
     "comments": null,
     "members": {
       "2023900900": "Ikun Hututu"
@@ -155,7 +137,7 @@
   {
     "groupName": "Guo Jingsheng",
     "repositoryLink": null,
-    "grade": 98.0,
+    "grade": 85.0,
     "comments": null,
     "members": {
       "2023905329": "Guo Jingsheng"
@@ -164,7 +146,7 @@
   {
     "groupName": "Jobs",
     "repositoryLink": null,
-    "grade": 100.0,
+    "grade": 78.0,
     "comments": null,
     "members": {
       "2023903117": "Jobs"
@@ -173,7 +155,7 @@
   {
     "groupName": "Zima",
     "repositoryLink": null,
-    "grade": 34.0,
+    "grade": 70.0,
     "comments": null,
     "members": {
       "2023902042": "Zima"
@@ -182,7 +164,7 @@
   {
     "groupName": "Doris",
     "repositoryLink": null,
-    "grade": 92.0,
+    "grade": 80.0,
     "comments": null,
     "members": {
       "2023905492": "Doris"
@@ -191,7 +173,7 @@
   {
     "groupName": "Leo",
     "repositoryLink": null,
-    "grade": 83.0,
+    "grade": 85.0,
     "comments": null,
     "members": {
       "2023905327": "Leo"
@@ -209,7 +191,7 @@
   {
     "groupName": "Summer",
     "repositoryLink": null,
-    "grade": 75.0,
+    "grade": 85.0,
     "comments": null,
     "members": {
       "2023903692": "Summer"
@@ -227,7 +209,7 @@
   {
     "groupName": "Enzo",
     "repositoryLink": null,
-    "grade": 65.0,
+    "grade": 100.0,
     "comments": null,
     "members": {
       "2023905940": "Enzo"
@@ -281,7 +263,7 @@
   {
     "groupName": "Ben",
     "repositoryLink": null,
-    "grade": 99.0,
+    "grade": 85.0,
     "comments": null,
     "members": {
       "2023901701": "Ben"
@@ -299,7 +281,7 @@
   {
     "groupName": "yogafire",
     "repositoryLink": null,
-    "grade": 56.0,
+    "grade": 100.0,
     "comments": null,
     "members": {
       "2023901565": "yogafire"
@@ -308,7 +290,7 @@
   {
     "groupName": "Danny",
     "repositoryLink": null,
-    "grade": 80.0,
+    "grade": 78.0,
     "comments": null,
     "members": {
       "2023905333": "Danny"
@@ -335,7 +317,7 @@
   {
     "groupName": "Daniel",
     "repositoryLink": null,
-    "grade": 100.0,
+    "grade": 75.0,
     "comments": null,
     "members": {
       "2023902045": "Daniel"
@@ -344,16 +326,25 @@
   {
     "groupName": "Neil",
     "repositoryLink": null,
-    "grade": 100.0,
+    "grade": 75.0,
     "comments": null,
     "members": {
       "2023905316": "Neil"
     }
   },
   {
-    "groupName": "Harrison",
+    "groupName": "ALEX",
     "repositoryLink": null,
     "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023905319": "ALEX"
+    }
+  },
+  {
+    "groupName": "Harrison",
+    "repositoryLink": null,
+    "grade": 65.0,
     "comments": null,
     "members": {
       "2023901708": "Harrison"
@@ -371,7 +362,7 @@
   {
     "groupName": "Eve",
     "repositoryLink": null,
-    "grade": 75.0,
+    "grade": 100.0,
     "comments": null,
     "members": {
       "2023902043": "Eve"
@@ -398,7 +389,7 @@
   {
     "groupName": "Ray",
     "repositoryLink": null,
-    "grade": 81.0,
+    "grade": 100.0,
     "comments": null,
     "members": {
       "2023900901": "Ray"
@@ -416,7 +407,7 @@
   {
     "groupName": "jacccccob",
     "repositoryLink": null,
-    "grade": 50.0,
+    "grade": 90.0,
     "comments": null,
     "members": {
       "2023905317": "jacccccob"
@@ -434,7 +425,7 @@
   {
     "groupName": "Rick",
     "repositoryLink": null,
-    "grade": 95.0,
+    "grade": 100.0,
     "comments": null,
     "members": {
       "2023901697": "Rick"
@@ -470,7 +461,7 @@
   {
     "groupName": "Fannie",
     "repositoryLink": null,
-    "grade": 65.0,
+    "grade": 100.0,
     "comments": null,
     "members": {
       "2023905939": "Fannie"
@@ -515,7 +506,7 @@
   {
     "groupName": "Xianqing Lin",
     "repositoryLink": null,
-    "grade": 90.0,
+    "grade": 85.0,
     "comments": null,
     "members": {
       "2023905315": "Xianqing Lin"
@@ -533,7 +524,7 @@
   {
     "groupName": "Mercury",
     "repositoryLink": null,
-    "grade": 95.0,
+    "grade": 100.0,
     "comments": null,
     "members": {
       "2023900906": "Mercury"
@@ -542,10 +533,19 @@
   {
     "groupName": "Benyuan Dai",
     "repositoryLink": null,
-    "grade": 100.0,
+    "grade": 85.0,
     "comments": null,
     "members": {
       "2023902791": "Benyuan Dai"
+    }
+  },
+  {
+    "groupName": "Cadian",
+    "repositoryLink": null,
+    "grade": 100.0,
+    "comments": null,
+    "members": {
+      "2023902792": "Cadian"
     }
   },
   {
@@ -560,7 +560,7 @@
   {
     "groupName": "Zikang Cao",
     "repositoryLink": null,
-    "grade": 97.0,
+    "grade": 100.0,
     "comments": null,
     "members": {
       "2023905938": "Zikang Cao"
@@ -578,7 +578,7 @@
   {
     "groupName": "Lucas",
     "repositoryLink": null,
-    "grade": 98.0,
+    "grade": 100.0,
     "comments": null,
     "members": {
       "2023901562": "Lucas"
@@ -596,7 +596,7 @@
   {
     "groupName": "Landy",
     "repositoryLink": null,
-    "grade": 98.0,
+    "grade": 80.0,
     "comments": null,
     "members": {
       "2023902038": "Landy"
@@ -614,7 +614,7 @@
   {
     "groupName": "Marco",
     "repositoryLink": null,
-    "grade": 85.0,
+    "grade": 100.0,
     "comments": null,
     "members": {
       "2023903114": "Marco"
@@ -686,7 +686,7 @@
   {
     "groupName": "Tom",
     "repositoryLink": null,
-    "grade": 92.0,
+    "grade": 100.0,
     "comments": null,
     "members": {
       "2023901563": "Tom"
@@ -695,7 +695,7 @@
   {
     "groupName": "Jacinda",
     "repositoryLink": null,
-    "grade": 90.0,
+    "grade": 100.0,
     "comments": null,
     "members": {
       "2023905322": "Jacinda"
@@ -704,7 +704,7 @@
   {
     "groupName": "Chen Zihan",
     "repositoryLink": null,
-    "grade": 97.0,
+    "grade": 90.0,
     "comments": null,
     "members": {
       "2023900905": "Chen Zihan"
@@ -713,7 +713,7 @@
   {
     "groupName": "Leo",
     "repositoryLink": null,
-    "grade": 97.0,
+    "grade": 100.0,
     "comments": null,
     "members": {
       "2023905932": "Leo"
@@ -722,7 +722,7 @@
   {
     "groupName": "Terry",
     "repositoryLink": null,
-    "grade": 99.5,
+    "grade": 100.0,
     "comments": null,
     "members": {
       "2023900899": "Terry"
@@ -731,7 +731,7 @@
   {
     "groupName": "Tom",
     "repositoryLink": null,
-    "grade": 95.0,
+    "grade": 100.0,
     "comments": null,
     "members": {
       "2023901699": "Tom"
@@ -776,7 +776,7 @@
   {
     "groupName": "Rayne Gao",
     "repositoryLink": null,
-    "grade": 95.0,
+    "grade": 90.0,
     "comments": null,
     "members": {
       "2023903116": "Rayne Gao"
@@ -785,7 +785,7 @@
   {
     "groupName": "Mark",
     "repositoryLink": null,
-    "grade": 98.0,
+    "grade": 100.0,
     "comments": null,
     "members": {
       "2023905418": "Mark"
@@ -794,7 +794,7 @@
   {
     "groupName": "Alger Zhu",
     "repositoryLink": null,
-    "grade": 97.0,
+    "grade": 100.0,
     "comments": null,
     "members": {
       "2023903988": "Alger Zhu"
@@ -821,7 +821,7 @@
   {
     "groupName": "lingche chi",
     "repositoryLink": null,
-    "grade": 99.0,
+    "grade": 90.0,
     "comments": null,
     "members": {
       "2023901707": "lingche chi"
@@ -830,7 +830,7 @@
   {
     "groupName": "Leo",
     "repositoryLink": null,
-    "grade": 99.0,
+    "grade": 100.0,
     "comments": null,
     "members": {
       "2023905934": "Leo"
@@ -839,7 +839,7 @@
   {
     "groupName": "Felix",
     "repositoryLink": null,
-    "grade": 0.0,
+    "grade": 65.0,
     "comments": null,
     "members": {
       "2023905328": "Felix"
